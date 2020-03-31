@@ -6,29 +6,36 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="description" content="">
-    <title>Hexo</title>
+    <title>牛奶少女克莱尔</title>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://codingclaire.github.io/">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Claire">
 <meta name="twitter:card" content="summary">
 
     <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "http://codingclaire.github.io/",
   "@type": "Person",
-  "email": "mailto:",
+  "email": "2423123645@qq.com",
   "image": "",
-  "name": "John Doe",
-  "url": "http://yoursite.com"
+  "name": "Claire",
+  "url": "http://codingclaire.github.io/"
 }
 </script>
     <script>
     var algoliaEnabled = false;
+    
+        var algolia = {
+            'applicationID': 'SOFGMI8K53',
+            'apiKey': '175825d204741f3d4bf2bc7fddea2f42',
+            'indexName': 'INDEX'
+        };
+        algoliaEnabled = true;
     
 </script>
 
@@ -110,6 +117,15 @@
     
 
     
+
+    <div class="ui search item">
+        <div class="ui transparent icon input">
+            <input id="search-input" type="text" placeholder="Search">
+            <i class="search link icon"></i>
+        </div>
+    </div>
+
+    
 </div>
 
     <div class="pusher body-content">
@@ -160,7 +176,7 @@
         <div class="ui vertical footer segment">
     <div class="ui center aligned container">
         <div class="ui inverted section divider"></div>
-        &copy; 2020 <a href="/">John Doe</a>,
+        &copy; 2020 <a href="/">Claire</a>,
         Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a
                 href="http://hexo.io/" target="_blank">Hexo</a>.
     </div>
@@ -168,6 +184,24 @@
 
     </div>
 
+
+    <div class="ui small long scrolling modal" id="search-modal">
+    <div class="header">
+        <div class="ui fluid icon input">
+            <input type="text" id="search-box" placeholder="Search everything you need...">
+            <i class="search icon"></i>
+        </div>
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="algolia-logo">
+                Powered by <img class="ui avatar image" src="/images/algolia_logo.svg">
+            </div>
+            <div id="search-results" class="ui relaxed divided list">
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
