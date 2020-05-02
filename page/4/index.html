@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: 文本挖掘 - Hexo</title>
+<title>Hexo</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/index.html">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
@@ -125,17 +125,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">文本挖掘</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     
 <div class="card">
     
@@ -143,13 +133,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time>
+                <time class="level-item has-text-grey" datetime="2019-04-21T16:00:00.000Z">2019-04-22</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1064 个字)
+                    10 分钟 读完 (大约 1508 个字)
                 </span>
                 
                 
@@ -158,26 +148,29 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/">文档主题建模</a>
+                <a class="has-link-black-ter" href="/2019/04/22/%E4%BB%8E%E5%81%9C%E6%9C%BA%E9%97%AE%E9%A2%98%E5%88%B0%E4%B8%8D%E5%8F%AF%E7%9F%A5%E8%AE%BA/">从停机问题到不可知论</a>
             
         </h1>
         <div class="content">
-            <p>对于一篇文章来说，分析它的主题能够达到理解文本的效果。主题建模就是通过在文档集合里面学习、识别和提取主题的过程。对于一篇文章 或者说一个文档来说，它包含着多个主题，而如何去区分不同的主题，是通过主题下面包含的多个单词来进行分析，我们能够将文档转化为一个数值向量，每一个维度对应一个主题。</p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
-<li><strong>分类文档</strong> （比如说不同领域的新闻：科技、金融、体育新闻。通过对新闻的主题建模，能够将文本按照主题来归类）</li>
-<li><strong>检索</strong>（当用户输入关键字的时候，就能够确认检索的文本的主题，从而在数据库进行匹配，最终返回相符的文本）</li>
-</ul>
-<h2 id="文本模型的可交换性"><a href="#文本模型的可交换性" class="headerlink" title="文本模型的可交换性"></a>文本模型的可交换性</h2><p>目前，大多数文本模型都基于“bag-of-words”的假设，即</p>
-<ul>
-<li>1.一篇文档内N个词之间的顺序可以随意互换，不影响建模过程</li>
-<li>2.一个语料库内M个文档可以随意互换顺序，哪个文档在前哪个文档在后都无所谓。这两个性质合称为文本模型的可交换性</li>
-</ul>
-<h2 id="四种流行的用于主题建模的算法"><a href="#四种流行的用于主题建模的算法" class="headerlink" title="四种流行的用于主题建模的算法"></a>四种流行的用于主题建模的算法</h2><h3 id="1-LSA-Latent-semantic-analysis"><a href="#1-LSA-Latent-semantic-analysis" class="headerlink" title="1.LSA(Latent semantic analysis)"></a>1.LSA(Latent semantic analysis)</h3><p>LSA的核心思想就是将我们所拥有的文档-术语矩阵分解成相互独立的文档-主题矩阵和主题-术语矩阵。词和文档是用向量来表示的，通过向量之间的关系，来判断词与词之间 或者文档与文档之间的关系。</p>
-<h3 id="2-pLSA"><a href="#2-pLSA" class="headerlink" title="2.pLSA"></a>2.pLSA</h3><p>pLSA，即概率潜在语义分析，采取概率方法替代 SVD 以解决问题。其核心思想是找到一个潜在主题的概率模型，该模型可以生成我们在文档-术语矩阵中观察到的数据。</p>
-<h3 id="3-LDA"><a href="#3-LDA" class="headerlink" title="3.LDA"></a>3.LDA</h3><p>将狄利克雷视为「分布的分布」。本质上，它回答了这样一个问题：「给定某种分布，我看到的实际概率分布可能是什么样子？」</p>
-<p>一篇文档，可以看成是一组有序的词的序列。从统计学角度来看，文档的生成可以看成是上帝抛掷骰子生成的结果，每一次抛掷骰子都生成一个词汇，抛掷N词生成一篇文档。在统计文本建模中，我们希望猜测出上帝是如何玩这个游戏的，这会涉及到两个最核心的问题：上帝都有什么样的骰子；上帝是如何抛掷这些骰子的；第一个问题就是表示模型中都有哪些参数，骰子的每一个面的概率都对应于模型中的参数；第二个问题就表示游戏规则是什么，上帝可能有各种不同类型的骰子，上帝可以按照一定的规则抛掷这些骰子从而产生词序列。</p>
-<h3 id="4-lda2vec"><a href="#4-lda2vec" class="headerlink" title="4.lda2vec"></a>4.lda2vec</h3><p>社交媒体如微博、脸书上也会有大量值得研究的文本，这些文本规模大、更新速度更快而且语义信息不丰富、噪声高。传统的pLSA和LDA模型泛化能力弱、主题词可解释性差、分类准确性低。</p>
-<p>文档向量表示随着word2vec模型的提出和深度学习的发展,近年来出现了很多相关研究成果。以LDA为代表的主题模型认为文档的生成是不同主题混合的结果;神经网络模型习惯于将文档表示为稠密向量。如果结合前者覆盖范围广和后者维度低的特点生成新的模型,可以做到快速检测,同对隐含语义的解释也会更好。lda2vec模型就是基于这一思想提出的。</p>
+            <p>你被关在在一个房间里，房间里挤满了很多台机器。对于你眼前的一台机器P，有一个小矮人坐在机器前，不断地向机器里敲打着序列，这时机器大声地喊了一句”hello world!”，说明条件满足了 。如果机器没有动静，说明输入的序列并不满足让它大喊的条件。对于每一台机器来说，它们满足的条件各不相同。</p>
+<p>我告诉你，你的任务是，造出一台超级机器，这样你才能够出去。这台机器我要求对于房间里任意的一台机器和对应的输入，如果这台机器能够喊出”hello world”， 那么超级机器就会说”yes”, 如果这台机器不能”hello world”， 那么超级机器就会说”no”。</p>
+<p>这看起来是个很简单的任务，因为超级机器只需要判断其他机器能不能喊”hello world”就可以了。这时候，我又对你提出了新的要求：”如果超级机器判断的机器没有喊’hello world’ ，那就让这台超级机器代替它喊一句’hello world’。”</p>
+<p>好像和之前的任务也没什么差别，只是改变了喊话的内容而已。</p>
+<p>现在我告诉你，对于某一台机器来说，你输入的序列，也完全可以是那台机器本身。什么意思呢，其实说到底，这里说的机器并不是实际存在的东西，而是一串序列，这听上去有一点恐怖，你能够把机器编成一串序列，让小矮人把这个序列敲到机器里。</p>
+<p>总之，小矮人们不太情愿地把这个序列敲进了机器，对于机器接下来会怎么样，小矮人也不清楚。但这时候你会发现，有些机器发出了”hello world”， 有些机器十分安静。说”hello world” 或是不说，就这两种结果。</p>
+<p>对于超级机器来说，你大概发现了，这台机器至少要有两个输入，也就是说，一个小矮人输入的是你要判断能不能发出”hello world” 的那台机器（所代表的序列P），而另一个小矮人要输入你要输入到待判断的机器里的那个序列I。</p>
+<p>但是现在我说，没必要再找两个小矮人，直接让你来，输入的序列就是机器代表的序列，不需要输入I了，机器也不需要有两个输入口，一个就够了。相当于说，之前说的两个输入，都是机器代表的序列P。你会输入两次机器代表的序列P，但是，鉴于这台超级机器只有一个输入，那么当你第一次输入P时，这台只由你控制的机器也会有一个输出，也就是说，当你输入P的时候，这台超级机器也有可能因为满足它自身的条件而大喊”hello world”。</p>
+<p>我想你可能也想不出来这样的机器要怎么做，但总之，我指着角落的一台机器，告诉你，其实那台机器就是超级机器。我让你过去，并且我告诉了你超级机器所代表的序列。</p>
+<p>“输入吧。” 我说。</p>
+<p>你开始敲打超级机器代表的序列，就像把超级机器自己塞进了自己的输入口里。</p>
+<p>但最终你发现了，我骗了你，那台机器根本就不是超级机器。</p>
+<p>如果这台超级机器，输入自己的序列，喊出了”hello world”， 那么根据最开始定义的规则，它会喊出”yes”, 而如果这台超级机器输入自己的序列并没有发出声音，按照定义，它输入的机器没有喊出”hello world”的时候，它会代替输入的机器，喊出”hello world”。</p>
+<p>这根本不可能，超级机器根本没办法造出来。就是这样，你没法逃出房间。</p>
+<hr>
+<p>今天计算理论讲了停机问题，感觉非常有意思，于是写了一个小故事，尽可能简单地解释出这一构造的巧妙性，但是可能会有交代不清的地方，欢迎指正~</p>
+<p>另外，关于停机问题，老师还扯到了很多有意思的东西，非常之”哲学”。</p>
+<p>比如说，如果故事里的机器是杀毒软件的话，其实可以发现，杀毒软件是不能够检测出所有的病毒的，因为它不能知道自己是不是就是病毒（细思极恐）。而且停机问题的推导其实涉及到了一种自我指涉的矛盾。说到”自我”，其实就会发现，按照这样的逻辑，一个人是无法完全认识自己的，或者说一个人是无法完全理解自身的。</p>
+<p>如果故事里的机器是我们的脑子，用我们的脑子去研究我们的脑子，其实就会有不能够认识到的地方。脑子是研究的主体，也是研究的客体；就像机器作为程序，但同时又作为程序的输入，而这时候你是不能认识到机器的输出的，所以你其实不能认识到这种脑子研究脑子的正确性甚至是可行性。所以说这就某种程度上支持了不可知论。</p>
 
         </div>
         
@@ -193,6 +186,29 @@
 
 
 
+
+    
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous">
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">上一页</a>
+        </div>
+        <div class="pagination-next is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/page/5/">下一页</a>
+        </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
+            
+            <li><a class="pagination-link is-current" href="/page/4/">4</a></li>
+            
+        </ul>
+    </nav>
+</div>
 </div>
                 
 

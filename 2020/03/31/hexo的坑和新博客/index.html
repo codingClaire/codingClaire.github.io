@@ -7,16 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: 文本挖掘 - Hexo</title>
+<title>hexo的坑和新博客 - Hexo</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/index.html">
+    <meta name="description" content="hexo给一篇文章加多个tagstags:[‘a’,’b’] Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo的坑和新博客">
+<meta property="og:url" content="http://yoursite.com/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="hexo给一篇文章加多个tagstags:[‘a’,’b’] Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2020-03-31T01:45:41.955Z">
+<meta property="article:modified_time" content="2020-05-01T08:58:11.845Z">
 <meta property="article:author" content="Claire">
+<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
@@ -112,6 +117,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,31 +134,20 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">文本挖掘</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time>
+                <time class="level-item has-text-grey" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1064 个字)
+                    1 分钟 读完 (大约 136 个字)
                 </span>
                 
                 
@@ -158,27 +156,34 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/">文档主题建模</a>
+                hexo的坑和新博客
             
         </h1>
         <div class="content">
-            <p>对于一篇文章来说，分析它的主题能够达到理解文本的效果。主题建模就是通过在文档集合里面学习、识别和提取主题的过程。对于一篇文章 或者说一个文档来说，它包含着多个主题，而如何去区分不同的主题，是通过主题下面包含的多个单词来进行分析，我们能够将文档转化为一个数值向量，每一个维度对应一个主题。</p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
-<li><strong>分类文档</strong> （比如说不同领域的新闻：科技、金融、体育新闻。通过对新闻的主题建模，能够将文本按照主题来归类）</li>
-<li><strong>检索</strong>（当用户输入关键字的时候，就能够确认检索的文本的主题，从而在数据库进行匹配，最终返回相符的文本）</li>
-</ul>
-<h2 id="文本模型的可交换性"><a href="#文本模型的可交换性" class="headerlink" title="文本模型的可交换性"></a>文本模型的可交换性</h2><p>目前，大多数文本模型都基于“bag-of-words”的假设，即</p>
-<ul>
-<li>1.一篇文档内N个词之间的顺序可以随意互换，不影响建模过程</li>
-<li>2.一个语料库内M个文档可以随意互换顺序，哪个文档在前哪个文档在后都无所谓。这两个性质合称为文本模型的可交换性</li>
-</ul>
-<h2 id="四种流行的用于主题建模的算法"><a href="#四种流行的用于主题建模的算法" class="headerlink" title="四种流行的用于主题建模的算法"></a>四种流行的用于主题建模的算法</h2><h3 id="1-LSA-Latent-semantic-analysis"><a href="#1-LSA-Latent-semantic-analysis" class="headerlink" title="1.LSA(Latent semantic analysis)"></a>1.LSA(Latent semantic analysis)</h3><p>LSA的核心思想就是将我们所拥有的文档-术语矩阵分解成相互独立的文档-主题矩阵和主题-术语矩阵。词和文档是用向量来表示的，通过向量之间的关系，来判断词与词之间 或者文档与文档之间的关系。</p>
-<h3 id="2-pLSA"><a href="#2-pLSA" class="headerlink" title="2.pLSA"></a>2.pLSA</h3><p>pLSA，即概率潜在语义分析，采取概率方法替代 SVD 以解决问题。其核心思想是找到一个潜在主题的概率模型，该模型可以生成我们在文档-术语矩阵中观察到的数据。</p>
-<h3 id="3-LDA"><a href="#3-LDA" class="headerlink" title="3.LDA"></a>3.LDA</h3><p>将狄利克雷视为「分布的分布」。本质上，它回答了这样一个问题：「给定某种分布，我看到的实际概率分布可能是什么样子？」</p>
-<p>一篇文档，可以看成是一组有序的词的序列。从统计学角度来看，文档的生成可以看成是上帝抛掷骰子生成的结果，每一次抛掷骰子都生成一个词汇，抛掷N词生成一篇文档。在统计文本建模中，我们希望猜测出上帝是如何玩这个游戏的，这会涉及到两个最核心的问题：上帝都有什么样的骰子；上帝是如何抛掷这些骰子的；第一个问题就是表示模型中都有哪些参数，骰子的每一个面的概率都对应于模型中的参数；第二个问题就表示游戏规则是什么，上帝可能有各种不同类型的骰子，上帝可以按照一定的规则抛掷这些骰子从而产生词序列。</p>
-<h3 id="4-lda2vec"><a href="#4-lda2vec" class="headerlink" title="4.lda2vec"></a>4.lda2vec</h3><p>社交媒体如微博、脸书上也会有大量值得研究的文本，这些文本规模大、更新速度更快而且语义信息不丰富、噪声高。传统的pLSA和LDA模型泛化能力弱、主题词可解释性差、分类准确性低。</p>
-<p>文档向量表示随着word2vec模型的提出和深度学习的发展,近年来出现了很多相关研究成果。以LDA为代表的主题模型认为文档的生成是不同主题混合的结果;神经网络模型习惯于将文档表示为稠密向量。如果结合前者覆盖范围广和后者维度低的特点生成新的模型,可以做到快速检测,同对隐含语义的解释也会更好。lda2vec模型就是基于这一思想提出的。</p>
+            <h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><h3 id="给一篇文章加多个tags"><a href="#给一篇文章加多个tags" class="headerlink" title="给一篇文章加多个tags"></a>给一篇文章加多个tags</h3><p>tags:[‘a’,’b’]</p>
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a>
+                </div>
+            </div>
         </div>
         
         
@@ -190,7 +195,26 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">D3笔记</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/">
+                <span class="level-item">文档主题建模</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -370,6 +394,46 @@
         <div class="column-right-shadow is-hidden-widescreen is-sticky">
         
             
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#hexo">
+        <span class="has-mr-6">1</span>
+        <span>hexo</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#给一篇文章加多个tags">
+        <span class="has-mr-6">1.1</span>
+        <span>给一篇文章加多个tags</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Quick-Start">
+        <span class="has-mr-6">2</span>
+        <span>Quick Start</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Create-a-new-post">
+        <span class="has-mr-6">2.1</span>
+        <span>Create a new post</span>
+        </a></li><li>
+        <a class="is-flex" href="#Run-server">
+        <span class="has-mr-6">2.2</span>
+        <span>Run server</span>
+        </a></li><li>
+        <a class="is-flex" href="#Generate-static-files">
+        <span class="has-mr-6">2.3</span>
+        <span>Generate static files</span>
+        </a></li><li>
+        <a class="is-flex" href="#Deploy-to-remote-sites">
+        <span class="has-mr-6">2.4</span>
+        <span>Deploy to remote sites</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
         
             <div class="card widget">
     <div class="card-content">
@@ -678,6 +742,46 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#hexo">
+        <span class="has-mr-6">1</span>
+        <span>hexo</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#给一篇文章加多个tags">
+        <span class="has-mr-6">1.1</span>
+        <span>给一篇文章加多个tags</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Quick-Start">
+        <span class="has-mr-6">2</span>
+        <span>Quick Start</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Create-a-new-post">
+        <span class="has-mr-6">2.1</span>
+        <span>Create a new post</span>
+        </a></li><li>
+        <a class="is-flex" href="#Run-server">
+        <span class="has-mr-6">2.2</span>
+        <span>Run server</span>
+        </a></li><li>
+        <a class="is-flex" href="#Generate-static-files">
+        <span class="has-mr-6">2.3</span>
+        <span>Generate static files</span>
+        </a></li><li>
+        <a class="is-flex" href="#Deploy-to-remote-sites">
+        <span class="has-mr-6">2.4</span>
+        <span>Deploy to remote sites</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">

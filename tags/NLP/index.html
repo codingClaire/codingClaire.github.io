@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: 文本挖掘 - Hexo</title>
+<title>标签: NLP - Hexo</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/NLP/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
@@ -130,7 +130,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">文本挖掘</a></li>
+            <li class="is-active"><a href="#" aria-current="page">NLP</a></li>
         </ul>
         </nav>
     </div>
@@ -143,13 +143,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time>
+                <time class="level-item has-text-grey" datetime="2020-05-02T00:15:09.000Z">2020-05-02</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1064 个字)
+                    1 分钟 读完 (大约 176 个字)
                 </span>
                 
                 
@@ -158,26 +158,150 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/">文档主题建模</a>
+                <a class="has-link-black-ter" href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/">【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction</a>
             
         </h1>
         <div class="content">
-            <p>对于一篇文章来说，分析它的主题能够达到理解文本的效果。主题建模就是通过在文档集合里面学习、识别和提取主题的过程。对于一篇文章 或者说一个文档来说，它包含着多个主题，而如何去区分不同的主题，是通过主题下面包含的多个单词来进行分析，我们能够将文档转化为一个数值向量，每一个维度对应一个主题。</p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
-<li><strong>分类文档</strong> （比如说不同领域的新闻：科技、金融、体育新闻。通过对新闻的主题建模，能够将文本按照主题来归类）</li>
-<li><strong>检索</strong>（当用户输入关键字的时候，就能够确认检索的文本的主题，从而在数据库进行匹配，最终返回相符的文本）</li>
-</ul>
-<h2 id="文本模型的可交换性"><a href="#文本模型的可交换性" class="headerlink" title="文本模型的可交换性"></a>文本模型的可交换性</h2><p>目前，大多数文本模型都基于“bag-of-words”的假设，即</p>
+            <h2 id="行文结构"><a href="#行文结构" class="headerlink" title="行文结构"></a>行文结构</h2><p>先关注于现有的工作，按照模型分类，其次探讨了关系提取的更多方向，主要是从数据量、学习表现、场景、领域四个方面，恰好和题目呼应；最后提出了其他的挑战。</p>
+<h3 id="Section-1-Introduction"><a href="#Section-1-Introduction" class="headerlink" title="Section 1 Introduction"></a>Section 1 Introduction</h3><p>RE: relation extraction</p>
+<h3 id="Section-2-背景和现有的工作"><a href="#Section-2-背景和现有的工作" class="headerlink" title="Section 2 背景和现有的工作"></a>Section 2 背景和现有的工作</h3><h4 id="2-1-模式提取模型"><a href="#2-1-模式提取模型" class="headerlink" title="2.1 模式提取模型"></a>2.1 模式提取模型</h4><h4 id="2-2-统计关系提取模型"><a href="#2-2-统计关系提取模型" class="headerlink" title="2.2 统计关系提取模型"></a>2.2 统计关系提取模型</h4><h4 id="2-3-神经网络关系提取模型"><a href="#2-3-神经网络关系提取模型" class="headerlink" title="2.3 神经网络关系提取模型"></a>2.3 神经网络关系提取模型</h4><h3 id="Section-3-RE的更多方向"><a href="#Section-3-RE的更多方向" class="headerlink" title="Section 3 RE的更多方向"></a>Section 3 RE的更多方向</h3><h4 id="3-1-使用更多数据"><a href="#3-1-使用更多数据" class="headerlink" title="3.1 使用更多数据"></a>3.1 使用更多数据</h4><h4 id="3-2-学习表现更有效"><a href="#3-2-学习表现更有效" class="headerlink" title="3.2  学习表现更有效"></a>3.2  学习表现更有效</h4><h4 id="3-3-在更复杂的场景中实现"><a href="#3-3-在更复杂的场景中实现" class="headerlink" title="3.3 在更复杂的场景中实现"></a>3.3 在更复杂的场景中实现</h4><h4 id="3-4-面向更开放的领域"><a href="#3-4-面向更开放的领域" class="headerlink" title="3.4 面向更开放的领域"></a>3.4 面向更开放的领域</h4><h3 id="Section-4-其他挑战"><a href="#Section-4-其他挑战" class="headerlink" title="Section  4 其他挑战"></a>Section  4 其他挑战</h3><h4 id="4-1-从文本或实体名中学习"><a href="#4-1-从文本或实体名中学习" class="headerlink" title="4.1 从文本或实体名中学习"></a>4.1 从文本或实体名中学习</h4><h4 id="4-2关系提取数据集"><a href="#4-2关系提取数据集" class="headerlink" title="4.2关系提取数据集"></a>4.2关系提取数据集</h4>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-29T16:00:00.000Z">2020-04-30</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 512 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/30/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93/">【综述总结1】Analysis Methods in Neural Language Processing:A Survey</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="行文结构"><a href="#行文结构" class="headerlink" title="行文结构"></a>行文结构</h2><p>论文进行综述时很善于从多个维度对工作进行分类，比如使用的方法、语言现象等。（作者也输出了一张表格、通过不同的维度归纳了相关的工作）。整体来说是按照不同角度下的方法进行综述，比如有一章专门写了自然语言处理中的可视化方法和衡量的难度性。同时最后将所有本文的结论写在了结语。</p>
+<h3 id="Section-1-Introduction"><a href="#Section-1-Introduction" class="headerlink" title="Section 1 Introduction"></a>Section 1 Introduction</h3><p>对全文脉络进行梳理</p>
+<h3 id="Section-2-什么样的语言信息会被神经网络使用？"><a href="#Section-2-什么样的语言信息会被神经网络使用？" class="headerlink" title="Section 2 什么样的语言信息会被神经网络使用？"></a>Section 2 什么样的语言信息会被神经网络使用？</h3><p>阐述从三个方面回答这一问题（和小标题对应）：</p>
 <ul>
-<li>1.一篇文档内N个词之间的顺序可以随意互换，不影响建模过程</li>
-<li>2.一个语料库内M个文档可以随意互换顺序，哪个文档在前哪个文档在后都无所谓。这两个性质合称为文本模型的可交换性</li>
+<li>which method are used  使用什么方法</li>
+<li>what kind of linguistic information is sought 什么信息</li>
+<li>which objects in the neural network are being investigated  什么被观测</li>
 </ul>
-<h2 id="四种流行的用于主题建模的算法"><a href="#四种流行的用于主题建模的算法" class="headerlink" title="四种流行的用于主题建模的算法"></a>四种流行的用于主题建模的算法</h2><h3 id="1-LSA-Latent-semantic-analysis"><a href="#1-LSA-Latent-semantic-analysis" class="headerlink" title="1.LSA(Latent semantic analysis)"></a>1.LSA(Latent semantic analysis)</h3><p>LSA的核心思想就是将我们所拥有的文档-术语矩阵分解成相互独立的文档-主题矩阵和主题-术语矩阵。词和文档是用向量来表示的，通过向量之间的关系，来判断词与词之间 或者文档与文档之间的关系。</p>
-<h3 id="2-pLSA"><a href="#2-pLSA" class="headerlink" title="2.pLSA"></a>2.pLSA</h3><p>pLSA，即概率潜在语义分析，采取概率方法替代 SVD 以解决问题。其核心思想是找到一个潜在主题的概率模型，该模型可以生成我们在文档-术语矩阵中观察到的数据。</p>
-<h3 id="3-LDA"><a href="#3-LDA" class="headerlink" title="3.LDA"></a>3.LDA</h3><p>将狄利克雷视为「分布的分布」。本质上，它回答了这样一个问题：「给定某种分布，我看到的实际概率分布可能是什么样子？」</p>
-<p>一篇文档，可以看成是一组有序的词的序列。从统计学角度来看，文档的生成可以看成是上帝抛掷骰子生成的结果，每一次抛掷骰子都生成一个词汇，抛掷N词生成一篇文档。在统计文本建模中，我们希望猜测出上帝是如何玩这个游戏的，这会涉及到两个最核心的问题：上帝都有什么样的骰子；上帝是如何抛掷这些骰子的；第一个问题就是表示模型中都有哪些参数，骰子的每一个面的概率都对应于模型中的参数；第二个问题就表示游戏规则是什么，上帝可能有各种不同类型的骰子，上帝可以按照一定的规则抛掷这些骰子从而产生词序列。</p>
-<h3 id="4-lda2vec"><a href="#4-lda2vec" class="headerlink" title="4.lda2vec"></a>4.lda2vec</h3><p>社交媒体如微博、脸书上也会有大量值得研究的文本，这些文本规模大、更新速度更快而且语义信息不丰富、噪声高。传统的pLSA和LDA模型泛化能力弱、主题词可解释性差、分类准确性低。</p>
-<p>文档向量表示随着word2vec模型的提出和深度学习的发展,近年来出现了很多相关研究成果。以LDA为代表的主题模型认为文档的生成是不同主题混合的结果;神经网络模型习惯于将文档表示为稠密向量。如果结合前者覆盖范围广和后者维度低的特点生成新的模型,可以做到快速检测,同对隐含语义的解释也会更好。lda2vec模型就是基于这一思想提出的。</p>
+<h4 id="2-2-Linguistic-Phenomena"><a href="#2-2-Linguistic-Phenomena" class="headerlink" title="2.2 Linguistic Phenomena"></a>2.2 Linguistic Phenomena</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sentence length</td>
+<td>句子长度</td>
+<td></td>
+</tr>
+<tr>
+<td>word position</td>
+<td>单词位置</td>
+<td></td>
+</tr>
+<tr>
+<td>word presence</td>
+<td>文字出现</td>
+<td></td>
+</tr>
+<tr>
+<td>simple word order</td>
+<td>简单词序</td>
+<td></td>
+</tr>
+<tr>
+<td>morphological information</td>
+<td>形态信息</td>
+<td></td>
+</tr>
+<tr>
+<td>syntactic information</td>
+<td>句法信息</td>
+<td></td>
+</tr>
+<tr>
+<td>semantic information</td>
+<td>语义信息</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><a href="https://boknilev.github.io/nlp-analysis-methods/table2.html">other phenomena</a></p>
+<h3 id="Section-3-可视化方法和衡量可视化工作的难度性"><a href="#Section-3-可视化方法和衡量可视化工作的难度性" class="headerlink" title="Section 3 可视化方法和衡量可视化工作的难度性"></a>Section 3 可视化方法和衡量可视化工作的难度性</h3><h3 id="Section-4-用于细粒度评估的挑战集的编译"><a href="#Section-4-用于细粒度评估的挑战集的编译" class="headerlink" title="Section 4 用于细粒度评估的挑战集的编译"></a>Section 4 用于细粒度评估的挑战集的编译</h3><p>datasets used for evaluating neural network models that diverge from the common average case evaluatio</p>
+<blockquote>
+<p>分类数据集的依据：</p>
+<ul>
+<li>the task they seek to evaluate</li>
+<li>the linguistic phenomena they aim to study</li>
+<li>the language(s) they target</li>
+<li>their size</li>
+<li>their method of construction</li>
+<li>how performance is evaluated</li>
+</ul>
+</blockquote>
+<h3 id="Section-5-对抗性例子的产生和使用、神经网络的弱点"><a href="#Section-5-对抗性例子的产生和使用、神经网络的弱点" class="headerlink" title="Section 5 对抗性例子的产生和使用、神经网络的弱点"></a>Section 5 对抗性例子的产生和使用、神经网络的弱点</h3><h3 id="Section-6-解释模型预测的工作"><a href="#Section-6-解释模型预测的工作" class="headerlink" title="Section 6 解释模型预测的工作"></a>Section 6 解释模型预测的工作</h3><h3 id="Section-7-其他不归于上述主题的方法"><a href="#Section-7-其他不归于上述主题的方法" class="headerlink" title="Section 7 其他不归于上述主题的方法"></a>Section 7 其他不归于上述主题的方法</h3><h2 id="引用他人工作的句式"><a href="#引用他人工作的句式" class="headerlink" title="引用他人工作的句式"></a>引用他人工作的句式</h2><ul>
+<li><p>see somebody for example</p>
+</li>
+<li><p>They found … suggesting that </p>
+</li>
+<li><p>In contrast,</p>
+</li>
+<li><p>Somebody <strong>made some headway on</strong> this question.</p>
+</li>
+<li><p>Somebody noted several key properties…</p>
+</li>
+<li><p>conducted behavioral experiments</p>
+</li>
+</ul>
+<h2 id="其他句式"><a href="#其他句式" class="headerlink" title="其他句式"></a>其他句式</h2><ul>
+<li><p>enable them to draw conclusions about…</p>
+</li>
+<li><p>synthesize a holistic picture from this diverse body of work</p>
+</li>
+<li><p>Another theme that emerges in several  studies is…</p>
+</li>
+<li><p>Much recent work has focused on …</p>
+</li>
+<li><p>… have gained renewed popularity in the NLP community.</p>
+</li>
+<li><p>Most of the relevant analysis work is concerned with…</p>
+</li>
+<li><p>Method … may shed new light on some of these questions.</p>
+</li>
+<li><p>A long tradition in work on (domain) is to …</p>
+</li>
+</ul>
 
         </div>
         
