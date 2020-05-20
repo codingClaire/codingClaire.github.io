@@ -149,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 165 个字)
+                    5 分钟 读完 (大约 752 个字)
                 </span>
                 
                 
@@ -164,17 +164,43 @@
         <div class="content">
             <p>最近不知为什么git desktop崩了，遂重新使用命令行，总结一下git的相关命令。</p>
 <h2 id="本地库管理"><a href="#本地库管理" class="headerlink" title="本地库管理"></a>本地库管理</h2><ol>
-<li>切换到工作目录</li>
-<li>将文件xxx（也可以添加文件夹）添加到仓库<br><code>git add xxx</code></li>
-<li>将文件提交到仓库<br><code>git commit -m &quot;关于此次commit的描述&quot;</code></li>
-<li>查看当前状态<br><code>git status</code></li>
-<li>查看修改内容<br><code>git diff</code></li>
+<li><p>切换到工作目录</p>
+</li>
+<li><p>将文件xxx（也可以添加文件夹）添加到仓库<br><code>git add xxx</code></p>
+</li>
+<li><p>将文件提交到仓库<br><code>git commit -m &quot;关于此次commit的描述&quot;</code></p>
+</li>
+<li><p>查看当前状态<br><code>git status</code></p>
+</li>
+<li><p>查看修改内容<br> <code>git diff</code></p>
+</li>
+<li><p>查看更新日志</p>
+<p><code>git log</code></p>
+</li>
 </ol>
 <h2 id="新建远程库"><a href="#新建远程库" class="headerlink" title="新建远程库"></a>新建远程库</h2><ol>
 <li>在github上创建仓库</li>
 <li>切换到工作目录并与本地的库关联<br><code>git remote add origin git@github.com:michaelliao/learngit.git</code></li>
 <li>把本地库的内容推到远程库上（之后可以不用写-u)<br><code>git push -u origin master</code></li>
 </ol>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>当使用github协同工作，使用分支可以使工作更加整洁。</p>
+<h3 id="切分支开发"><a href="#切分支开发" class="headerlink" title="切分支开发"></a>切分支开发</h3><p>git的分支可以看作指向当前结点的指针，HEAD指针始终指向文件的最新的地方。</p>
+<p>分支的创建：<code>git branch branch1</code></p>
+<p>分支的切换：<code>git checkout branch1</code></p>
+<p>分支切换意味着，如果在该分支上产生的所有改动add或commit都将是在该分支下。</p>
+<h3 id="分支的合并"><a href="#分支的合并" class="headerlink" title="分支的合并"></a>分支的合并</h3><h4 id="一、本地多个不同分支的合并"><a href="#一、本地多个不同分支的合并" class="headerlink" title="一、本地多个不同分支的合并"></a>一、本地多个不同分支的合并</h4><p>本地有多个分支时，在branch1分支下，使用<code>git merge branch2</code>就会将branch2合并到branch1分支。</p>
+<h4 id="二、远程分支和本地分支的合并"><a href="#二、远程分支和本地分支的合并" class="headerlink" title="二、远程分支和本地分支的合并"></a>二、远程分支和本地分支的合并</h4><p><code>git pull</code>拉取远程分之后直接与本地分支进行合并，其作用相当于<code>git fetch</code>和<code>git merge</code></p>
+<p>但是远程和本地合并时较长涉及到一致性的问题。</p>
+<p><strong>1.如果本地分支已有未提交的修改，此时又需要pull，可使用如下命令：</strong></p>
+<p>1）用<code>git add</code>将需要隐藏的文件保存在暂存区</p>
+<p>2）隐藏本地分支工作：<code>git stash save &quot;message&quot;</code>  </p>
+<p>3）执行<code>git pull</code>命令，将远程分支下拉下来，此时不会出现冲突情况</p>
+<p>4）使用<code>git stash list</code>可查看有哪些stash。使用<code>git stash show stash@{num}</code>可以看到第num-1个stash了存储了那些内容,默认是0号存储。</p>
+<p>5） 若要恢复原来的文件，可使用<code>git stash pop</code>命令恢复。该命令会将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash。</p>
+<p>6）若隐藏的文件可丢弃，则可使用<code>git stash drop stash@{$num}</code>丢弃该文件的内容。</p>
+<p>注意，使用<code>git stash</code>后，暂存区的所有文件都会被隐藏，意味着如果再次进行<code>git add</code> 暂存区是不会有东西的，使用<code>git commit</code>也是无法提交更新的，只有恢复后才能解除文件的隐藏。 </p>
+<h4 id="三、某个分支的diverged"><a href="#三、某个分支的diverged" class="headerlink" title="三、某个分支的diverged"></a>三、某个分支的diverged</h4><p>当出现了<code>Your branch and origin/master have diverged,and have...different commits each respectively</code></p>
+<p>此时可使用<code>git rebase origin/master</code>将分叉的分支重新合并。</p>
 
         </div>
         
@@ -235,7 +261,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -376,6 +402,25 @@
         
         <article class="media">
             
+            <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个解决word页码错乱的小方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction">
@@ -450,25 +495,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档主题建模">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档主题建模</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -486,7 +512,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -684,6 +710,25 @@
         
         <article class="media">
             
+            <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个解决word页码错乱的小方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction">
@@ -758,25 +803,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档主题建模">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档主题建模</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -794,7 +820,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>

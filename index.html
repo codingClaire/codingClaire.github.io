@@ -133,6 +133,61 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 626 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/">一个解决word页码错乱的小方法</a>
+            
+        </h1>
+        <div class="content">
+            <p>说实话，我常常因为word多此一举的方便用户而感到困扰。</p>
+<p>比如拿到了一个页码错乱的文档模板，然后强迫症的我页码绝对不能错一个。</p>
+<p>那么如果出现了这样恐怖的情况:文档页码在某一页开始一直往下都相同的话，其实是因为word看见的文档并不和你看见的一样，如果一个节没有结束的话，那么word就默认这一页还没有结束，可以理解为word看见的文档按照节来说实际上是一个不知道多长的羊皮卷。</p>
+<p>通常如果出现页码相同的情况，可以双击页码并注意看导航栏里是否勾选了链接到前一节。我们看字面意思就能猜到，链接到前一节就指的是前后两个页面(不一定是你看到的页面，而是word认为的页面，总之）它们被绑定在一起了，修改一个另一个也会被更改。如果你发现勾选了这项的话，把它取消。我们不需要自作多情的链接。</p>
+<p>但是还有一种情况是你发现链接到前一节没有被勾选，但页码也还是从某一页往下相同，那么就是因为word把”节“理解成了”页“，对于未完成的节，它是不会变换页码的。所以，你要做的就是告诉word这一页已经结束了。</p>
+<p>那么具体的方法如下：</p>
+<blockquote>
+<p>1.光标移动到相同页面中的第一张的最末尾，点击布局-&gt; 分隔符，选择下一页，就会在该页插入分节符（下一页）</p>
+<p>2.选中第二页的页码，就会发现此时会显示勾选了链接到前一节，取消它</p>
+<p>3.正确地命名页码</p>
+<p>4.如此往复直到问题解决</p>
+</blockquote>
+<p>不知道这个方法是不是正确，总之页码错乱问题是能够解决了，但是随之而来的是新的问题，自动目录并不能识别到对应的页码，还好自动页码可以手动改页码。</p>
+<p>结尾也不知道要说我是该去学习一下Word呢，还是高喊”Latex真香“, 那就这样吧。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-05-02T00:15:09.000Z">2020-05-02</time>
                 
                 
@@ -363,61 +418,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 136 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/">hexo的坑和新博客</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><h3 id="给一篇文章加多个tags"><a href="#给一篇文章加多个tags" class="headerlink" title="给一篇文章加多个tags"></a>给一篇文章加多个tags</h3><p>tags:[‘a’,’b’]</p>
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -486,7 +486,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -627,6 +627,25 @@
         
         <article class="media">
             
+            <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个解决word页码错乱的小方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction">
@@ -701,25 +720,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档主题建模">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档主题建模</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -737,7 +737,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -935,6 +935,25 @@
         
         <article class="media">
             
+            <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个解决word页码错乱的小方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction">
@@ -1009,25 +1028,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档主题建模">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档主题建模</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1045,7 +1045,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>

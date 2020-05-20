@@ -133,6 +133,61 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 136 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/">hexo的坑和新博客</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><h3 id="给一篇文章加多个tags"><a href="#给一篇文章加多个tags" class="headerlink" title="给一篇文章加多个tags"></a>给一篇文章加多个tags</h3><p>tags:[‘a’,’b’]</p>
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time>
                 
                 
@@ -260,7 +315,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 165 个字)
+                    5 分钟 读完 (大约 752 个字)
                 </span>
                 
                 
@@ -275,86 +330,43 @@
         <div class="content">
             <p>最近不知为什么git desktop崩了，遂重新使用命令行，总结一下git的相关命令。</p>
 <h2 id="本地库管理"><a href="#本地库管理" class="headerlink" title="本地库管理"></a>本地库管理</h2><ol>
-<li>切换到工作目录</li>
-<li>将文件xxx（也可以添加文件夹）添加到仓库<br><code>git add xxx</code></li>
-<li>将文件提交到仓库<br><code>git commit -m &quot;关于此次commit的描述&quot;</code></li>
-<li>查看当前状态<br><code>git status</code></li>
-<li>查看修改内容<br><code>git diff</code></li>
+<li><p>切换到工作目录</p>
+</li>
+<li><p>将文件xxx（也可以添加文件夹）添加到仓库<br><code>git add xxx</code></p>
+</li>
+<li><p>将文件提交到仓库<br><code>git commit -m &quot;关于此次commit的描述&quot;</code></p>
+</li>
+<li><p>查看当前状态<br><code>git status</code></p>
+</li>
+<li><p>查看修改内容<br> <code>git diff</code></p>
+</li>
+<li><p>查看更新日志</p>
+<p><code>git log</code></p>
+</li>
 </ol>
 <h2 id="新建远程库"><a href="#新建远程库" class="headerlink" title="新建远程库"></a>新建远程库</h2><ol>
 <li>在github上创建仓库</li>
 <li>切换到工作目录并与本地的库关联<br><code>git remote add origin git@github.com:michaelliao/learngit.git</code></li>
 <li>把本地库的内容推到远程库上（之后可以不用写-u)<br><code>git push -u origin master</code></li>
 </ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 748 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/27/%E3%80%8AJavaScript&jQuery%20%E4%BA%A4%E4%BA%92%E5%BC%8FWeb%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E3%80%8B%EF%BC%88%E4%BA%8C%EF%BC%89/">《JavaScript&amp;jQuery 交互式Web前端开发》（二）</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="四、文档对象模型"><a href="#四、文档对象模型" class="headerlink" title="四、文档对象模型"></a>四、文档对象模型</h2><p>浏览器加载web 创建页面模型 这个模型被称为DOM树 被保存在浏览器的内存中</p>
-<h4 id="四种节点"><a href="#四种节点" class="headerlink" title="四种节点"></a>四种节点</h4><ul>
-<li>文档节点</li>
-<li>元素节点</li>
-<li>属性节点</li>
-<li>文本节点</li>
-</ul>
-<h3 id="使用DOM树"><a href="#使用DOM树" class="headerlink" title="使用DOM树"></a>使用DOM树</h3><p>访问并更新DOM树的两个步骤：<br>1.定位到于需要操作的元素所对应的节点<br>2.使用它的文本内容、子元素或属性</p>
-<h4 id="1-访问元素"><a href="#1-访问元素" class="headerlink" title="1.访问元素"></a>1.访问元素</h4><p><code>getElementById()</code><br><code>querySelector() //使用CSS选择器</code><br><code>getElementByClassName() //选择所有在class中使用了特定值的元素</code><br><code>getElementByTagName() //选择所有使用了指定标记的元素</code><br><code>querySelectorAll() //使用CSS选择器来选择所有匹配的元素</code><br><code>parentNode //当前节点的父节点</code><br><code>previousSibling/nextSibling //前一个或后一个兄弟节点</code><br><code>firstChild/lastChild //当前节点的第一个或最后一个子节点</code></p>
-<h4 id="2-操作元素"><a href="#2-操作元素" class="headerlink" title="2.操作元素"></a>2.操作元素</h4><p><code>nodeValue 这个属性允许访问或修改文本节点中的内容</code><br><code>innerHTML 这个属性可以访问子元素和文本内容</code><br><code>textContent 这个属性仅访问文本内容</code><br><code>createElement() 创建节点</code><br><code>createTextNode()</code><br><code>appendChild() 将节点添加到树中</code><br><code>removeChild() 从树中移除节点</code><br><code>className/id 可以获取更新class和id的属性</code><br><code>hasAttribute() 检查属性是否存在</code><br><code>getAttribute() 获取属性值</code><br><code>setAttribute() 更新属性值</code><br><code>removeAttribute() 移除属性值</code></p>
-<h4 id="3-访问元素"><a href="#3-访问元素" class="headerlink" title="3.访问元素"></a>3.访问元素</h4><p>DOM查询可能返回一个元素 也可能返回一个NodeList 节点的集合</p>
-<h4 id="4-返回多个元素的DOM查询"><a href="#4-返回多个元素的DOM查询" class="headerlink" title="4.返回多个元素的DOM查询"></a>4.返回多个元素的DOM查询</h4><p>length NodeList中一共有多少个项<br>item() 方法：返回NodeList中特定的节点 需要在小括号中指定编号</p>
-<h4 id="5-重用NodeList"><a href="#5-重用NodeList" class="headerlink" title="5.重用NodeList"></a>5.重用NodeList</h4><p>动态NodeList 脚本更新页面之后，NodeList也同样会更新 静态的话 NodeList不会被更新 不会反映脚本所做的修改</p>
-<p>getElementBy开头的方法都会返回动态NodeList<br>querySelector开头的方法会返回静态NodeList</p>
-<pre><code>var elements=getElementByTagName(&apos;h1&apos;);
-if(elements.length&gt;=1){//检查nodelist至少包含一个节点
-    var firstItem=elements.item(0);//item()方法
-    var secondItem=elements[1];//数组语法
-}</code></pre><p>数组语法的速度更快 更推荐使用</p>
-<h4 id="6-遍历DOM"><a href="#6-遍历DOM" class="headerlink" title="6.遍历DOM"></a>6.遍历DOM</h4><p>有些浏览器会在元素之间添加一个文本节点 不管它之间是不是真的有空白<br>解决这一问题的方法 使用jQuery库</p>
-<h4 id="使用NodeValue属性获取和更新文本节点"><a href="#使用NodeValue属性获取和更新文本节点" class="headerlink" title="使用NodeValue属性获取和更新文本节点"></a>使用NodeValue属性获取和更新文本节点</h4><pre><code>var itemTwo=document.getElementById(&apos;two&apos;);
-var elText=itemTwo.firstChild.nodeValue;
-elText=elText.replace(&apos;pine nuts&apos;,&apos;kale&apos;);
-itemTwo.firstChild.nodeValue=eltext;</code></pre><h4 id="使用textContent和innerText获取和更新文本"><a href="#使用textContent和innerText获取和更新文本" class="headerlink" title="使用textContent和innerText获取和更新文本"></a>使用textContent和innerText获取和更新文本</h4><p><code>&lt;li id=&quot;one&quot;&gt;&lt;em&gt;fresh&lt;/em&gt;figs&lt;/li&gt;</code><br>获取li元素中的文本 用textContent返回fresh figs<br>同样可以使用这个属性来更新元素的内容</p>
-<p>innerText应避免使用 FireFox不支持<br>不会返回css隐藏的内容 需要考虑布局规则来判断元素的可见性 在获取文本内容的速度要比textContent慢</p>
-<h4 id="使用innerHTML获取和更新文本"><a href="#使用innerHTML获取和更新文本" class="headerlink" title="使用innerHTML获取和更新文本"></a>使用innerHTML获取和更新文本</h4><pre><code>var firstItem=document.getElementById(&apos;one&apos;);
-var itemContent= firstItem.innerHTML;
-firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+itemContent+&apos;&lt;/a&gt;&apos;;</code></pre><p>itemContent中包含如下字符串<br><code>&lt;em&gt;fresh&lt;/em&gt; figs</code><br>浏览器会把字符串中包含的任何元素都添加到DOM树中</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>当使用github协同工作，使用分支可以使工作更加整洁。</p>
+<h3 id="切分支开发"><a href="#切分支开发" class="headerlink" title="切分支开发"></a>切分支开发</h3><p>git的分支可以看作指向当前结点的指针，HEAD指针始终指向文件的最新的地方。</p>
+<p>分支的创建：<code>git branch branch1</code></p>
+<p>分支的切换：<code>git checkout branch1</code></p>
+<p>分支切换意味着，如果在该分支上产生的所有改动add或commit都将是在该分支下。</p>
+<h3 id="分支的合并"><a href="#分支的合并" class="headerlink" title="分支的合并"></a>分支的合并</h3><h4 id="一、本地多个不同分支的合并"><a href="#一、本地多个不同分支的合并" class="headerlink" title="一、本地多个不同分支的合并"></a>一、本地多个不同分支的合并</h4><p>本地有多个分支时，在branch1分支下，使用<code>git merge branch2</code>就会将branch2合并到branch1分支。</p>
+<h4 id="二、远程分支和本地分支的合并"><a href="#二、远程分支和本地分支的合并" class="headerlink" title="二、远程分支和本地分支的合并"></a>二、远程分支和本地分支的合并</h4><p><code>git pull</code>拉取远程分之后直接与本地分支进行合并，其作用相当于<code>git fetch</code>和<code>git merge</code></p>
+<p>但是远程和本地合并时较长涉及到一致性的问题。</p>
+<p><strong>1.如果本地分支已有未提交的修改，此时又需要pull，可使用如下命令：</strong></p>
+<p>1）用<code>git add</code>将需要隐藏的文件保存在暂存区</p>
+<p>2）隐藏本地分支工作：<code>git stash save &quot;message&quot;</code>  </p>
+<p>3）执行<code>git pull</code>命令，将远程分支下拉下来，此时不会出现冲突情况</p>
+<p>4）使用<code>git stash list</code>可查看有哪些stash。使用<code>git stash show stash@{num}</code>可以看到第num-1个stash了存储了那些内容,默认是0号存储。</p>
+<p>5） 若要恢复原来的文件，可使用<code>git stash pop</code>命令恢复。该命令会将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash。</p>
+<p>6）若隐藏的文件可丢弃，则可使用<code>git stash drop stash@{$num}</code>丢弃该文件的内容。</p>
+<p>注意，使用<code>git stash</code>后，暂存区的所有文件都会被隐藏，意味着如果再次进行<code>git add</code> 暂存区是不会有东西的，使用<code>git commit</code>也是无法提交更新的，只有恢复后才能解除文件的隐藏。 </p>
+<h4 id="三、某个分支的diverged"><a href="#三、某个分支的diverged" class="headerlink" title="三、某个分支的diverged"></a>三、某个分支的diverged</h4><p>当出现了<code>Your branch and origin/master have diverged,and have...different commits each respectively</code></p>
+<p>此时可使用<code>git rebase origin/master</code>将分叉的分支重新合并。</p>
 
         </div>
         
@@ -438,7 +450,7 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -579,6 +591,25 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
         
         <article class="media">
             
+            <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个解决word页码错乱的小方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction">
@@ -653,25 +684,6 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档主题建模">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档主题建模</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -689,7 +701,7 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -887,6 +899,25 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
         
         <article class="media">
             
+            <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个解决word页码错乱的小方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction">
@@ -961,25 +992,6 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档主题建模">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T12:00:00.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档主题建模</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -997,7 +1009,7 @@ firstItem.innerHTML=&apos;&lt;a href=\&quot;http://example.org\&quot;&gt;&apos;+
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
