@@ -12,13 +12,13 @@
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="http://codingclaire.github.io/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="http://codingclaire.github.io/images/og_image.png">
 <meta property="article:author" content="Claire">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="http://codingclaire.github.io/images/og_image.png">
 
 
 
@@ -133,6 +133,200 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-29T16:00:00.000Z">2020-04-30</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 512 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/30/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93/">【综述总结1】Analysis Methods in Neural Language Processing:A Survey</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="行文结构"><a href="#行文结构" class="headerlink" title="行文结构"></a>行文结构</h2><p>论文进行综述时很善于从多个维度对工作进行分类，比如使用的方法、语言现象等。（作者也输出了一张表格、通过不同的维度归纳了相关的工作）。整体来说是按照不同角度下的方法进行综述，比如有一章专门写了自然语言处理中的可视化方法和衡量的难度性。同时最后将所有本文的结论写在了结语。</p>
+<h3 id="Section-1-Introduction"><a href="#Section-1-Introduction" class="headerlink" title="Section 1 Introduction"></a>Section 1 Introduction</h3><p>对全文脉络进行梳理</p>
+<h3 id="Section-2-什么样的语言信息会被神经网络使用？"><a href="#Section-2-什么样的语言信息会被神经网络使用？" class="headerlink" title="Section 2 什么样的语言信息会被神经网络使用？"></a>Section 2 什么样的语言信息会被神经网络使用？</h3><p>阐述从三个方面回答这一问题（和小标题对应）：</p>
+<ul>
+<li>which method are used  使用什么方法</li>
+<li>what kind of linguistic information is sought 什么信息</li>
+<li>which objects in the neural network are being investigated  什么被观测</li>
+</ul>
+<h4 id="2-2-Linguistic-Phenomena"><a href="#2-2-Linguistic-Phenomena" class="headerlink" title="2.2 Linguistic Phenomena"></a>2.2 Linguistic Phenomena</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sentence length</td>
+<td>句子长度</td>
+<td></td>
+</tr>
+<tr>
+<td>word position</td>
+<td>单词位置</td>
+<td></td>
+</tr>
+<tr>
+<td>word presence</td>
+<td>文字出现</td>
+<td></td>
+</tr>
+<tr>
+<td>simple word order</td>
+<td>简单词序</td>
+<td></td>
+</tr>
+<tr>
+<td>morphological information</td>
+<td>形态信息</td>
+<td></td>
+</tr>
+<tr>
+<td>syntactic information</td>
+<td>句法信息</td>
+<td></td>
+</tr>
+<tr>
+<td>semantic information</td>
+<td>语义信息</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><a href="https://boknilev.github.io/nlp-analysis-methods/table2.html">other phenomena</a></p>
+<h3 id="Section-3-可视化方法和衡量可视化工作的难度性"><a href="#Section-3-可视化方法和衡量可视化工作的难度性" class="headerlink" title="Section 3 可视化方法和衡量可视化工作的难度性"></a>Section 3 可视化方法和衡量可视化工作的难度性</h3><h3 id="Section-4-用于细粒度评估的挑战集的编译"><a href="#Section-4-用于细粒度评估的挑战集的编译" class="headerlink" title="Section 4 用于细粒度评估的挑战集的编译"></a>Section 4 用于细粒度评估的挑战集的编译</h3><p>datasets used for evaluating neural network models that diverge from the common average case evaluatio</p>
+<blockquote>
+<p>分类数据集的依据：</p>
+<ul>
+<li>the task they seek to evaluate</li>
+<li>the linguistic phenomena they aim to study</li>
+<li>the language(s) they target</li>
+<li>their size</li>
+<li>their method of construction</li>
+<li>how performance is evaluated</li>
+</ul>
+</blockquote>
+<h3 id="Section-5-对抗性例子的产生和使用、神经网络的弱点"><a href="#Section-5-对抗性例子的产生和使用、神经网络的弱点" class="headerlink" title="Section 5 对抗性例子的产生和使用、神经网络的弱点"></a>Section 5 对抗性例子的产生和使用、神经网络的弱点</h3><h3 id="Section-6-解释模型预测的工作"><a href="#Section-6-解释模型预测的工作" class="headerlink" title="Section 6 解释模型预测的工作"></a>Section 6 解释模型预测的工作</h3><h3 id="Section-7-其他不归于上述主题的方法"><a href="#Section-7-其他不归于上述主题的方法" class="headerlink" title="Section 7 其他不归于上述主题的方法"></a>Section 7 其他不归于上述主题的方法</h3><h2 id="引用他人工作的句式"><a href="#引用他人工作的句式" class="headerlink" title="引用他人工作的句式"></a>引用他人工作的句式</h2><ul>
+<li><p>see somebody for example</p>
+</li>
+<li><p>They found … suggesting that </p>
+</li>
+<li><p>In contrast,</p>
+</li>
+<li><p>Somebody <strong>made some headway on</strong> this question.</p>
+</li>
+<li><p>Somebody noted several key properties…</p>
+</li>
+<li><p>conducted behavioral experiments</p>
+</li>
+</ul>
+<h2 id="其他句式"><a href="#其他句式" class="headerlink" title="其他句式"></a>其他句式</h2><ul>
+<li><p>enable them to draw conclusions about…</p>
+</li>
+<li><p>synthesize a holistic picture from this diverse body of work</p>
+</li>
+<li><p>Another theme that emerges in several  studies is…</p>
+</li>
+<li><p>Much recent work has focused on …</p>
+</li>
+<li><p>… have gained renewed popularity in the NLP community.</p>
+</li>
+<li><p>Most of the relevant analysis work is concerned with…</p>
+</li>
+<li><p>Method … may shed new light on some of these questions.</p>
+</li>
+<li><p>A long tradition in work on (domain) is to …</p>
+</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-03T03:38:29.000Z">2020-04-03</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 119 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/">D3笔记</a>
+            
+        </h1>
+        <div class="content">
+            <p>loading data onto the page</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">waitSeconds=<span class="function"><span class="params">numSeconds</span>=&gt;</span><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> message=<span class="string">`<span class="subst">$&#123;numSeconds&#125;</span> seconds have passed!`</span>;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>resolve(message),numSeconds*<span class="number">1000</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">waitSeconds(<span class="number">2</span>).then(<span class="function"><span class="params">message</span>=&gt;</span><span class="built_in">console</span>.log(message));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结果：等待两秒后显示 2 seconds have passed!</p>
+</blockquote>
+<h2 id="ECMAScript-6-Features"><a href="#ECMAScript-6-Features" class="headerlink" title="ECMAScript 6 Features"></a>ECMAScript 6 Features</h2><h2 id="HTML-CSS-SVG"><a href="#HTML-CSS-SVG" class="headerlink" title="HTML CSS SVG"></a>HTML CSS SVG</h2><p>Scalable Vector Graph</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>&#123;select,arc&#125; <span class="keyword">from</span> <span class="string">'d3'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> width=+svg.attr(<span class="string">'width'</span>) <span class="comment">//string转换为float</span></span><br><span class="line"><span class="keyword">const</span> width=<span class="built_in">parseFloat</span>(svg.attr(<span class="string">'width'</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> circle=svg.append(<span class="string">'circle'</span>)</span><br><span class="line">	.attr(<span class="string">'fill'</span>,<span class="string">'yellow'</span>) </span><br><span class="line">	.attr(<span class="string">'stroke'</span>,<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> g=svg.append(<span class="string">'g'</span>)</span><br><span class="line">	.attr(<span class="string">'transform'</span>,<span class="string">'translate($&#123;width/2&#125;,$&#123;height/2&#125;)'</span>);</span><br><span class="line"><span class="keyword">const</span> mouth=svg.append(<span class="string">'path'</span>)</span><br><span class="line">	.attr(<span class="string">'d'</span>,acr()(&#123;</span><br><span class="line">        innerRadius:<span class="number">80</span>,</span><br><span class="line">        outerRadius:<span class="number">100</span>,</span><br><span class="line">        startAngle:<span class="built_in">Math</span>.PI/<span class="number">2</span>,</span><br><span class="line">        endAngle:<span class="built_in">Math</span>,PI*<span class="number">3</span>/<span class="number">2</span></span><br><span class="line">    &#125;));</span><br></pre></td></tr></table></figure>
+
+<h2 id="d3"><a href="#d3" class="headerlink" title="d3"></a>d3</h2><p>csv comma seperated value</p>
+<h3 id="customizing-axis"><a href="#customizing-axis" class="headerlink" title="customizing  axis"></a>customizing  axis</h3><p>d3.format() 函数</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time>
                 
                 
@@ -238,150 +432,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-13T07:00:00.000Z">2019-10-13</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 653 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/13/%E4%B8%80%E4%BB%BD%E4%B8%8D%E5%AE%8C%E5%85%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">一份不完全的数据可视化入门指南</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="1-如何快速上手数据可视化？"><a href="#1-如何快速上手数据可视化？" class="headerlink" title="1. 如何快速上手数据可视化？"></a>1. 如何快速上手数据可视化？</h2><p>1.【FreeCodeCamp】<a href="https://www.freecodecamp.cn/home">https://www.freecodecamp.cn/home</a> (学习Html/Css/JavaScript)</p>
-<p>2.【Echarts.js】<a href="https://www.echartsjs.com/zh/index.html">https://www.echartsjs.com/zh/index.html</a></p>
-<p>3.【D3】<a href="https://d3js.org/">https://d3js.org/</a></p>
-<p>4.【更多的工具总结】 <a href="https://zhuanlan.zhihu.com/p/24089938">https://zhuanlan.zhihu.com/p/24089938</a></p>
-<h2 id="2-有哪些值得借鉴的优秀的数据可视化设计作品？"><a href="#2-有哪些值得借鉴的优秀的数据可视化设计作品？" class="headerlink" title="2.有哪些值得借鉴的优秀的数据可视化设计作品？"></a>2.有哪些值得借鉴的优秀的数据可视化设计作品？</h2><p>【使用Tableau Public 制作的优秀作品】<a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">https://public.tableau.com/</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">zh-cn</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">/gallery/?</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">tab=</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">viz-of-the-day&amp;type</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">=</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">viz</a><a href="https://public.tableau.com/zh-cn/gallery/?tab=viz-of-the-day&type=viz-of-the-day">-of-the-day</a></p>
-<p>【使用Echarts制作的优秀作品】 <a href="https://gallery.echartsjs.com/explore.html">https</a><a href="https://gallery.echartsjs.com/explore.html">://</a><a href="https://gallery.echartsjs.com/explore.html">gallery.echartsjs.com/explore.html#sort=rank<del>timeframe=all</del>author=all</a></p>
-<p>【信息之美获奖作品】<a href="https://www.informationisbeautifulawards.com/">https://www.informationisbeautifulawards.com/</a></p>
-<p>【数据可视化领域的五大趋势】<a href="https://baijiahao.baidu.com/s?id=1614710364563883354&wfr=spider&for=pc">https://baijiahao.baidu.com/</a><a href="https://baijiahao.baidu.com/s?id=1614710364563883354&wfr=spider&for=pc">s?id</a><a href="https://baijiahao.baidu.com/s?id=1614710364563883354&wfr=spider&for=pc">=1614710364563883354&amp;wfr=</a><a href="https://baijiahao.baidu.com/s?id=1614710364563883354&wfr=spider&for=pc">spider&amp;for</a><a href="https://baijiahao.baidu.com/s?id=1614710364563883354&wfr=spider&for=pc">=pc</a></p>
-<p>【一位自由数据可视化设计师（ Nadieh Bremer ）的作品集】<a href="https://www.visualcinnamon.com/portfolio/">https://www.visualcinnamon.com/portfolio/</a></p>
-<h2 id="3-数据可视化的学术研究发展情况？"><a href="#3-数据可视化的学术研究发展情况？" class="headerlink" title="3.数据可视化的学术研究发展情况？"></a>3.数据可视化的学术研究发展情况？</h2><h3 id="CCF-A类会议-刊物"><a href="#CCF-A类会议-刊物" class="headerlink" title="CCF A类会议/刊物"></a>CCF A类会议/刊物</h3><p>【IEEE Visualization Conference (IEEE VIS)】<a href="http://dblp.uni-trier.de/db/conf/visualization/index.html">http://dblp.uni-trier.de/db/conf/visualization/index.html</a></p>
-<p>【IEEE Transactions on Visualization and Computer Graphics(TVCG)】 <a href="http://dblp.uni-trier.de/db/journals/tvcg/">http://dblp.uni-trier.de/db/journals/tvcg/</a></p>
-<p>【ACM Knowledge Discovery and Data Mining （SIGKDD）】<a href="http://dblp.uni-trier.de/db/conf/kdd/">http://dblp.uni-trier.de/db/conf/kdd/</a></p>
-<h3 id="国内的实验室-学者"><a href="#国内的实验室-学者" class="headerlink" title="国内的实验室/学者"></a><strong>国内的实验室/学者</strong></h3><p>【北京大学，袁晓如】 <a href="http://vis.pku.edu.cn/wiki/">http://vis.pku.edu.cn/wiki/</a></p>
-<p>【浙江大学，陈为】 <a href="http://www.cad.zju.edu.cn/home/vagblog/">http://www.cad.zju.edu.cn/home/vagblog/</a></p>
-<p>【同济大学，曹楠】<a href="http://www.nancao.org/">http://www.nancao.org/</a></p>
-<p>【清华大学，刘世霞】 <a href="http://www.shixialiu.com/">http://www.shixialiu.com/</a></p>
-<p>【四川大学，朱敏】 <a href="http://scuvis.org/">http://scuvis.org/</a></p>
-<h2 id="4-有哪些书籍可以进行学习？"><a href="#4-有哪些书籍可以进行学习？" class="headerlink" title="4.有哪些书籍可以进行学习？"></a>4.有哪些书籍可以进行学习？</h2><p>《Knowledge Is Beautiful》<a href="https://book.douban.com/subject/11650561/">https://book.douban.com/subject/11650561/</a></p>
-<p>《数据可视化》 <a href="https://book.douban.com/subject/25760272/">https://book.douban.com/subject/25760272/</a></p>
-<p>《数据可视化(40位数据设计师访谈录)》 <a href="https://book.douban.com/subject/27049704/">https://book.douban.com/subject/27049704/</a></p>
-<h2 id="5-相关的比赛？"><a href="#5-相关的比赛？" class="headerlink" title="5.相关的比赛？"></a>5.相关的比赛？</h2><p>【China Vis 挑战赛】 <a href="http://www.chinavis.org/2019/challenge.html">http://www.chinavis.org/2019/challenge.html</a></p>
-<p>【Kaggle】 <a href="http://kaggle.com/">http://kaggle.com/</a></p>
-<p>【天池大数据比赛】<a href="https://tianchi.aliyun.com/competition/gameList/activeList">https://tianchi.aliyun.com/competition/gameList/activeList</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-10T16:00:00.000Z">2019-10-11</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 752 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/11/git%E6%80%BB%E7%BB%93/">git总结</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近不知为什么git desktop崩了，遂重新使用命令行，总结一下git的相关命令。</p>
-<h2 id="本地库管理"><a href="#本地库管理" class="headerlink" title="本地库管理"></a>本地库管理</h2><ol>
-<li><p>切换到工作目录</p>
-</li>
-<li><p>将文件xxx（也可以添加文件夹）添加到仓库<br><code>git add xxx</code></p>
-</li>
-<li><p>将文件提交到仓库<br><code>git commit -m &quot;关于此次commit的描述&quot;</code></p>
-</li>
-<li><p>查看当前状态<br><code>git status</code></p>
-</li>
-<li><p>查看修改内容<br> <code>git diff</code></p>
-</li>
-<li><p>查看更新日志</p>
-<p><code>git log</code></p>
-</li>
-</ol>
-<h2 id="新建远程库"><a href="#新建远程库" class="headerlink" title="新建远程库"></a>新建远程库</h2><ol>
-<li>在github上创建仓库</li>
-<li>切换到工作目录并与本地的库关联<br><code>git remote add origin git@github.com:michaelliao/learngit.git</code></li>
-<li>把本地库的内容推到远程库上（之后可以不用写-u)<br><code>git push -u origin master</code></li>
-</ol>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>当使用github协同工作，使用分支可以使工作更加整洁。</p>
-<h3 id="切分支开发"><a href="#切分支开发" class="headerlink" title="切分支开发"></a>切分支开发</h3><p>git的分支可以看作指向当前结点的指针，HEAD指针始终指向文件的最新的地方。</p>
-<p>分支的创建：<code>git branch branch1</code></p>
-<p>分支的切换：<code>git checkout branch1</code></p>
-<p>分支切换意味着，如果在该分支上产生的所有改动add或commit都将是在该分支下。</p>
-<h3 id="分支的合并"><a href="#分支的合并" class="headerlink" title="分支的合并"></a>分支的合并</h3><h4 id="一、本地多个不同分支的合并"><a href="#一、本地多个不同分支的合并" class="headerlink" title="一、本地多个不同分支的合并"></a>一、本地多个不同分支的合并</h4><p>本地有多个分支时，在branch1分支下，使用<code>git merge branch2</code>就会将branch2合并到branch1分支。</p>
-<h4 id="二、远程分支和本地分支的合并"><a href="#二、远程分支和本地分支的合并" class="headerlink" title="二、远程分支和本地分支的合并"></a>二、远程分支和本地分支的合并</h4><p><code>git pull</code>拉取远程分之后直接与本地分支进行合并，其作用相当于<code>git fetch</code>和<code>git merge</code></p>
-<p>但是远程和本地合并时较长涉及到一致性的问题。</p>
-<p><strong>1.如果本地分支已有未提交的修改，此时又需要pull，可使用如下命令：</strong></p>
-<p>1）用<code>git add</code>将需要隐藏的文件保存在暂存区</p>
-<p>2）隐藏本地分支工作：<code>git stash save &quot;message&quot;</code>  </p>
-<p>3）执行<code>git pull</code>命令，将远程分支下拉下来，此时不会出现冲突情况</p>
-<p>4）使用<code>git stash list</code>可查看有哪些stash。使用<code>git stash show stash@{num}</code>可以看到第num-1个stash了存储了那些内容,默认是0号存储。</p>
-<p>5） 若要恢复原来的文件，可使用<code>git stash pop</code>命令恢复。该命令会将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash。</p>
-<p>6）若隐藏的文件可丢弃，则可使用<code>git stash drop stash@{$num}</code>丢弃该文件的内容。</p>
-<p>注意，使用<code>git stash</code>后，暂存区的所有文件都会被隐藏，意味着如果再次进行<code>git add</code> 暂存区是不会有东西的，使用<code>git commit</code>也是无法提交更新的，只有恢复后才能解除文件的隐藏。 </p>
-<h4 id="三、某个分支的diverged"><a href="#三、某个分支的diverged" class="headerlink" title="三、某个分支的diverged"></a>三、某个分支的diverged</h4><p>当出现了<code>Your branch and origin/master have diverged,and have...different commits each respectively</code></p>
-<p>此时可使用<code>git rebase origin/master</code>将分叉的分支重新合并。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -450,7 +500,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            14
+                            16
                         </p>
                     </a>
                 </div>
@@ -474,7 +524,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            11
+                            12
                         </p>
                     </a>
                 </div>
@@ -574,7 +624,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/NLP/" style="font-size: 20px;">NLP</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">主题建模</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%B0%E5%AD%97%E4%BA%BA%E6%96%87/" style="font-size: 10px;">数字人文</a> <a href="/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/" style="font-size: 10px;">文本挖掘</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/" style="font-size: 10px;">知其所以然</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 20px;">综述</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a>
+        <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/NLP/" style="font-size: 20px;">NLP</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">主题建模</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%B0%E5%AD%97%E4%BA%BA%E6%96%87/" style="font-size: 10px;">数字人文</a> <a href="/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/" style="font-size: 10px;">文本挖掘</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/" style="font-size: 10px;">知其所以然</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 20px;">综述</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 20px;">编译原理</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a>
     </div>
 </div>
     
@@ -588,6 +638,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语法分析的例子整理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T12:58:37.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">语法分析的例子整理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于语法分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T02:07:43.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">关于语法分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -646,44 +734,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="D3笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T03:38:29.000Z">2020-04-03</time></div>
-                    <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">D3笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo的坑和新博客">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time></div>
-                    <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo的坑和新博客</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -701,7 +751,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -862,6 +912,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E7%BB%BC%E8%BF%B0/">
                         <span class="tag">综述</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="tag">编译原理</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -899,6 +956,44 @@
         
         <article class="media">
             
+            <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语法分析的例子整理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T12:58:37.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">语法分析的例子整理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于语法分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T02:07:43.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">关于语法分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
@@ -954,44 +1049,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="D3笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T03:38:29.000Z">2020-04-03</time></div>
-                    <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">D3笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo的坑和新博客">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time></div>
-                    <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo的坑和新博客</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1009,7 +1066,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1170,6 +1227,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E7%BB%BC%E8%BF%B0/">
                         <span class="tag">综述</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="tag">编译原理</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1255,7 +1319,7 @@
 <script>
 var IcarusThemeSettings = {
     site: {
-        url: 'http://yoursite.com',
+        url: 'http://codingClaire.github.io',
         external_link: {"enable":true,"exclude":[]}
     },
     article: {

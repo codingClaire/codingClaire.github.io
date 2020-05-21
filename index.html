@@ -12,13 +12,13 @@
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://codingclaire.github.io/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="http://codingclaire.github.io/images/og_image.png">
 <meta property="article:author" content="Claire">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="http://codingclaire.github.io/images/og_image.png">
 
 
 
@@ -133,6 +133,198 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-21T12:58:37.000Z">2020-05-21</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 139 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/">语法分析的例子整理</a>
+            
+        </h1>
+        <div class="content">
+            <p>$$<br>E\rightarrow E+T|T \T\rightarrow T<em>F|F \F\rightarrow (E) |id<br>$$<br>扩展文法：<br>$$<br>E’\rightarrow E \E\rightarrow E+T|T \T\rightarrow T</em>F|F \F\rightarrow (E) |id<br>$$</p>
+<p>LR(0)项：<br>$$<br>E’\rightarrow .E \quad E’\rightarrow E. \E\rightarrow .E+T \quad E\rightarrow E.+T \\quad E\rightarrow E+.T \quad E\rightarrow E+T. \E\rightarrow .T \quad E\rightarrow T. \T\rightarrow .T<em>F \quad T\rightarrow T.*F \quad T\rightarrow T</em>.F \quad T\rightarrow T*F. \T\rightarrow .F \quad T\rightarrow F. \F\rightarrow .(E) \quad F\rightarrow (.E) \quad F\rightarrow (E.) \quad F\rightarrow (E). \F\rightarrow .id \quad F\rightarrow id.<br>$$<br>绘制LR(0)自动机：</p>
+<p><img src="/.com//image-20200521205727392.png" alt="image-20200521205727392"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-21T02:07:43.000Z">2020-05-21</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2199 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">关于语法分析</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>这将是一个非常口语化的总结，因为这就是我口述的总结。</p>
+</blockquote>
+<p>语法分析过程主要包括两种方法：自底向上的语法分析和自顶向下的语法分析。其中，“底”指的就是原始串，而“顶”指的是开始符号。分析的目的就是确定某一个确定的字符串是否属于文法描述的语言。</p>
+<p>而这些分析方法，最终都是要让串形成对应的语法分析树，因此它们将一个判定问题，转化成了生成语法分析树的过程。</p>
+<h1 id="First集和Follow集"><a href="#First集和Follow集" class="headerlink" title="First集和Follow集"></a>First集和Follow集</h1><p>First集和Follow集应该是对于任意的文法都是能够确定的。</p>
+<p>文法中的任意文法符号串都是有First集的，First集相当于这个文法符号串能推出的串中最左侧的终结符的集合。First集可以包含$\epsilon$。</p>
+<blockquote>
+<p>求First集的规则：</p>
+<ol>
+<li><p>把所有的终结符语法规则列出来（我感觉First集求的时候不能有或？还是也可以）</p>
+</li>
+<li><p>如果X是终结符或者$\epsilon$,$First(X)={X}$</p>
+<p>如果X是非终结符，对每个产生式$X-&gt;X_1X_2…X_n$,$First(X_1)$是$First(X)$的子集。</p>
+<p>如果有$X_1X_2…X_i\Rightarrow\epsilon(i&lt;n)$,那么$First(X_{i+1})$是$First(X)$的子集。</p>
+</li>
+</ol>
+</blockquote>
+<p>Follow集能够让一个非终结符消失（推出空），就是说Follow是确定当某一个非终结符后面出现了哪些终结符的时候，我们需要用推出空这个产生式。</p>
+<blockquote>
+<p>求Follow集的规则：</p>
+<p>1.先将$放入Follow(S)中，S为开始字符。(构建LL(1)分析表的时候，如果有$S\Rightarrow\epsilon$,那么就可以写在[S,$]里，表示如果接受的是一个空串，就可以用这个产生式)</p>
+<p>2.如果存在产生式$A\rightarrow\alpha B\beta$,那么求解Follow(B)的时候，要将$First(B)$中除了$\epsilon$所有的元素都加入Follow(B)。$\beta$可包含终结符或非终结符。</p>
+<p>3.产生式右侧被推导出之后，左侧的Follow集就是右侧最右（需要考虑右侧是否为空，若为空就不断考虑向左移动的符号）的非终结符的Follow集的子集。</p>
+<p>【如果存在产生式$A\rightarrow\alpha B\beta$,且$\beta$可空（或者说B的First集包含$\epsilon$)，那么$Follow(B)\Leftarrow Follow(A)$】</p>
+</blockquote>
+<p>因为我们确定某个非终结符的Follow集，都是通过它在右侧才能确定的，因此我们不需要考虑那些右侧全是终结符的产生式。</p>
+<p>LL(1)分析表做的是这件事：横轴是预测的下一个字符，然后当前的栈顶的非终结符已知，那么要通过哪一个产生式能够最终推出预测的下一个字符。所以我们需要通过计算First集和Follow集来确定LL(1)分析表。</p>
+<h1 id="自顶向下的语法分析"><a href="#自顶向下的语法分析" class="headerlink" title="自顶向下的语法分析"></a>自顶向下的语法分析</h1><p>从开始符号最终到实际的字符串，<strong>自顶向下</strong>中主要分为<strong>回溯分析程序</strong>和<strong>预测分析程序</strong>。我们主要学了两种预测分析方法：<strong>递归下降和LL(1)</strong>。</p>
+<p><strong>为何叫“预测分析”，</strong>我们可以这么理解：首先，自顶向下分析方法的基础就是将字符串看成输入串，就是说从开始到结束，我们可以认为是逐步读取这个串的，因此字符之间有了先后被读取的，那么我们构建语法分析树也就是一个先根次序创建树的过程，我们也可以说<strong>自顶向下分析就是要找到对应串的最左推导</strong>。因此预测分析首先是要求给定的文法中没有左因子、左递归，文法不能是二义性的，其次预测分析需要看文法的下一个字符，也就是<strong>下一个输出符号</strong>，所以我们称之为“预测”。</p>
+<h2 id="回溯分析程序"><a href="#回溯分析程序" class="headerlink" title="回溯分析程序"></a>回溯分析程序</h2><h2 id="预测分析程序"><a href="#预测分析程序" class="headerlink" title="预测分析程序"></a>预测分析程序</h2><h3 id="递归下降"><a href="#递归下降" class="headerlink" title="递归下降"></a>递归下降</h3><p>改写为$EBNF$(消除左递归、去除左因子)</p>
+<h3 id="LL-1"><a href="#LL-1" class="headerlink" title="LL(1)"></a>LL(1)</h3><p>第一个L表示从左向右扫描输入，第二个L表示最左推导，1表示每一步中只需要向前看一个输入符号来决定语法分析动作。</p>
+<h4 id="预测分析表的构建"><a href="#预测分析表的构建" class="headerlink" title="预测分析表的构建"></a>预测分析表的构建</h4><blockquote>
+<p>$LL(1)$构建预测分析表的步骤：</p>
+<ol>
+<li>$First(\alpha)$中的每个记号$s$，都将$A\rightarrow\alpha$添加至$M[A,s]$中。</li>
+<li>$\alpha$可空的话，对$Follow(A)$中的每一个元素$k$，将$A\rightarrow\alpha$添加到$M[A,k]$中。</li>
+</ol>
+<p>如果$M[A,\alpha]$没有产生式的话，就将其设置为$error$。</p>
+</blockquote>
+<h4 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h4><p>一个文法若满足以下条件，则该文法就是LL(1)文法：</p>
+<p>在每个产生式$A\rightarrow{\alpha}_1 |{\alpha}_2⋯|{\alpha}_n$中，对于所有的i和j:$1≤i, j≤n, i≠j$，$First(α_i )∩First(α_j )$为空。（若不为空，假设有一个相同元素$k$,那么在$M[A,k]$就会加入两个产生式：$A\rightarrow{\alpha}_i$和$A\rightarrow{\alpha}_j$)</p>
+<p>若对于非终结符A可空，那么$First(A)∩Follow(A)$为空。(若有相同元素k，根据分析表也会发现$M[A,k]$有两个产生式)</p>
+<p><strong>如果一个文法G，由它构造的LL(1)分析表中的每个子项最多只含有一个产生式，那么它就是LL(1)文法。</strong></p>
+<p>在LL(1)分析表中有两项产生式的文法不一定是二义性的文法，可能是有左递归的。</p>
+<blockquote>
+<p>一个不是$LL(1)$的文法同样可以用$LL(1)$方法。</p>
+</blockquote>
+<p>LL(1）方法对应的是非递归的预测分析器，显示维护栈结构，应该和计算理论里的下推自动机类似。下推自动机所定义的语言恰好就是上下文无关语言。</p>
+<h1 id="自底向上的语法分析"><a href="#自底向上的语法分析" class="headerlink" title="自底向上的语法分析"></a>自底向上的语法分析</h1><p>归约其实就是推导的反向操作。如果反向构造一个推导过程，那么就会是最右推导的。推导的方法是从记号串开始，使用产生式进行归约，期望得到开始符号，如果能够得到开始符号，那么这个字符串就是文法可以识别的语句。</p>
+<p>两个动作：移进 shift和规约 reduce。</p>
+<p>自底向下就是从输入串到开始符号的归约，归约的方向是从左到右，可以认为是最左归约，逆向的过程就是最右推导。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="短语、直接短语和句柄"><a href="#短语、直接短语和句柄" class="headerlink" title="短语、直接短语和句柄"></a>短语、直接短语和句柄</h3><p>短语就是在一个句型中对应的分析树，里以非终结符为根的子树的所有叶子节点构成的排列就是对于该非终结符的短语，如果子树只有两层，那么就是直接短语。最左侧的非终结符的子树对应的短语就是句柄。</p>
+<p>句柄的定义：如果$S\Rightarrow_{lm}^{*}\alpha A\omega \Rightarrow_{lm} \alpha \beta \omega$，A是输入串中最右的非终结符，则$\beta$称为一个句柄。</p>
+<p>句柄可以理解为一个归约点，可以允许解析器通过进一步的归约操作回到开始符号的位置。而实际上我们做的归约就是最左归约。</p>
+<p>对于下列文法：</p>
+<p>$E\rightarrow E+T|T$<br>$T\rightarrow T*F|F$<br>$F\rightarrow (E) |id$</p>
+<p>对于输入串$id*id$，从左到右是一个最左归约的过程。从左至右使用的产生式为：</p>
+<table>
+<thead>
+<tr>
+<th>产生式</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$F\rightarrow id$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/.com//image-20200521195029382.png" alt="image-20200521195029382"></p>
+<h3 id="可行前缀"><a href="#可行前缀" class="headerlink" title="可行前缀"></a>可行前缀</h3><h2 id="LR-0-文法"><a href="#LR-0-文法" class="headerlink" title="LR(0)文法"></a>LR(0)文法</h2><p>1.扩展文法。</p>
+<p>在决定状态间的转移前，我们必须先加入一条扩展文法：$S\rightarrow E$其中$S$是新的起始符号（start symbol）而<em>E</em>是原先的起始符号。这一做法是为了保证分析器能有一个唯一的起始状态。</p>
+<p>2.列LR(0)项。</p>
+<p>3.起始状态是所有点在最左侧的LR(0)项组成的封闭集。</p>
+<p>LR(0)文法中L指的是从左到右</p>
+<p>点号的左侧是已经读入的，点号的剩余是还没有读入的</p>
+<h2 id="SLR-1-文法"><a href="#SLR-1-文法" class="headerlink" title="SLR(1)文法"></a>SLR(1)文法</h2><hr>
+<p>所以其实表示正则语言的有穷自动机和和表示上下文无关语言的下推自动机都算图灵机？</p>
+<p>所谓的规约</p>
+<p>上下文无关语言的泵引理</p>
+<p>正则表达式 正则语言</p>
+<p>上下文无关语言 上下文文法</p>
+<p>上下文有关语言</p>
+<p>所有的正则语言都能被上下文无关文法表示。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-05-20T08:11:28.000Z">2020-05-20</time>
                 
                 
@@ -224,200 +416,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-29T16:00:00.000Z">2020-04-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 512 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/30/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93/">【综述总结1】Analysis Methods in Neural Language Processing:A Survey</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="行文结构"><a href="#行文结构" class="headerlink" title="行文结构"></a>行文结构</h2><p>论文进行综述时很善于从多个维度对工作进行分类，比如使用的方法、语言现象等。（作者也输出了一张表格、通过不同的维度归纳了相关的工作）。整体来说是按照不同角度下的方法进行综述，比如有一章专门写了自然语言处理中的可视化方法和衡量的难度性。同时最后将所有本文的结论写在了结语。</p>
-<h3 id="Section-1-Introduction"><a href="#Section-1-Introduction" class="headerlink" title="Section 1 Introduction"></a>Section 1 Introduction</h3><p>对全文脉络进行梳理</p>
-<h3 id="Section-2-什么样的语言信息会被神经网络使用？"><a href="#Section-2-什么样的语言信息会被神经网络使用？" class="headerlink" title="Section 2 什么样的语言信息会被神经网络使用？"></a>Section 2 什么样的语言信息会被神经网络使用？</h3><p>阐述从三个方面回答这一问题（和小标题对应）：</p>
-<ul>
-<li>which method are used  使用什么方法</li>
-<li>what kind of linguistic information is sought 什么信息</li>
-<li>which objects in the neural network are being investigated  什么被观测</li>
-</ul>
-<h4 id="2-2-Linguistic-Phenomena"><a href="#2-2-Linguistic-Phenomena" class="headerlink" title="2.2 Linguistic Phenomena"></a>2.2 Linguistic Phenomena</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>sentence length</td>
-<td>句子长度</td>
-<td></td>
-</tr>
-<tr>
-<td>word position</td>
-<td>单词位置</td>
-<td></td>
-</tr>
-<tr>
-<td>word presence</td>
-<td>文字出现</td>
-<td></td>
-</tr>
-<tr>
-<td>simple word order</td>
-<td>简单词序</td>
-<td></td>
-</tr>
-<tr>
-<td>morphological information</td>
-<td>形态信息</td>
-<td></td>
-</tr>
-<tr>
-<td>syntactic information</td>
-<td>句法信息</td>
-<td></td>
-</tr>
-<tr>
-<td>semantic information</td>
-<td>语义信息</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><a href="https://boknilev.github.io/nlp-analysis-methods/table2.html">other phenomena</a></p>
-<h3 id="Section-3-可视化方法和衡量可视化工作的难度性"><a href="#Section-3-可视化方法和衡量可视化工作的难度性" class="headerlink" title="Section 3 可视化方法和衡量可视化工作的难度性"></a>Section 3 可视化方法和衡量可视化工作的难度性</h3><h3 id="Section-4-用于细粒度评估的挑战集的编译"><a href="#Section-4-用于细粒度评估的挑战集的编译" class="headerlink" title="Section 4 用于细粒度评估的挑战集的编译"></a>Section 4 用于细粒度评估的挑战集的编译</h3><p>datasets used for evaluating neural network models that diverge from the common average case evaluatio</p>
-<blockquote>
-<p>分类数据集的依据：</p>
-<ul>
-<li>the task they seek to evaluate</li>
-<li>the linguistic phenomena they aim to study</li>
-<li>the language(s) they target</li>
-<li>their size</li>
-<li>their method of construction</li>
-<li>how performance is evaluated</li>
-</ul>
-</blockquote>
-<h3 id="Section-5-对抗性例子的产生和使用、神经网络的弱点"><a href="#Section-5-对抗性例子的产生和使用、神经网络的弱点" class="headerlink" title="Section 5 对抗性例子的产生和使用、神经网络的弱点"></a>Section 5 对抗性例子的产生和使用、神经网络的弱点</h3><h3 id="Section-6-解释模型预测的工作"><a href="#Section-6-解释模型预测的工作" class="headerlink" title="Section 6 解释模型预测的工作"></a>Section 6 解释模型预测的工作</h3><h3 id="Section-7-其他不归于上述主题的方法"><a href="#Section-7-其他不归于上述主题的方法" class="headerlink" title="Section 7 其他不归于上述主题的方法"></a>Section 7 其他不归于上述主题的方法</h3><h2 id="引用他人工作的句式"><a href="#引用他人工作的句式" class="headerlink" title="引用他人工作的句式"></a>引用他人工作的句式</h2><ul>
-<li><p>see somebody for example</p>
-</li>
-<li><p>They found … suggesting that </p>
-</li>
-<li><p>In contrast,</p>
-</li>
-<li><p>Somebody <strong>made some headway on</strong> this question.</p>
-</li>
-<li><p>Somebody noted several key properties…</p>
-</li>
-<li><p>conducted behavioral experiments</p>
-</li>
-</ul>
-<h2 id="其他句式"><a href="#其他句式" class="headerlink" title="其他句式"></a>其他句式</h2><ul>
-<li><p>enable them to draw conclusions about…</p>
-</li>
-<li><p>synthesize a holistic picture from this diverse body of work</p>
-</li>
-<li><p>Another theme that emerges in several  studies is…</p>
-</li>
-<li><p>Much recent work has focused on …</p>
-</li>
-<li><p>… have gained renewed popularity in the NLP community.</p>
-</li>
-<li><p>Most of the relevant analysis work is concerned with…</p>
-</li>
-<li><p>Method … may shed new light on some of these questions.</p>
-</li>
-<li><p>A long tradition in work on (domain) is to …</p>
-</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-03T03:38:29.000Z">2020-04-03</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 119 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/">D3笔记</a>
-            
-        </h1>
-        <div class="content">
-            <p>loading data onto the page</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">waitSeconds=<span class="function"><span class="params">numSeconds</span>=&gt;</span><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> message=<span class="string">`<span class="subst">$&#123;numSeconds&#125;</span> seconds have passed!`</span>;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>resolve(message),numSeconds*<span class="number">1000</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">waitSeconds(<span class="number">2</span>).then(<span class="function"><span class="params">message</span>=&gt;</span><span class="built_in">console</span>.log(message));</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>结果：等待两秒后显示 2 seconds have passed!</p>
-</blockquote>
-<h2 id="ECMAScript-6-Features"><a href="#ECMAScript-6-Features" class="headerlink" title="ECMAScript 6 Features"></a>ECMAScript 6 Features</h2><h2 id="HTML-CSS-SVG"><a href="#HTML-CSS-SVG" class="headerlink" title="HTML CSS SVG"></a>HTML CSS SVG</h2><p>Scalable Vector Graph</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>&#123;select,arc&#125; <span class="keyword">from</span> <span class="string">'d3'</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> width=+svg.attr(<span class="string">'width'</span>) <span class="comment">//string转换为float</span></span><br><span class="line"><span class="keyword">const</span> width=<span class="built_in">parseFloat</span>(svg.attr(<span class="string">'width'</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> circle=svg.append(<span class="string">'circle'</span>)</span><br><span class="line">	.attr(<span class="string">'fill'</span>,<span class="string">'yellow'</span>) </span><br><span class="line">	.attr(<span class="string">'stroke'</span>,<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> g=svg.append(<span class="string">'g'</span>)</span><br><span class="line">	.attr(<span class="string">'transform'</span>,<span class="string">'translate($&#123;width/2&#125;,$&#123;height/2&#125;)'</span>);</span><br><span class="line"><span class="keyword">const</span> mouth=svg.append(<span class="string">'path'</span>)</span><br><span class="line">	.attr(<span class="string">'d'</span>,acr()(&#123;</span><br><span class="line">        innerRadius:<span class="number">80</span>,</span><br><span class="line">        outerRadius:<span class="number">100</span>,</span><br><span class="line">        startAngle:<span class="built_in">Math</span>.PI/<span class="number">2</span>,</span><br><span class="line">        endAngle:<span class="built_in">Math</span>,PI*<span class="number">3</span>/<span class="number">2</span></span><br><span class="line">    &#125;));</span><br></pre></td></tr></table></figure>
-
-<h2 id="d3"><a href="#d3" class="headerlink" title="d3"></a>d3</h2><p>csv comma seperated value</p>
-<h3 id="customizing-axis"><a href="#customizing-axis" class="headerlink" title="customizing  axis"></a>customizing  axis</h3><p>d3.format() 函数</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -486,7 +484,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            14
+                            16
                         </p>
                     </a>
                 </div>
@@ -510,7 +508,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            11
+                            12
                         </p>
                     </a>
                 </div>
@@ -610,7 +608,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/NLP/" style="font-size: 20px;">NLP</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">主题建模</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%B0%E5%AD%97%E4%BA%BA%E6%96%87/" style="font-size: 10px;">数字人文</a> <a href="/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/" style="font-size: 10px;">文本挖掘</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/" style="font-size: 10px;">知其所以然</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 20px;">综述</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a>
+        <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/NLP/" style="font-size: 20px;">NLP</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">主题建模</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%B0%E5%AD%97%E4%BA%BA%E6%96%87/" style="font-size: 10px;">数字人文</a> <a href="/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/" style="font-size: 10px;">文本挖掘</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/" style="font-size: 10px;">知其所以然</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 20px;">综述</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 20px;">编译原理</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a>
     </div>
 </div>
     
@@ -624,6 +622,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语法分析的例子整理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T12:58:37.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">语法分析的例子整理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于语法分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T02:07:43.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">关于语法分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -682,44 +718,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="D3笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T03:38:29.000Z">2020-04-03</time></div>
-                    <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">D3笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo的坑和新博客">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time></div>
-                    <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo的坑和新博客</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -737,7 +735,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -898,6 +896,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E7%BB%BC%E8%BF%B0/">
                         <span class="tag">综述</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="tag">编译原理</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -935,6 +940,44 @@
         
         <article class="media">
             
+            <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语法分析的例子整理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T12:58:37.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">语法分析的例子整理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于语法分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-21T02:07:43.000Z">2020-05-21</time></div>
+                    <a href="/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">关于语法分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="一个解决word页码错乱的小方法">
@@ -990,44 +1033,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="D3笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T03:38:29.000Z">2020-04-03</time></div>
-                    <a href="/2020/04/03/D3%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">D3笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo的坑和新博客">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T01:45:41.955Z">2020-03-31</time></div>
-                    <a href="/2020/03/31/hexo%E7%9A%84%E5%9D%91%E5%92%8C%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo的坑和新博客</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1045,7 +1050,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1206,6 +1211,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E7%BB%BC%E8%BF%B0/">
                         <span class="tag">综述</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="tag">编译原理</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1291,7 +1303,7 @@
 <script>
 var IcarusThemeSettings = {
     site: {
-        url: 'http://yoursite.com',
+        url: 'http://codingClaire.github.io',
         external_link: {"enable":true,"exclude":[]}
     },
     article: {
