@@ -6,7 +6,7 @@
   <link href="https://wuruoting.club/atom.xml" rel="self"/>
   
   <link href="https://wuruoting.club/"/>
-  <updated>2021-04-07T11:51:16.764Z</updated>
+  <updated>2021-04-07T14:20:33.320Z</updated>
   <id>https://wuruoting.club/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Keras中RNNLayer的输入输出总结</title>
+    <link href="https://wuruoting.club/2021/04/07/2021-04-07-keras-LSTM/"/>
+    <id>https://wuruoting.club/2021/04/07/2021-04-07-keras-LSTM/</id>
+    <published>2021-04-07T14:00:24.000Z</published>
+    <updated>2021-04-07T14:20:33.320Z</updated>
+    
+    <content type="html"><![CDATA[<p>网上关于Keras的RNNLayer中的输入写的很不清楚，整理如下：</p><h2 id="LSTM的输入"><a href="#LSTM的输入" class="headerlink" title="LSTM的输入"></a>LSTM的输入</h2><h3 id="input-dim、input-length、input-shape的关系"><a href="#input-dim、input-length、input-shape的关系" class="headerlink" title="input_dim、input_length、input_shape的关系"></a>input_dim、input_length、input_shape的关系</h3><p>LSTM的输入是一个三维的张量（numpy narray), 三维张量的shape是[samples, time steps, features]，也就是[样本数量，时间步长（序列数量），特征长度]。LSTM layer的参数需要确定其中的两个，在model.fit时，就能够对trainX进行训练。因此input_dim表示单个样本的特征长度，可以用trainX.shape[2]赋值； input_length表示的就是时间步长，序列长度，可以用trainX.shape[1]进行赋值。</p><p>另外一种写法是input_shape，其实就是这两个量的结合：input_shape = (input_length, input_dim) </p><p>因此以下的两种写法是等价的：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(LSTM(units=<span class="number">256</span>, return_sequences=<span class="literal">True</span>,input_dim=trainX.shape[<span class="number">2</span>], input_length=trainX.shape[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(LSTM(units=<span class="number">256</span>, return_sequences=<span class="literal">True</span>,input_shape=(trainX.shape[<span class="number">1</span>], trainX.shape[<span class="number">2</span>])))</span><br></pre></td></tr></table></figure><h2 id="GRU的输入"><a href="#GRU的输入" class="headerlink" title="GRU的输入"></a>GRU的输入</h2><p>TODO</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;网上关于Keras的RNNLayer中的输入写的很不清楚，整理如下：&lt;/p&gt;
+&lt;h2 id=&quot;LSTM的输入&quot;&gt;&lt;a href=&quot;#LSTM的输入&quot; class=&quot;headerlink&quot; title=&quot;LSTM的输入&quot;&gt;&lt;/a&gt;LSTM的输入&lt;/h2&gt;&lt;h3 id=&quot;inp</summary>
+      
+    
+    
+    
+    
+    <category term="Keras" scheme="https://wuruoting.club/tags/Keras/"/>
+    
+    <category term="RNN" scheme="https://wuruoting.club/tags/RNN/"/>
+    
+  </entry>
   
   <entry>
     <title>gitbook+Typora打造舒适的笔记环境</title>
@@ -466,32 +491,6 @@
     <category term="交流" scheme="https://wuruoting.club/tags/%E4%BA%A4%E6%B5%81/"/>
     
     <category term="科研" scheme="https://wuruoting.club/tags/%E7%A7%91%E7%A0%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【论文精读笔记1】文物数据可视化系统调查综述</title>
-    <link href="https://wuruoting.club/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/"/>
-    <id>https://wuruoting.club/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/</id>
-    <published>2019-07-02T08:56:13.000Z</published>
-    <updated>2020-06-17T09:13:19.467Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p>[1]Windhager Florian,Federico Paolo,Schreder Gunther,Glinka Katrin,Dork Marian,Miksch Silvia,Mayr Eva. Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges.[J]. IEEE Transactions on Visualization and Computer graphics,2019.</p><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>经过数十年的现代化，网络上出现了大量的来自美术馆、图书馆、档案馆和博物馆的文化遗产藏品，数字文化遗产数据不断增加，相关学者和一般用户的访问量也不断增多。最近许多方法已经开始允许可视化地访问文化收藏，并通过交互可视化的方式将其作为复杂全面的信息空间进行解释。与传统的Web界面不同，转为文化遗产部门的藏品设计的可视化类型更具有创新型和交互的多样性。</p><h1 id="研究方法和贡献"><a href="#研究方法和贡献" class="headerlink" title="研究方法和贡献"></a>研究方法和贡献</h1><p>1.论文作者团队调查并回顾了数字文化遗产藏品的信息可视化方法，分析了70个文化遗产藏品的可视化系统（主要搜索包括信息视觉、视觉分析、人机交互、数字人文关系、数字艺术史和博物馆研究领域中相关期刊、出版物和会议中的作品），多角度对文化遗产藏品可视化界面设计的现状进行了研究和分析，并设计了一个<a href="http://collectionvis.org">网站</a>来探索这个集合的可视化。</p><p>2.作为一个跨学科的团队，论文作者团队讨论了新的设计原则和策略，以及它们是如何解决了文化遗产藏品相关研究的挑战的。</p><h2 id="什么是“CH-DATA”-（文化遗产藏品数据）"><a href="#什么是“CH-DATA”-（文化遗产藏品数据）" class="headerlink" title="什么是“CH DATA”? （文化遗产藏品数据）"></a>什么是“CH DATA”? （文化遗产藏品数据）</h2><p><strong>Tangible Assets:</strong>objects, tools, artworks, building</p><p><strong>Intangible Assets</strong>: arts, performing arts, crafts, expressions, customs, rites…</p><h2 id="Visualization-of-CH-collections-文物藏品的可视化系统"><a href="#Visualization-of-CH-collections-文物藏品的可视化系统" class="headerlink" title="Visualization of CH collections 文物藏品的可视化系统"></a>Visualization of CH collections 文物藏品的可视化系统</h2><p><img src="/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/image.png" alt></p><p>作者团队选取了70个可视化系统，其中50个来自学术文献，20个来自面向公众的文物展示平台。在选择研究可视化系统时，遵循了以下的一系列限制:</p><ol><li>focus on approaches and<br>interface designs utilize InfoVis techniques</li></ol><p>3D objects ×</p><p>2.<br>the search space is restricted to the culture sector</p><p>personal photo/music × &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scientific text documents ×</p><p>3.<br>focus on CH object and asset collections</p><p>cultural-historical entities( e.g. actors, events) ×</p><p><img src="/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/image-1.png" alt></p><p>这张图片中左侧显示了所有类型的文物数据，右侧是展现了单个文物的类型以及与它相关联的其他信息，如时间、创造地点、作者、时间或是与其他文物的关联。</p><h2 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h2><p>作者先就所有的文物可视化系统进行了分类，一共分出了七类。</p><h3 id="1-Data"><a href="#1-Data" class="headerlink" title="1.Data"></a>1.Data</h3><p> 1.Object-centric approach  2.Event-centric approach </p><h3 id="2-Users"><a href="#2-Users" class="headerlink" title="2.Users"></a>2.Users</h3><p>Distinguish 2 classes of users: 1.Experts 2.Casual users </p><h3 id="3-Tasks"><a href="#3-Tasks" class="headerlink" title="3. Tasks"></a>3. Tasks</h3><p> 1.Elementary tasks 2.Synoptic tasks </p><h3 id="4-Granularity"><a href="#4-Granularity" class="headerlink" title="4.Granularity"></a>4.Granularity</h3><p>1.Single Object Previews </p><p>2.Multi-Object Previews </p><p>3.Collection Overviews Utilizing Discrete Surrogates </p><p>4.Collection Overviews Utilizing Abstractions </p><h3 id="5-Interactivity"><a href="#5-Interactivity" class="headerlink" title="5.Interactivity"></a>5.Interactivity</h3><p>1.Object Search</p><p>2.Overview and Orientation</p><p>3.Vertical Immersion or Abstraction </p><p>4.Accessing Object Details </p><p>5.Horizontal Exploration 6.Curated Path</p><h3 id="6-Temporal-Visualization-Methods"><a href="#6-Temporal-Visualization-Methods" class="headerlink" title="6.Temporal Visualization Methods"></a>6.Temporal Visualization Methods</h3><h3 id="7-Non-Temporal-Visualization-Methods"><a href="#7-Non-Temporal-Visualization-Methods" class="headerlink" title="7.Non-Temporal Visualization Methods"></a>7.Non-Temporal Visualization Methods</h3><p><img src="/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/image-2.png" alt></p><p>最终基于这些分类呈现出了一个很大的表格。</p><p><img src="/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/image-3.png" alt></p><h2 id="Survey-And-Analysis-of-The-Interface"><a href="#Survey-And-Analysis-of-The-Interface" class="headerlink" title="**Survey And Analysis of The Interface"></a>**Survey And Analysis of The Interface</h2><p><strong>1.The development of CH visualization</strong></p><p><img src="/2019/07/02/%E6%96%87%E7%89%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E6%9F%A5%E7%BB%BC%E8%BF%B0/image-4.png" alt></p><p><strong>2.Casual VS. Expert Use</strong></p><p>&nbsp;Interfaces for casual users focus more on<br>image objects **than<br>approaches for professional<br>users, and<br>often also display a thumbnail of the image itself;</p><p>Expert interfaces use fewer lists, grids, and tag<br>clouds than casual<br>interfaces. </p><p>Casual users interface should be simpler and provide few ways of visualization data</p><p>*<em>3.A founding *</em></p><p>No hybrid systems integrating InfoVis techniques with 3D rendering techniques( e.g. of real or virtual museums)</p><p>a particularly interesting unexplored possibility and future potential (also for VR/AR guides)</p><p><strong>4.Intangible CH data</strong></p><p>a remarkable shortage of interfaces enabling access to intangible<br>objects or practices,<br>such as<br>music, film,<br>performing arts,<br>or linguistic entities(e.g., narratives, folk tales, or<br>poems).</p><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><h3 id="1-Serendipity"><a href="#1-Serendipity" class="headerlink" title="1.Serendipity"></a>1.Serendipity</h3><p>Serendipity -&gt; concept in<br>library and information sciences</p><p>“the faculty or phenomenon of<br>finding valuable or agreeable things not sought for”</p><p><strong>Options for Operationalization</strong> </p><p>1.emulating the serendipitous information space of a library or museum in digital CH interfaces </p><p>2.offer a slightly more serendipitous access in the sense that related or similar objects to the one searched for are also recommended based on existing object taxonomies or user-generated tags  </p><h3 id="2-Generosity"><a href="#2-Generosity" class="headerlink" title="2.Generosity"></a>2.Generosity</h3><p>provide rich and navigable representations that encourage exploration and browsing， while overviews establish context and maintain orientation during<br>access to details at<br>multiple scales.</p><p>playful extensions of information seeking towards less goal-oriented information activities, such as satisfying curiosity, enjoying aesthetics, and avoiding boredom</p><h3 id="3-criticality"><a href="#3-criticality" class="headerlink" title="3.criticality"></a>3.criticality</h3><p>criticality -&gt; reflections and design strategies, that can help to meet<br>specific epistemic</p><p>standards in various humanities,<br>arts, and CH communities.</p><p>the understanding of CH collections as <strong>dynamic entities *<em>that can be formed, re-arranged, contextualized, and annotated through innovative forms of participation can be specifically supported. Equally, *</em>InfoVis and interface design holds the potential to allow for multiple, uncertain,</strong> and sometimes even conflicting perspectives and narratives to surface. </p><h3 id="4-User-Guidance-and-Narration"><a href="#4-User-Guidance-and-Narration" class="headerlink" title="4.User Guidance and Narration"></a>4.User Guidance and Narration</h3><p>User<br>Guidance: Existing<br>metadata<br>of CH<br>collections often<br>support faceted browsing and recommendations<br>corresponding<br>to data dimensions</p><p>narrating<br>the collection:telling a story by <strong>selecting</strong>and <strong>presenting</strong><br>objects in a purposeful manner, accompanying them<br>with additional information, and even guiding<br>visitors through<br>and between exhibits</p><p>&nbsp; narrative<br>guidance can be implemented, for example, as animated<br>movements across a map,<br>which may<br>include different textual and visual source materials .</p><h3 id="5-Remote-Access-VS-Being-There"><a href="#5-Remote-Access-VS-Being-There" class="headerlink" title="5.Remote Access VS Being There"></a>5.Remote Access VS Being There</h3><p>InfoVis systems developed primarily for remote use will not<br>necessarily serve the</p><p>information needs (or maybe rather<br>expectations) of museum<br>visitors</p><p>We consider the in-situ use of exploratory interfaces and collection visualizations inreal CH exhibition settings to be a largely unexplored area of application. </p><h3 id="6-Facets-of-Uncertainty"><a href="#6-Facets-of-Uncertainty" class="headerlink" title="6.Facets of Uncertainty"></a>6.Facets of Uncertainty</h3><p>Uncertainty:<br>how to deal with uncertain data already belongs to<br>one of the standard<br>exercises of<br>the field </p><p>a lack of discussion on the same level</p><p>challenging metadata :“date”</p><p>The acknowledgment of imprecision and interpretative openness that is present in textual sources in the humanities have hardly been acknowledged in the design of CH interfaces and visualizations. </p><h3 id="7-Contextualization"><a href="#7-Contextualization" class="headerlink" title="7.Contextualization"></a>7.Contextualization</h3><p>Linked data is a way of publishing structured<br>data that allows<br>metadata of<br>different local databases to be connected and enriched</p><p>uniquely <strong>identifying</strong> entities (such as cultural artifacts, creators, institutions, places, or events) and <strong>drawing</strong> typified (e.g., temporal, spatial, contextual, and conceptual)links between them, linked data initiatives weave CH-specific knowledge graphs and relational tissues into the Semantic Web.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;来源&quot;&gt;&lt;a href=&quot;#来源&quot; class=&quot;headerlink&quot; title=&quot;来源&quot;&gt;&lt;/a&gt;来源&lt;/h1&gt;&lt;p&gt;[1]Windhager Florian,Federico Paolo,Schreder Gunther,Glinka Katrin,Dor</summary>
-      
-    
-    
-    
-    
-    <category term="数据可视化" scheme="https://wuruoting.club/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-    <category term="TVCG" scheme="https://wuruoting.club/tags/TVCG/"/>
-    
-    <category term="数字人文" scheme="https://wuruoting.club/tags/%E6%95%B0%E5%AD%97%E4%BA%BA%E6%96%87/"/>
     
   </entry>
   
