@@ -36,8 +36,14 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
-<script>
-  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":true};
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz",
+      appKey: "c0YVFIAlMCeKLx899vBJAnMV"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
 </script>
 
     <title>从停机问题到不可知论 - Ruoting Wu's Blog</title>
@@ -100,7 +106,12 @@
       <div class="post-meta">
         <span class="post-time">
           2019-04-22
-        </span></div>
+        </span><span class="post-visits"
+             data-url="/2019/04/22/%E4%BB%8E%E5%81%9C%E6%9C%BA%E9%97%AE%E9%A2%98%E5%88%B0%E4%B8%8D%E5%8F%AF%E7%9F%A5%E8%AE%BA/"
+             data-title="从停机问题到不可知论">
+          阅读次数 0
+        </span>
+        </div>
     </header>
 
     <div class="post-content"><p>你被关在在一个房间里，房间里挤满了很多台机器。对于你眼前的一台机器P，有一个小矮人坐在机器前，不断地向机器里敲打着序列，这时机器大声地喊了一句”hello world!”，说明条件满足了 。如果机器没有动静，说明输入的序列并不满足让它大喊的条件。对于每一台机器来说，它们满足的条件各不相同。</p>
@@ -137,7 +148,17 @@
       <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
     </p>
   </div>
-      <footer class="post-footer">
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="wechat">
+        </label>
+      <label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="alipay">
+        </label>
+      </div>
+  </div><footer class="post-footer">
         <div class="post-tags">
             <a href="/tags/%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/">知其所以然</a>
             </div>
