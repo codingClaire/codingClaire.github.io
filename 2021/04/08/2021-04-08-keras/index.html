@@ -131,7 +131,8 @@
 <p>.h5 文件</p>
 <h3 id="保存某一层的输出：model-layers-index-output"><a href="#保存某一层的输出：model-layers-index-output" class="headerlink" title="保存某一层的输出：model.layers[index].output"></a>保存某一层的输出：<code>model.layers[index].output</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inp = model.input</span><br><span class="line">outputs = [layer.output <span class="keyword">for</span> layer <span class="keyword">in</span> model.layers]</span><br></pre></td></tr></table></figure>
 
-<p>outputs里的元素的类型是：<br><code>&lt;class &#39;tensorflow.python.framework.ops.Tensor&#39;&gt;</code></p>
+<p>outputs 里的元素的类型是：<br><code>&lt;class &#39;tensorflow.python.framework.ops.Tensor&#39;&gt;</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># serialize model to JSON</span></span><br><span class="line">model_json = model.to_json()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"model.json"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> json_file:</span><br><span class="line">    json_file.write(model_json)</span><br><span class="line"><span class="comment"># serialize weights to HDF5</span></span><br><span class="line">model.save_weights(<span class="string">"model.h5"</span>)</span><br><span class="line">print(<span class="string">"Saved model to disk"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># later...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># load json and create model</span></span><br><span class="line">json_file = open(<span class="string">'model.json'</span>, <span class="string">'r'</span>)</span><br><span class="line">loaded_model_json = json_file.read()</span><br><span class="line">json_file.close()</span><br><span class="line">loaded_model = model_from_json(loaded_model_json)</span><br><span class="line"><span class="comment"># load weights into new model</span></span><br><span class="line">loaded_model.load_weights(<span class="string">"model.h5"</span>)</span><br><span class="line">print(<span class="string">"Loaded model from disk"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># evaluate loaded model on test data</span></span><br><span class="line">loaded_model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'rmsprop'</span>, metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line">score = loaded_model.evaluate(X, Y, verbose=<span class="number">0</span>)</span><br><span class="line">print(<span class="string">"%s: %.2f%%"</span> % (loaded_model.metrics_names[<span class="number">1</span>], score[<span class="number">1</span>]*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
 
       </div>
       <div class="post-copyright">
@@ -159,7 +160,12 @@
       </div>
   </div><footer class="post-footer">
         
-        <nav class="post-nav"><a class="next" href="/2021/04/07/2021-04-07-keras-LSTM/">
+        <nav class="post-nav"><a class="prev" href="/2021/04/09/2021-04-09-GNN-classification/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">图神经网络里的监督/半监督和转导/归纳概念解析</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    <a class="next" href="/2021/04/07/2021-04-07-keras-LSTM/">
         <span class="next-text nav-default">Keras中RNNLayer的输入输出总结</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
