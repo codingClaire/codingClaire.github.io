@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="图神经网络里的监督/半监督和转导/归纳概念解析"/><meta name="keywords" content="图, 机器学习, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
-<link rel="canonical" href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/"/>
+<meta name="description" content="如何读取HDF5保存的权重"/><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
+<link rel="canonical" href="https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
     MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
@@ -46,7 +46,7 @@
   window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
 </script>
 
-    <title>图神经网络里的监督/半监督和转导/归纳概念解析 - Ruoting Wu's Blog</title>
+    <title>如何读取HDF5保存的权重 - Ruoting Wu's Blog</title>
   <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
 </head>
 
@@ -100,25 +100,26 @@
         <div class="content-wrapper">
           <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">图神经网络里的监督/半监督和转导/归纳概念解析
+      <h1 class="post-title">如何读取HDF5保存的权重
         </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2021-04-09
+          2021-04-20
         </span><span class="post-visits"
-             data-url="/2021/04/09/2021-04-09-GNN-classification/"
-             data-title="图神经网络里的监督/半监督和转导/归纳概念解析">
+             data-url="/2021/04/20/2021-04-20-hdf5-weights/"
+             data-title="如何读取HDF5保存的权重">
           阅读次数 0
         </span>
         </div>
     </header>
 
-    <div class="post-content"><p>监督(supervised)和半监督(semi-supervised)其实是转导（transductive)和归纳(inductive)</p>
-<p>对于节点分类来说，如何区分监督学习和半监督学习的关键在于节点在训练过程中被使用的区别，也就是训练集节点是否被用在GNN的消息传递操作中，并且会被用于计算损失。</p>
-<p>transductive的测试节点是无标签的，并且不会被使用在损失计算中，但是这些点和相关的边会被用于消息传递中，也就是说图神经网络会生成测试集节点的潜在表示中，但是最后一层的表示不会被用在损失函数的计算中。</p>
-<p>indutive的测试节点既不会用在GNN的消息传递过程中，也不会用在损失函数计算中，也就是说，inductive在GNN训练的过程中完全不会被包括。</p>
-<p>半监督指的就是GNN会使用transductive的测试节点组成的测试集，也就是说在训练的过程中实际上是能够看到测试的节点的（但不能看到label）。监督指的就是在做归纳式的节点分类时，测试的节点是完全不会被检测到的。</p>
+    <div class="post-content"><p><a href="https://keras.io/api/layers/base_layer/#set_weights-method" target="_blank" rel="noopener">https://keras.io/api/layers/base_layer/#set_weights-method</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f = h5py.File(<span class="string">"encoder_weights_0.hdf5"</span>, <span class="string">"r"</span>)</span><br><span class="line">print(f.filename, <span class="string">":"</span>)</span><br><span class="line">print(f[<span class="string">'dense_1'</span>])</span><br><span class="line">print([key <span class="keyword">for</span> key <span class="keyword">in</span> f.keys()], <span class="string">"\n"</span>)</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> f.keys():</span><br><span class="line">    print(key,f[key])</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> f[key].keys():</span><br><span class="line">        print(k,f[key][k])</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> f[key][k].keys():</span><br><span class="line">            print(l, f[key][k][l])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;HDF5 group "/dense_1" (1 members)&gt;</span><br><span class="line">['dense_1', 'dense_2', 'dense_3', 'input_1']</span><br><span class="line"></span><br><span class="line">dense_1 &lt;HDF5 group "/dense_1" (1 members)&gt;</span><br><span class="line">dense_1 &lt;HDF5 group "/dense_1/dense_1" (2 members)&gt;</span><br><span class="line">bias:0 &lt;HDF5 dataset "bias:0": shape (64,), type "&lt;f4"&gt;</span><br><span class="line">kernel:0 &lt;HDF5 dataset "kernel:0": shape (100, 64), type "&lt;f4"&gt;</span><br><span class="line">dense_2 &lt;HDF5 group "/dense_2" (1 members)&gt;</span><br><span class="line">dense_2 &lt;HDF5 group "/dense_2/dense_2" (2 members)&gt;</span><br><span class="line">bias:0 &lt;HDF5 dataset "bias:0": shape (16,), type "&lt;f4"&gt;</span><br><span class="line">kernel:0 &lt;HDF5 dataset "kernel:0": shape (64, 16), type "&lt;f4"&gt;</span><br><span class="line">dense_3 &lt;HDF5 group "/dense_3" (1 members)&gt;</span><br><span class="line">dense_3 &lt;HDF5 group "/dense_3/dense_3" (2 members)&gt;</span><br><span class="line">bias:0 &lt;HDF5 dataset "bias:0": shape (8,), type "&lt;f4"&gt;</span><br><span class="line">kernel:0 &lt;HDF5 dataset "kernel:0": shape (16, 8), type "&lt;f4"&gt;</span><br><span class="line">input_1 &lt;HDF5 group "/input_1" (0 members)&gt;</span><br></pre></td></tr></table></figure>
+
+<p>a Dense layer returns a list of two values– per-output weights and the bias value.</p>
 
       </div>
       <div class="post-copyright">
@@ -128,7 +129,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/">https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/</a>
+      <a href="https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/">https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
@@ -145,18 +146,14 @@
         </label>
       </div>
   </div><footer class="post-footer">
-        <div class="post-tags">
-            <a href="/tags/%E5%9B%BE/">图</a>
-            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-            </div>
         
-        <nav class="post-nav"><a class="prev" href="/2021/04/13/2021-04-13-Tensorboard/">
+        <nav class="post-nav"><a class="prev" href="/2021/05/11/2021-05-11-anomaly-detection-1/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">TensorBoard相关知识</span>
+        <span class="prev-text nav-default">【异常检测1】基本概念</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    <a class="next" href="/2021/04/08/2021-04-08-keras/">
-        <span class="next-text nav-default">Keras的一些基本操作</span>
+    <a class="next" href="/2021/04/14/2021-04-14-boosting/">
+        <span class="next-text nav-default">Boosting提升</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

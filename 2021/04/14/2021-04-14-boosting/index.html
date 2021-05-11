@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="图神经网络里的监督/半监督和转导/归纳概念解析"/><meta name="keywords" content="图, 机器学习, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
-<link rel="canonical" href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/"/>
+<meta name="description" content="Boosting提升"/><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
+<link rel="canonical" href="https://wuruoting.club/2021/04/14/2021-04-14-boosting/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
     MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
@@ -46,7 +46,7 @@
   window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
 </script>
 
-    <title>图神经网络里的监督/半监督和转导/归纳概念解析 - Ruoting Wu's Blog</title>
+    <title>Boosting提升 - Ruoting Wu's Blog</title>
   <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
 </head>
 
@@ -100,25 +100,45 @@
         <div class="content-wrapper">
           <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">图神经网络里的监督/半监督和转导/归纳概念解析
+      <h1 class="post-title">Boosting提升
         </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2021-04-09
+          2021-04-14
         </span><span class="post-visits"
-             data-url="/2021/04/09/2021-04-09-GNN-classification/"
-             data-title="图神经网络里的监督/半监督和转导/归纳概念解析">
+             data-url="/2021/04/14/2021-04-14-boosting/"
+             data-title="Boosting提升">
           阅读次数 0
         </span>
         </div>
     </header>
 
-    <div class="post-content"><p>监督(supervised)和半监督(semi-supervised)其实是转导（transductive)和归纳(inductive)</p>
-<p>对于节点分类来说，如何区分监督学习和半监督学习的关键在于节点在训练过程中被使用的区别，也就是训练集节点是否被用在GNN的消息传递操作中，并且会被用于计算损失。</p>
-<p>transductive的测试节点是无标签的，并且不会被使用在损失计算中，但是这些点和相关的边会被用于消息传递中，也就是说图神经网络会生成测试集节点的潜在表示中，但是最后一层的表示不会被用在损失函数的计算中。</p>
-<p>indutive的测试节点既不会用在GNN的消息传递过程中，也不会用在损失函数计算中，也就是说，inductive在GNN训练的过程中完全不会被包括。</p>
-<p>半监督指的就是GNN会使用transductive的测试节点组成的测试集，也就是说在训练的过程中实际上是能够看到测试的节点的（但不能看到label）。监督指的就是在做归纳式的节点分类时，测试的节点是完全不会被检测到的。</p>
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Boosting"><span class="toc-text">什么是Boosting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boosting的两种方法"><span class="toc-text">Boosting的两种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost算法"><span class="toc-text">AdaBoost算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Boost"><span class="toc-text">Gradient Boost</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Boost-Decision-Tree-GBDT"><span class="toc-text">Gradient Boost Decision Tree(GBDT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boosting框架"><span class="toc-text">Boosting框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XGBoost"><span class="toc-text">XGBoost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LightGBM"><span class="toc-text">LightGBM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#防止过拟合的方法"><span class="toc-text">防止过拟合的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#num-leaves"><span class="toc-text">num_leaves</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#num-iterations"><span class="toc-text">num_iterations</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="什么是Boosting"><a href="#什么是Boosting" class="headerlink" title="什么是Boosting"></a>什么是Boosting</h2><p>TODO</p>
+<h2 id="Boosting的两种方法"><a href="#Boosting的两种方法" class="headerlink" title="Boosting的两种方法"></a>Boosting的两种方法</h2><h3 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h3><h3 id="Gradient-Boost"><a href="#Gradient-Boost" class="headerlink" title="Gradient Boost"></a>Gradient Boost</h3><h2 id="Gradient-Boost-Decision-Tree-GBDT"><a href="#Gradient-Boost-Decision-Tree-GBDT" class="headerlink" title="Gradient Boost Decision Tree(GBDT)"></a>Gradient Boost Decision Tree(GBDT)</h2><p>在每个树节点中找到最佳分割点非常耗时，而且会消耗内存</p>
+<h2 id="Boosting框架"><a href="#Boosting框架" class="headerlink" title="Boosting框架"></a>Boosting框架</h2><h3 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h3><h3 id="LightGBM"><a href="#LightGBM" class="headerlink" title="LightGBM"></a>LightGBM</h3><ul>
+<li><p>基于histogram</p>
+</li>
+<li><p>leaf-wise</p>
+</li>
+</ul>
+<p><img src="/2021/04/14/2021-04-14-boosting/image-20210414095754315.png" alt="image-20210414095754315"></p>
+<p><img src="/2021/04/14/2021-04-14-boosting/image-20210414095812474.png" alt="image-20210414095812474"></p>
+<p><img src="/2021/04/14/2021-04-14-boosting/image-20210414095908847.png" alt="image-20210414095908847"></p>
+<p>直方图优化：基于分桶，减少内存的使用，正则化不容易overfit</p>
+<p>控制max_depth来控制num_leaves</p>
+<p>num_leaves=2^max_depth</p>
+<p>lightGBM控制num_leaves，而不是树的最大深度，因为lightGBM不会生成满二叉树，因此通过控制num_leaves确保树的深度不过大，防止过拟合。</p>
+<h4 id="防止过拟合的方法"><a href="#防止过拟合的方法" class="headerlink" title="防止过拟合的方法"></a>防止过拟合的方法</h4><p><img src="/2021/04/14/2021-04-14-boosting/image-20210414101304982.png" alt="image-20210414101304982"></p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><h5 id="num-leaves"><a href="#num-leaves" class="headerlink" title="num_leaves"></a>num_leaves</h5><p>num_leaves越大，增加了训练集的精确度，但增加了过拟合的几率</p>
+<h5 id="num-iterations"><a href="#num-iterations" class="headerlink" title="num_iterations"></a>num_iterations</h5><hr>
+<p>参考资料：</p>
+<p>1.微软亚洲研究院AI头条分享-<a href="https%3A//v.qq.com/x/page/k0362z6lqix.html">Introduction to LightGBM</a>-Taifeng Wang</p>
 
       </div>
       <div class="post-copyright">
@@ -128,7 +148,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/">https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/</a>
+      <a href="https://wuruoting.club/2021/04/14/2021-04-14-boosting/">https://wuruoting.club/2021/04/14/2021-04-14-boosting/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
@@ -145,18 +165,14 @@
         </label>
       </div>
   </div><footer class="post-footer">
-        <div class="post-tags">
-            <a href="/tags/%E5%9B%BE/">图</a>
-            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-            </div>
         
-        <nav class="post-nav"><a class="prev" href="/2021/04/13/2021-04-13-Tensorboard/">
+        <nav class="post-nav"><a class="prev" href="/2021/04/20/2021-04-20-hdf5-weights/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">TensorBoard相关知识</span>
+        <span class="prev-text nav-default">如何读取HDF5保存的权重</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    <a class="next" href="/2021/04/08/2021-04-08-keras/">
-        <span class="next-text nav-default">Keras的一些基本操作</span>
+    <a class="next" href="/2021/04/13/2021-04-13-Tensorboard/">
+        <span class="next-text nav-default">TensorBoard相关知识</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

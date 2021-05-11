@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="图神经网络里的监督/半监督和转导/归纳概念解析"/><meta name="keywords" content="图, 机器学习, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
-<link rel="canonical" href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/"/>
+<meta name="description" content="【异常检测1】基本概念"/><meta name="keywords" content="异常检测, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
+<link rel="canonical" href="https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
     MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
@@ -46,7 +46,7 @@
   window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
 </script>
 
-    <title>图神经网络里的监督/半监督和转导/归纳概念解析 - Ruoting Wu's Blog</title>
+    <title>【异常检测1】基本概念 - Ruoting Wu's Blog</title>
   <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
 </head>
 
@@ -100,25 +100,33 @@
         <div class="content-wrapper">
           <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">图神经网络里的监督/半监督和转导/归纳概念解析
+      <h1 class="post-title">【异常检测1】基本概念
         </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2021-04-09
+          2021-05-11
         </span><span class="post-visits"
-             data-url="/2021/04/09/2021-04-09-GNN-classification/"
-             data-title="图神经网络里的监督/半监督和转导/归纳概念解析">
+             data-url="/2021/05/11/2021-05-11-anomaly-detection-1/"
+             data-title="【异常检测1】基本概念">
           阅读次数 0
         </span>
         </div>
     </header>
 
-    <div class="post-content"><p>监督(supervised)和半监督(semi-supervised)其实是转导（transductive)和归纳(inductive)</p>
-<p>对于节点分类来说，如何区分监督学习和半监督学习的关键在于节点在训练过程中被使用的区别，也就是训练集节点是否被用在GNN的消息传递操作中，并且会被用于计算损失。</p>
-<p>transductive的测试节点是无标签的，并且不会被使用在损失计算中，但是这些点和相关的边会被用于消息传递中，也就是说图神经网络会生成测试集节点的潜在表示中，但是最后一层的表示不会被用在损失函数的计算中。</p>
-<p>indutive的测试节点既不会用在GNN的消息传递过程中，也不会用在损失函数计算中，也就是说，inductive在GNN训练的过程中完全不会被包括。</p>
-<p>半监督指的就是GNN会使用transductive的测试节点组成的测试集，也就是说在训练的过程中实际上是能够看到测试的节点的（但不能看到label）。监督指的就是在做归纳式的节点分类时，测试的节点是完全不会被检测到的。</p>
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是异常检测"><span class="toc-text">什么是异常检测?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常检测"><span class="toc-text">异常检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常检测的方法有哪些？"><span class="toc-text">异常检测的方法有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有监督学习"><span class="toc-text">有监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无监督学习"><span class="toc-text">无监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#半监督学习"><span class="toc-text">半监督学习</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p><a href="https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0.md" target="_blank" rel="noopener">DataWhale组队学习活动</a></p>
+</blockquote>
+<h2 id="什么是异常检测"><a href="#什么是异常检测" class="headerlink" title="什么是异常检测?"></a>什么是异常检测?</h2><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>在统计学中，离群值（Outliers）是与其他观测值显著不同的数据点，也成为异常点。异常点的出现可能是因为观测的可变性或实验的错误。异常是指在大量的数据中较为稀少的数据点、事件或者行为。异常通常与正常数据不同，通常代表着数据中出现的一些问题，如欺诈行为、网络、文字的错误等。异常也被成为噪音、偏差和异常。异常可以被分为三类：点异常、条件异常和群体异常。</p>
+<h3 id="异常检测"><a href="#异常检测" class="headerlink" title="异常检测"></a>异常检测</h3><p>异常检测是在数据集中找到非正常的数据、条件或群体。找到异常节点面临着一些挑战，如用于异常检测的数据集有样本类别不均衡的问题，还有异常节点是不规则的，不同的异常可能表现上完全不同。</p>
+<h2 id="异常检测的方法有哪些？"><a href="#异常检测的方法有哪些？" class="headerlink" title="异常检测的方法有哪些？"></a>异常检测的方法有哪些？</h2><h3 id="有监督学习"><a href="#有监督学习" class="headerlink" title="有监督学习"></a>有监督学习</h3><p>有监督学习方法适用于有标签的数据集，也就是说在训练过程中会知道数据是否是异常的，这就相当于一个分类问题。可以用很多基础的机器学习分类算法进行检测，如SVM，决策树、GBDT、XGBoost等进行分类。但值得注意的是，包含异常的数据集是不均衡的，因此可能会影响性能。可以考虑使用集成学习的方法，如feature bagging。</p>
+<h3 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h3><p>无监督学习方法适用于没有标签的训练集，可以对数据集进行聚类。用于聚类的方法可以运用在异常检测的场景中，如DBSCAN算法、KNN算法、LOF(local outlier factor)算法等。但无监督学习聚类的方法，有时候会面临维度灾难，可能相似性的度量在高维数据重失效。</p>
+<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>半监督学习的异常检测指的是在训练集中只有正常的数据集，没有异常的实例参与训练。然后会构造出一个表示正常行为的模型，然后会测试该模型生成的实例的可能性。比较适用于数据的标签不足的时候。</p>
 
       </div>
       <div class="post-copyright">
@@ -128,7 +136,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/">https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/</a>
+      <a href="https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/">https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
@@ -146,17 +154,11 @@
       </div>
   </div><footer class="post-footer">
         <div class="post-tags">
-            <a href="/tags/%E5%9B%BE/">图</a>
-            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+            <a href="/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/">异常检测</a>
             </div>
         
-        <nav class="post-nav"><a class="prev" href="/2021/04/13/2021-04-13-Tensorboard/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">TensorBoard相关知识</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
-    <a class="next" href="/2021/04/08/2021-04-08-keras/">
-        <span class="next-text nav-default">Keras的一些基本操作</span>
+        <nav class="post-nav"><a class="next" href="/2021/04/20/2021-04-20-hdf5-weights/">
+        <span class="next-text nav-default">如何读取HDF5保存的权重</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
