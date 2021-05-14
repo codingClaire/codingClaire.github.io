@@ -6,7 +6,7 @@
   <link href="https://wuruoting.club/atom.xml" rel="self"/>
   
   <link href="https://wuruoting.club/"/>
-  <updated>2021-05-11T13:06:22.549Z</updated>
+  <updated>2021-05-14T16:32:31.264Z</updated>
   <id>https://wuruoting.club/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>2021/05/14 - anomaly-detection-2</title>
+    <link href="https://wuruoting.club/2021/05/14/2021-05-14-anomaly-detection-2/"/>
+    <id>https://wuruoting.club/2021/05/14/2021-05-14-anomaly-detection-2/</id>
+    <published>2021-05-14T15:13:17.000Z</published>
+    <updated>2021-05-14T16:32:31.264Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0.md" target="_blank" rel="noopener">DataWhale组队学习活动</a></p></blockquote><p>基于统计学来进行异常检测的方法就是学习一个拟合数据集的生成模型，认为模型中低概率区域的对象就是识别出的异常点。</p><p>异常检测的方法可以分为参数方法和非参数方法。它们最大的区别是，参数方法的假定了先验的统计模型，然后运用概率密度公式来计算分布产生概率，非参数方法没有假定先验的统计模型，相当于是运用输入数据来确定模型，这里的参数不是模型训练的参数，而是指先验分布的参数。</p><h2 id="参数方法"><a href="#参数方法" class="headerlink" title="参数方法"></a>参数方法</h2><p>主要思路就是先确定一个分布，然后再通过输入数据学习分布的参数，低概率的点就被识别为异常点。如可以选择正态分布进行求解。</p><p>在异常点中分为一元异常点和多元异常点，区别是多元异常点会有多个特征。这时候在维度为1的数据中的分布需要被扩充到更高维度上，如果各个维度，也就是说数据的每一个特征都相互独立，那么就可以直接利用一元异常点的异常检测进行扩充，但是如果特征之间有相关关系且符合多元高斯分布，那么就可以求相应参数。如果实际数据复杂，还可以采用混合的参数分布。</p><h3 id="非参数方法"><a href="#非参数方法" class="headerlink" title="非参数方法"></a>非参数方法</h3><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>利用数据构造直方图，异常点如果在直方图中就是正常的，否则是异常的。模型容易受到超参数影响如直方图箱数或箱尺寸。当箱尺寸太小，可能正常对象会被误识别为异常点，当箱尺寸太大，异常节点可能会被判定为正确的，造成错误。</p><h3 id="角度"><a href="#角度" class="headerlink" title="角度"></a>角度</h3><p>基于角度的异常节点检测主要的思想在于如果某一个数据点距离其余点越远，那么潜在角度可能越小，该点越有可能是异常点。使用加权的余弦可计算出异常的分数。</p><h3 id="HBOS"><a href="#HBOS" class="headerlink" title="HBOS"></a>HBOS</h3><ul><li><p>全称Histogram-based Outlier Score</p></li><li><p>单变量方法组合，适用于互相独立的特征</p></li><li><p>对每个维度进行区间划分，区间密度越高，异常评分越低</p></li><li><p>流程</p><ul><li>对每个维度做出数据直方图（静态宽度直方图、动态宽度直方图）</li><li>箱子高度表示密度估计，归一化处理计算出HBOS值</li><li>$$ H B O S(p)=\sum_{i=0}^{d} \log \left(\frac{1}{\text {hist}_{i}(p)}\right) $$</li></ul></li><li><p>缺点：不能检测局部异常值</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%B8%80%E3%80%81%E6%A6%82</summary>
+      
+    
+    
+    
+    
+    <category term="异常检测" scheme="https://wuruoting.club/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【异常检测1】基本概念</title>
     <link href="https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/"/>
     <id>https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/</id>
     <published>2021-05-11T11:46:14.000Z</published>
-    <updated>2021-05-11T13:06:22.549Z</updated>
+    <updated>2021-05-12T02:14:11.065Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p><a href="https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0.md" target="_blank" rel="noopener">DataWhale组队学习活动</a></p></blockquote><h2 id="什么是异常检测"><a href="#什么是异常检测" class="headerlink" title="什么是异常检测?"></a>什么是异常检测?</h2><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>在统计学中，离群值（Outliers）是与其他观测值显著不同的数据点，也成为异常点。异常点的出现可能是因为观测的可变性或实验的错误。异常是指在大量的数据中较为稀少的数据点、事件或者行为。异常通常与正常数据不同，通常代表着数据中出现的一些问题，如欺诈行为、网络、文字的错误等。异常也被成为噪音、偏差和异常。异常可以被分为三类：点异常、条件异常和群体异常。</p><h3 id="异常检测"><a href="#异常检测" class="headerlink" title="异常检测"></a>异常检测</h3><p>异常检测是在数据集中找到非正常的数据、条件或群体。找到异常节点面临着一些挑战，如用于异常检测的数据集有样本类别不均衡的问题，还有异常节点是不规则的，不同的异常可能表现上完全不同。</p><h2 id="异常检测的方法有哪些？"><a href="#异常检测的方法有哪些？" class="headerlink" title="异常检测的方法有哪些？"></a>异常检测的方法有哪些？</h2><h3 id="有监督学习"><a href="#有监督学习" class="headerlink" title="有监督学习"></a>有监督学习</h3><p>有监督学习方法适用于有标签的数据集，也就是说在训练过程中会知道数据是否是异常的，这就相当于一个分类问题。可以用很多基础的机器学习分类算法进行检测，如SVM，决策树、GBDT、XGBoost等进行分类。但值得注意的是，包含异常的数据集是不均衡的，因此可能会影响性能。可以考虑使用集成学习的方法，如feature bagging。</p><h3 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h3><p>无监督学习方法适用于没有标签的训练集，可以对数据集进行聚类。用于聚类的方法可以运用在异常检测的场景中，如DBSCAN算法、KNN算法、LOF(local outlier factor)算法等。但无监督学习聚类的方法，有时候会面临维度灾难，可能相似性的度量在高维数据重失效。</p><h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>半监督学习的异常检测指的是在训练集中只有正常的数据集，没有异常的实例参与训练。然后会构造出一个表示正常行为的模型，然后会测试该模型生成的实例的可能性。比较适用于数据的标签不足的时候。</p>]]></content>
     
@@ -44,7 +67,7 @@
     <link href="https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/"/>
     <id>https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/</id>
     <published>2021-04-20T11:23:37.000Z</published>
-    <updated>2021-05-11T11:50:57.200Z</updated>
+    <updated>2021-05-13T08:45:06.731Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://keras.io/api/layers/base_layer/#set_weights-method" target="_blank" rel="noopener">https://keras.io/api/layers/base_layer/#set_weights-method</a></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f = h5py.File(<span class="string">"encoder_weights_0.hdf5"</span>, <span class="string">"r"</span>)</span><br><span class="line">print(f.filename, <span class="string">":"</span>)</span><br><span class="line">print(f[<span class="string">'dense_1'</span>])</span><br><span class="line">print([key <span class="keyword">for</span> key <span class="keyword">in</span> f.keys()], <span class="string">"\n"</span>)</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> f.keys():</span><br><span class="line">    print(key,f[key])</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> f[key].keys():</span><br><span class="line">        print(k,f[key][k])</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> f[key][k].keys():</span><br><span class="line">            print(l, f[key][k][l])</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;HDF5 group "/dense_1" (1 members)&gt;</span><br><span class="line">['dense_1', 'dense_2', 'dense_3', 'input_1']</span><br><span class="line"></span><br><span class="line">dense_1 &lt;HDF5 group "/dense_1" (1 members)&gt;</span><br><span class="line">dense_1 &lt;HDF5 group "/dense_1/dense_1" (2 members)&gt;</span><br><span class="line">bias:0 &lt;HDF5 dataset "bias:0": shape (64,), type "&lt;f4"&gt;</span><br><span class="line">kernel:0 &lt;HDF5 dataset "kernel:0": shape (100, 64), type "&lt;f4"&gt;</span><br><span class="line">dense_2 &lt;HDF5 group "/dense_2" (1 members)&gt;</span><br><span class="line">dense_2 &lt;HDF5 group "/dense_2/dense_2" (2 members)&gt;</span><br><span class="line">bias:0 &lt;HDF5 dataset "bias:0": shape (16,), type "&lt;f4"&gt;</span><br><span class="line">kernel:0 &lt;HDF5 dataset "kernel:0": shape (64, 16), type "&lt;f4"&gt;</span><br><span class="line">dense_3 &lt;HDF5 group "/dense_3" (1 members)&gt;</span><br><span class="line">dense_3 &lt;HDF5 group "/dense_3/dense_3" (2 members)&gt;</span><br><span class="line">bias:0 &lt;HDF5 dataset "bias:0": shape (8,), type "&lt;f4"&gt;</span><br><span class="line">kernel:0 &lt;HDF5 dataset "kernel:0": shape (16, 8), type "&lt;f4"&gt;</span><br><span class="line">input_1 &lt;HDF5 group "/input_1" (0 members)&gt;</span><br></pre></td></tr></table></figure><p>a Dense layer returns a list of two values– per-output weights and the bias value.</p>]]></content>
     
@@ -449,30 +472,6 @@
     
     
     <category term="博客" scheme="https://wuruoting.club/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文档主题建模</title>
-    <link href="https://wuruoting.club/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/"/>
-    <id>https://wuruoting.club/2019/11/26/%E6%96%87%E6%A1%A3%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/</id>
-    <published>2019-11-26T12:00:00.000Z</published>
-    <updated>2020-04-01T01:50:24.958Z</updated>
-    
-    <content type="html"><![CDATA[<p>对于一篇文章来说，分析它的主题能够达到理解文本的效果。主题建模就是通过在文档集合里面学习、识别和提取主题的过程。对于一篇文章 或者说一个文档来说，它包含着多个主题，而如何去区分不同的主题，是通过主题下面包含的多个单词来进行分析，我们能够将文档转化为一个数值向量，每一个维度对应一个主题。</p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul><li><strong>分类文档</strong> （比如说不同领域的新闻：科技、金融、体育新闻。通过对新闻的主题建模，能够将文本按照主题来归类）</li><li><strong>检索</strong>（当用户输入关键字的时候，就能够确认检索的文本的主题，从而在数据库进行匹配，最终返回相符的文本）</li></ul><h2 id="文本模型的可交换性"><a href="#文本模型的可交换性" class="headerlink" title="文本模型的可交换性"></a>文本模型的可交换性</h2><p>目前，大多数文本模型都基于“bag-of-words”的假设，即</p><ul><li>1.一篇文档内N个词之间的顺序可以随意互换，不影响建模过程</li><li>2.一个语料库内M个文档可以随意互换顺序，哪个文档在前哪个文档在后都无所谓。这两个性质合称为文本模型的可交换性</li></ul><h2 id="四种流行的用于主题建模的算法"><a href="#四种流行的用于主题建模的算法" class="headerlink" title="四种流行的用于主题建模的算法"></a>四种流行的用于主题建模的算法</h2><h3 id="1-LSA-Latent-semantic-analysis"><a href="#1-LSA-Latent-semantic-analysis" class="headerlink" title="1.LSA(Latent semantic analysis)"></a>1.LSA(Latent semantic analysis)</h3><p>LSA的核心思想就是将我们所拥有的文档-术语矩阵分解成相互独立的文档-主题矩阵和主题-术语矩阵。词和文档是用向量来表示的，通过向量之间的关系，来判断词与词之间 或者文档与文档之间的关系。</p><h3 id="2-pLSA"><a href="#2-pLSA" class="headerlink" title="2.pLSA"></a>2.pLSA</h3><p>pLSA，即概率潜在语义分析，采取概率方法替代 SVD 以解决问题。其核心思想是找到一个潜在主题的概率模型，该模型可以生成我们在文档-术语矩阵中观察到的数据。</p><h3 id="3-LDA"><a href="#3-LDA" class="headerlink" title="3.LDA"></a>3.LDA</h3><p>将狄利克雷视为「分布的分布」。本质上，它回答了这样一个问题：「给定某种分布，我看到的实际概率分布可能是什么样子？」</p><p>一篇文档，可以看成是一组有序的词的序列。从统计学角度来看，文档的生成可以看成是上帝抛掷骰子生成的结果，每一次抛掷骰子都生成一个词汇，抛掷N词生成一篇文档。在统计文本建模中，我们希望猜测出上帝是如何玩这个游戏的，这会涉及到两个最核心的问题：上帝都有什么样的骰子；上帝是如何抛掷这些骰子的；第一个问题就是表示模型中都有哪些参数，骰子的每一个面的概率都对应于模型中的参数；第二个问题就表示游戏规则是什么，上帝可能有各种不同类型的骰子，上帝可以按照一定的规则抛掷这些骰子从而产生词序列。</p><h3 id="4-lda2vec"><a href="#4-lda2vec" class="headerlink" title="4.lda2vec"></a>4.lda2vec</h3><p>社交媒体如微博、脸书上也会有大量值得研究的文本，这些文本规模大、更新速度更快而且语义信息不丰富、噪声高。传统的pLSA和LDA模型泛化能力弱、主题词可解释性差、分类准确性低。</p><p>文档向量表示随着word2vec模型的提出和深度学习的发展,近年来出现了很多相关研究成果。以LDA为代表的主题模型认为文档的生成是不同主题混合的结果;神经网络模型习惯于将文档表示为稠密向量。如果结合前者覆盖范围广和后者维度低的特点生成新的模型,可以做到快速检测,同对隐含语义的解释也会更好。lda2vec模型就是基于这一思想提出的。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;对于一篇文章来说，分析它的主题能够达到理解文本的效果。主题建模就是通过在文档集合里面学习、识别和提取主题的过程。对于一篇文章 或者说一个文档来说，它包含着多个主题，而如何去区分不同的主题，是通过主题下面包含的多个单词来进行分析，我们能够将文档转化为一个数值向量，每一个维度对</summary>
-      
-    
-    
-    
-    
-    <category term="文本挖掘" scheme="https://wuruoting.club/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/"/>
-    
-    <category term="主题建模" scheme="https://wuruoting.club/tags/%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/"/>
     
   </entry>
   

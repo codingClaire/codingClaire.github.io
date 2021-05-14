@@ -119,7 +119,7 @@
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地库管理"><span class="toc-text">本地库管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新建远程库"><span class="toc-text">新建远程库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支"><span class="toc-text">分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#切分支开发"><span class="toc-text">切分支开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支的合并"><span class="toc-text">分支的合并</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、本地多个不同分支的合并"><span class="toc-text">一、本地多个不同分支的合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、远程分支和本地分支的合并"><span class="toc-text">二、远程分支和本地分支的合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、某个分支的diverged"><span class="toc-text">三、某个分支的diverged</span></a></li></ol></li></ol></li></ol>
     </div>
-  </div><div class="post-content"><p>最近不知为什么git desktop崩了，遂重新使用命令行，总结一下git的相关命令。</p>
+  </div><div class="post-content"><p>最近不知为什么git desktop崩了，遂重新使用命令行，总结一下git的相关命令。 </p>
 <h2 id="本地库管理"><a href="#本地库管理" class="headerlink" title="本地库管理"></a>本地库管理</h2><ol>
 <li><p>切换到工作目录</p>
 </li>
@@ -137,7 +137,9 @@
 </ol>
 <h2 id="新建远程库"><a href="#新建远程库" class="headerlink" title="新建远程库"></a>新建远程库</h2><ol>
 <li>在github上创建仓库</li>
+<li>在本地创建文件夹作为本地仓库，在文件夹下使用命令行<br><code>git init</code>，使本地文件夹成为仓库</li>
 <li>切换到工作目录并与本地的库关联<br><code>git remote add origin git@github.com:michaelliao/learngit.git</code></li>
+<li><code>git pull origin branchxx</code>将远程仓库branchxx的内容下拉到本地库，branchxx一般是master或者main，在github网站的远程仓库页面可以找到</li>
 <li>把本地库的内容推到远程库上（之后可以不用写-u)<br><code>git push -u origin master</code></li>
 </ol>
 <h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>当使用github协同工作，使用分支可以使工作更加整洁。</p>
@@ -155,7 +157,7 @@
 <p>4）使用<code>git stash list</code>可查看有哪些stash。使用<code>git stash show stash@{num}</code>可以看到第num-1个stash了存储了那些内容,默认是0号存储。</p>
 <p>5） 若要恢复原来的文件，可使用<code>git stash pop</code>命令恢复。该命令会将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash。</p>
 <p>6）若隐藏的文件可丢弃，则可使用<code>git stash drop stash@{$num}</code>丢弃该文件的内容。</p>
-<p>注意，使用<code>git stash</code>后，暂存区的所有文件都会被隐藏，意味着如果再次进行<code>git add</code> 暂存区是不会有东西的，使用<code>git commit</code>也是无法提交更新的，只有恢复后才能解除文件的隐藏。 </p>
+<p>注意，使用<code>git stash</code>后，暂存区的所有文件都会被隐藏，意味着如果再次进行<code>git add</code> 暂存区是不会有东西的，使用<code>git commit</code>也是无法提交更新的，只有恢复后才能解除文件的隐藏。</p>
 <h4 id="三、某个分支的diverged"><a href="#三、某个分支的diverged" class="headerlink" title="三、某个分支的diverged"></a>三、某个分支的diverged</h4><p>当出现了<code>Your branch and origin/master have diverged,and have...different commits each respectively</code></p>
 <p>此时可使用<code>git rebase origin/master</code>将分叉的分支重新合并。</p>
 
