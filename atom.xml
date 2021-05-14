@@ -6,7 +6,7 @@
   <link href="https://wuruoting.club/atom.xml" rel="self"/>
   
   <link href="https://wuruoting.club/"/>
-  <updated>2021-05-14T16:32:31.264Z</updated>
+  <updated>2021-05-14T16:35:27.596Z</updated>
   <id>https://wuruoting.club/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2021/05/14 - anomaly-detection-2</title>
+    <title>【异常检测2】基于统计学的异常检测方法</title>
     <link href="https://wuruoting.club/2021/05/14/2021-05-14-anomaly-detection-2/"/>
     <id>https://wuruoting.club/2021/05/14/2021-05-14-anomaly-detection-2/</id>
     <published>2021-05-14T15:13:17.000Z</published>
-    <updated>2021-05-14T16:32:31.264Z</updated>
+    <updated>2021-05-14T16:35:27.596Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p><a href="https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0.md" target="_blank" rel="noopener">DataWhale组队学习活动</a></p></blockquote><p>基于统计学来进行异常检测的方法就是学习一个拟合数据集的生成模型，认为模型中低概率区域的对象就是识别出的异常点。</p><p>异常检测的方法可以分为参数方法和非参数方法。它们最大的区别是，参数方法的假定了先验的统计模型，然后运用概率密度公式来计算分布产生概率，非参数方法没有假定先验的统计模型，相当于是运用输入数据来确定模型，这里的参数不是模型训练的参数，而是指先验分布的参数。</p><h2 id="参数方法"><a href="#参数方法" class="headerlink" title="参数方法"></a>参数方法</h2><p>主要思路就是先确定一个分布，然后再通过输入数据学习分布的参数，低概率的点就被识别为异常点。如可以选择正态分布进行求解。</p><p>在异常点中分为一元异常点和多元异常点，区别是多元异常点会有多个特征。这时候在维度为1的数据中的分布需要被扩充到更高维度上，如果各个维度，也就是说数据的每一个特征都相互独立，那么就可以直接利用一元异常点的异常检测进行扩充，但是如果特征之间有相关关系且符合多元高斯分布，那么就可以求相应参数。如果实际数据复杂，还可以采用混合的参数分布。</p><h3 id="非参数方法"><a href="#非参数方法" class="headerlink" title="非参数方法"></a>非参数方法</h3><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>利用数据构造直方图，异常点如果在直方图中就是正常的，否则是异常的。模型容易受到超参数影响如直方图箱数或箱尺寸。当箱尺寸太小，可能正常对象会被误识别为异常点，当箱尺寸太大，异常节点可能会被判定为正确的，造成错误。</p><h3 id="角度"><a href="#角度" class="headerlink" title="角度"></a>角度</h3><p>基于角度的异常节点检测主要的思想在于如果某一个数据点距离其余点越远，那么潜在角度可能越小，该点越有可能是异常点。使用加权的余弦可计算出异常的分数。</p><h3 id="HBOS"><a href="#HBOS" class="headerlink" title="HBOS"></a>HBOS</h3><ul><li><p>全称Histogram-based Outlier Score</p></li><li><p>单变量方法组合，适用于互相独立的特征</p></li><li><p>对每个维度进行区间划分，区间密度越高，异常评分越低</p></li><li><p>流程</p><ul><li>对每个维度做出数据直方图（静态宽度直方图、动态宽度直方图）</li><li>箱子高度表示密度估计，归一化处理计算出HBOS值</li><li>$$ H B O S(p)=\sum_{i=0}^{d} \log \left(\frac{1}{\text {hist}_{i}(p)}\right) $$</li></ul></li><li><p>缺点：不能检测局部异常值</p></li></ul>]]></content>
     
