@@ -117,7 +117,7 @@
     <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#参数方法"><span class="toc-text">参数方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#非参数方法"><span class="toc-text">非参数方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直方图"><span class="toc-text">直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#角度"><span class="toc-text">角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HBOS"><span class="toc-text">HBOS</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#参数方法"><span class="toc-text">参数方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非参数方法"><span class="toc-text">非参数方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直方图"><span class="toc-text">直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#角度"><span class="toc-text">角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HBOS"><span class="toc-text">HBOS</span></a></li></ol></li></ol>
     </div>
   </div><div class="post-content"><blockquote>
 <p><a href="https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0.md" target="_blank" rel="noopener">DataWhale组队学习活动</a></p>
@@ -126,25 +126,11 @@
 <p>异常检测的方法可以分为参数方法和非参数方法。它们最大的区别是，参数方法的假定了先验的统计模型，然后运用概率密度公式来计算分布产生概率，非参数方法没有假定先验的统计模型，相当于是运用输入数据来确定模型，这里的参数不是模型训练的参数，而是指先验分布的参数。</p>
 <h2 id="参数方法"><a href="#参数方法" class="headerlink" title="参数方法"></a>参数方法</h2><p>主要思路就是先确定一个分布，然后再通过输入数据学习分布的参数，低概率的点就被识别为异常点。如可以选择正态分布进行求解。</p>
 <p>在异常点中分为一元异常点和多元异常点，区别是多元异常点会有多个特征。这时候在维度为1的数据中的分布需要被扩充到更高维度上，如果各个维度，也就是说数据的每一个特征都相互独立，那么就可以直接利用一元异常点的异常检测进行扩充，但是如果特征之间有相关关系且符合多元高斯分布，那么就可以求相应参数。如果实际数据复杂，还可以采用混合的参数分布。</p>
-<h3 id="非参数方法"><a href="#非参数方法" class="headerlink" title="非参数方法"></a>非参数方法</h3><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>利用数据构造直方图，异常点如果在直方图中就是正常的，否则是异常的。模型容易受到超参数影响如直方图箱数或箱尺寸。当箱尺寸太小，可能正常对象会被误识别为异常点，当箱尺寸太大，异常节点可能会被判定为正确的，造成错误。</p>
+<h2 id="非参数方法"><a href="#非参数方法" class="headerlink" title="非参数方法"></a>非参数方法</h2><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>利用数据构造直方图，异常点如果在直方图中就是正常的，否则是异常的。模型容易受到超参数影响如直方图箱数或箱尺寸。当箱尺寸太小，可能正常对象会被误识别为异常点，当箱尺寸太大，异常节点可能会被判定为正确的，造成错误。</p>
 <h3 id="角度"><a href="#角度" class="headerlink" title="角度"></a>角度</h3><p>基于角度的异常节点检测主要的思想在于如果某一个数据点距离其余点越远，那么潜在角度可能越小，该点越有可能是异常点。使用加权的余弦可计算出异常的分数。</p>
-<h3 id="HBOS"><a href="#HBOS" class="headerlink" title="HBOS"></a>HBOS</h3><ul>
-<li><p>全称Histogram-based Outlier Score</p>
-</li>
-<li><p>单变量方法组合，适用于互相独立的特征</p>
-</li>
-<li><p>对每个维度进行区间划分，区间密度越高，异常评分越低</p>
-</li>
-<li><p>流程</p>
-<ul>
-<li>对每个维度做出数据直方图（静态宽度直方图、动态宽度直方图）</li>
-<li>箱子高度表示密度估计，归一化处理计算出HBOS值</li>
-<li>$$ H B O S(p)=\sum_{i=0}^{d} \log \left(\frac{1}{\text {hist}_{i}(p)}\right) $$</li>
-</ul>
-</li>
-<li><p>缺点：不能检测局部异常值</p>
-</li>
-</ul>
+<h3 id="HBOS"><a href="#HBOS" class="headerlink" title="HBOS"></a>HBOS</h3><p>该方法全称Histogram-based Outlier Score，是将单变量方法组合，适用于互相独立的特征，然后对每个维度进行区间划分，<strong>区间密度越高，异常评分越低。</strong>计算方法是对每个维度做出数据直方图（静态宽度直方图、动态宽度直方图），用箱子高度表示密度估计，归一化处理计算出HBOS值。</p>
+<p>$ H B O S(p)=\sum_{i=0}^{d} \log \left(\frac{1}{\text {hist}_{i}(p)}\right) $$</p>
+<p>这一方法的缺点是不能检测局部异常值。</p>
 
       </div>
       <div class="post-copyright">
@@ -175,7 +161,12 @@
             <a href="/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/">异常检测</a>
             </div>
         
-        <nav class="post-nav"><a class="next" href="/2021/05/11/2021-05-11-anomaly-detection-1/">
+        <nav class="post-nav"><a class="prev" href="/2021/05/17/2021-05-17-anomaly-detection-3/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">【异常检测3】线性模型（线性回归、主成分分析）</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    <a class="next" href="/2021/05/11/2021-05-11-anomaly-detection-1/">
         <span class="next-text nav-default">【异常检测1】基本概念</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
