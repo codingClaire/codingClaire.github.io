@@ -152,7 +152,7 @@
 </ol>
 <h3 id="主成分分析中的异常检测"><a href="#主成分分析中的异常检测" class="headerlink" title="主成分分析中的异常检测"></a>主成分分析中的异常检测</h3><p>对于特征值较小（方差较小）的特征向量 $j$，第 $i$ 条记录的 $y_{ij}$ 与 $y_{kj}$ 的其他值的偏差较大，说明有离群行为。这是因为当$j$固定而$k$变化时，$y_{kj}$ 的值应当变化不大。因此，$y_{ij}$ 值是不常见的。</p>
 <p>使用特征值来计算数据点沿每个主分量方向到质心的归一化距离。设$e_{j}$为第$j$个特征向量，$λ_j$为沿该方向的方差(特征值)。数据点$\bar{X}$相对于对数据质心$\bar{\mu}$的总体归一化异常得分可以由下式给出：</p>
-<p>test<br>$$<br>S \operatorname{core}(\bar{X})=\sum_{j=1}^{d} \frac{\left|(\bar{X}-\bar{\mu}) \cdot \bar{e}<em>{j}\right|^{2}}{\lambda</em>{j}} \tag{13}<br>$$</p>
+<p>$$<br>S \operatorname{core}(\bar{X})=\sum_{j=1}^{d} \frac{|(\bar{X}-\bar{\mu}) \cdot \bar{e_j}|^{2}}{\lambda_j} \tag{13}<br>$$</p>
 <blockquote>
 <p>注意在使用PCA时，需要对数据进行归一化操作，进行均值为0方差为1的标准化处理。这隐含地导致在主成分分析中使用相关矩阵而不是协方差矩阵。</p>
 </blockquote>
