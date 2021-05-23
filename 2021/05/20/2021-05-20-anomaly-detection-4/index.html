@@ -135,6 +135,7 @@
 </blockquote>
 <h3 id="4-局部可达密度（local-reachability-density）"><a href="#4-局部可达密度（local-reachability-density）" class="headerlink" title="4.局部可达密度（local reachability density）"></a>4.局部可达密度（local reachability density）</h3><p>给定点p关于o的局部可达密度是p到o的k-邻域内所有点的可达距离平均值的导数。<br>计算时需要避免数据集内所有数据落在同一点上，此时可达距离之和为0，局部密度就是∞。</p>
 <h3 id="5-局部异常因子-LOF"><a href="#5-局部异常因子-LOF" class="headerlink" title="5.局部异常因子(LOF)"></a>5.局部异常因子(LOF)</h3><p>局部异常银子是通过每个点的局部可达密度和它们的k个邻点的局部可达密度进行比较，得到LOF。<br>LOF是对象p的邻居点o的局部可达密度的平均值与p的局部可达密度的比值。<br>LOF数值就是离群点分数。</p>
+<p>数据的LOF值越高，通常会有更稀疏的邻居，更可能是异常点。</p>
 
       </div>
       <div class="post-copyright">
@@ -165,7 +166,12 @@
             <a href="/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/">异常检测</a>
             </div>
         
-        <nav class="post-nav"><a class="next" href="/2021/05/17/2021-05-17-anomaly-detection-3/">
+        <nav class="post-nav"><a class="prev" href="/2021/05/23/2021-05-23-anomaly-detection-5/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">【异常检测4】基于集成学习的异常检测</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    <a class="next" href="/2021/05/17/2021-05-17-anomaly-detection-3/">
         <span class="next-text nav-default">【异常检测3】线性模型（线性回归、主成分分析）</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>

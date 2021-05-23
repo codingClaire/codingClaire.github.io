@@ -117,7 +117,7 @@
     <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Boosting"><span class="toc-text">什么是Boosting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boosting的两种方法"><span class="toc-text">Boosting的两种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost算法"><span class="toc-text">AdaBoost算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Boost"><span class="toc-text">Gradient Boost</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Boost-Decision-Tree-GBDT"><span class="toc-text">Gradient Boost Decision Tree(GBDT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boosting框架"><span class="toc-text">Boosting框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XGBoost"><span class="toc-text">XGBoost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LightGBM"><span class="toc-text">LightGBM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#防止过拟合的方法"><span class="toc-text">防止过拟合的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#num-leaves"><span class="toc-text">num_leaves</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#num-iterations"><span class="toc-text">num_iterations</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Boosting"><span class="toc-text">什么是Boosting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boosting的两种方法"><span class="toc-text">Boosting的两种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost算法"><span class="toc-text">AdaBoost算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Boost"><span class="toc-text">Gradient Boost</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Boost-Decision-Tree-GBDT"><span class="toc-text">Gradient Boost Decision Tree(GBDT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boosting框架"><span class="toc-text">Boosting框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XGBoost"><span class="toc-text">XGBoost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LightGBM"><span class="toc-text">LightGBM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#防止过拟合的方法"><span class="toc-text">防止过拟合的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#num-leaves"><span class="toc-text">num_leaves</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#num-iterations"><span class="toc-text">num_iterations</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bagging-和-Boosting的区别"><span class="toc-text">Bagging 和 Boosting的区别</span></a></li></ol>
     </div>
   </div><div class="post-content"><h2 id="什么是Boosting"><a href="#什么是Boosting" class="headerlink" title="什么是Boosting"></a>什么是Boosting</h2><p>TODO</p>
 <h2 id="Boosting的两种方法"><a href="#Boosting的两种方法" class="headerlink" title="Boosting的两种方法"></a>Boosting的两种方法</h2><h3 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h3><h3 id="Gradient-Boost"><a href="#Gradient-Boost" class="headerlink" title="Gradient Boost"></a>Gradient Boost</h3><h2 id="Gradient-Boost-Decision-Tree-GBDT"><a href="#Gradient-Boost-Decision-Tree-GBDT" class="headerlink" title="Gradient Boost Decision Tree(GBDT)"></a>Gradient Boost Decision Tree(GBDT)</h2><p>在每个树节点中找到最佳分割点非常耗时，而且会消耗内存</p>
@@ -136,9 +136,24 @@
 <p>lightGBM控制num_leaves，而不是树的最大深度，因为lightGBM不会生成满二叉树，因此通过控制num_leaves确保树的深度不过大，防止过拟合。</p>
 <h4 id="防止过拟合的方法"><a href="#防止过拟合的方法" class="headerlink" title="防止过拟合的方法"></a>防止过拟合的方法</h4><p><img src="/2021/04/14/2021-04-14-boosting/image-20210414101304982.png" alt="image-20210414101304982"></p>
 <h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><h5 id="num-leaves"><a href="#num-leaves" class="headerlink" title="num_leaves"></a>num_leaves</h5><p>num_leaves越大，增加了训练集的精确度，但增加了过拟合的几率</p>
-<h5 id="num-iterations"><a href="#num-iterations" class="headerlink" title="num_iterations"></a>num_iterations</h5><hr>
+<h5 id="num-iterations"><a href="#num-iterations" class="headerlink" title="num_iterations"></a>num_iterations</h5><h2 id="Bagging-和-Boosting的区别"><a href="#Bagging-和-Boosting的区别" class="headerlink" title="Bagging 和 Boosting的区别"></a>Bagging 和 Boosting的区别</h2><p>Bagging：</p>
+<ul>
+<li>训练集是在原始集中有放回选取的，从原始集中选出的各轮训练集之间是独立的</li>
+<li>使用均匀取样，每个样例的权重相等</li>
+<li>所有预测函数的权重相等</li>
+<li>各个预测函数可以并行生成</li>
+</ul>
+<p>Boosting：</p>
+<ul>
+<li>每一轮的训练集不变，只是训练集中每个样例在分类器中的权重发生变化，权值是根据上一轮的分类结果进行调整</li>
+<li>根据错误率不断调整样例的权值，错误率越大则权重越大</li>
+<li>每个弱分类器都有相应的权重，对于分类误差小的分类器会有更大的权重</li>
+<li>各个预测函数只能顺序生成，因为后一个模型参数需要前一轮模型的结果</li>
+</ul>
+<hr>
 <p>参考资料：</p>
 <p>1.微软亚洲研究院AI头条分享-<a href="https%3A//v.qq.com/x/page/k0362z6lqix.html">Introduction to LightGBM</a>-Taifeng Wang</p>
+<p>2.<a href="https://easyaitech.medium.com/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E8%AF%A6%E8%A7%A3-bagging-boosting-%E4%BB%A5%E5%8F%8A%E4%BB%96%E4%BB%AC%E7%9A%84-4-%E7%82%B9%E5%8C%BA%E5%88%AB-6e3c72df05b8#:~:text=%E8%80%8C%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%A0%B8%E5%BF%83,%E4%BD%9C%E2%80%9C%E5%A5%97%E8%A2%8B%E6%B3%95%E2%80%9D%EF%BC%89" target="_blank" rel="noopener">一文看懂集成学习（详解 bagging、boosting 以及他们的 4 点区别）</a></p>
 
       </div>
       <div class="post-copyright">
