@@ -3,11 +3,11 @@
   <title>Ruoting Wu&#39;s Blog</title>
   
   
-  <link href="https://wuruoting.club/atom.xml" rel="self"/>
+  <link href="https://ruotingwu.github.io/atom.xml" rel="self"/>
   
-  <link href="https://wuruoting.club/"/>
-  <updated>2021-05-23T16:45:19.937Z</updated>
-  <id>https://wuruoting.club/</id>
+  <link href="https://ruotingwu.github.io/"/>
+  <updated>2021-07-04T11:32:41.097Z</updated>
+  <id>https://ruotingwu.github.io/</id>
   
   <author>
     <name>Ruoting Wu</name>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Attention Mechanism总结</title>
+    <link href="https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/"/>
+    <id>https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/</id>
+    <published>2021-06-29T08:29:52.000Z</published>
+    <updated>2021-07-04T11:32:41.097Z</updated>
+    
+    <content type="html"><![CDATA[<p>[toc]</p><h2 id="Neural-Machine-Translation-NMT"><a href="#Neural-Machine-Translation-NMT" class="headerlink" title="Neural Machine Translation(NMT)"></a>Neural Machine Translation(NMT)</h2><p>Neural Machine Translation,简称NMT, 是指使用深度学习来完成机器翻译任务。NMT任务是一个端到端的学习任务，输入一个序列直接输出对应的目标序列。NMT可以被分为两个步骤：编码和解码。如图所示：</p><div align="center">    <img src="/2021/06/29/2021-07-01-attention/1.png" width="50%" height="50%"></div><center>图1</center><p><strong>-encoder</strong></p><p>在encoder阶段，模型输入语句 $x=(x_1,…x_{T_x})$ ，使用RNN计算上下文向量（context vector），其中t时刻的隐含状态计算公式如下：<br>$$<br>h_t=f(x_t,h_{t-1})<br>$$<br>上下文向量：<br>$$<br>c=q({h_1,…h_{T_x}})<br>$$<br>$f$和$q$是两个非线性函数， (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)使用LSTM作为$f$, $q({h_1,…h_T })= h_T$作为$q$。</p><p>-<strong>decoder</strong></p><p>在decoder阶段，模型逐个预测单词。当预测单词$y_{t^{‘}}$时，给定的上下文向量$c$和所有之前预测的单词${y_1,…y_{t^{‘}-1}}$将会用于预测。decoder生成的目标序列$y=(y_1,…y_{T_y})$，条件概率为：<br>$$<br>p(y)=\prod_{t=1}^{T}p(y_t│{y_1,…y_{t-1}},c)<br>$$</p><ul><li>如果使用RNN，则条件概率可以被表示为$p(y_t│y_1,…y_{t-1},c)=g(y_{t-1},s_t,c)$</li><li>如果使用Attention机制，</li></ul><h3 id="coditional-probability"><a href="#coditional-probability" class="headerlink" title="coditional probability"></a>coditional probability</h3><h2 id="Seq2seq模型"><a href="#Seq2seq模型" class="headerlink" title="Seq2seq模型"></a>Seq2seq模型</h2><p>Seq2seq模型 (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)是基于encoder-decoder框架下使用LSTM对文本进行翻译。</p><h3 id="encoder-decoder框架"><a href="#encoder-decoder框架" class="headerlink" title="encoder-decoder框架"></a>encoder-decoder框架</h3><div align="center">    <img src="/2021/06/29/2021-07-01-attention/2.png" width="90%" height="90%"></div><center>图2 （图片来源：Sutskever et al.2014）</center><p>图2中，模型输入句子“ABC&lt;EOS&gt;”, 输出对应的翻译句子“WXYZ&lt;EOS&gt;”，当decoder输入Z时，模型预测出&lt;EOS&gt;字符（end-of-sentence)，表示预测结束。</p><p>encoder-decoder框架是sequence-to-sequence任务中的一个标准的模型，其中包括两个组件：</p><p>encoder: 读入原始的序列，生成整个输入序列的representation(即输入语句的embedding，也被称作context vector) 。</p><p>decoder: 使用encoder输出的representation，生成目标序列。</p><h3 id="Seq2seq的问题"><a href="#Seq2seq的问题" class="headerlink" title="Seq2seq的问题"></a>Seq2seq的问题</h3><p>RNN结构存在着长程梯度消失的问题，随着输入句子长度的增加，结构的效果会有所下降。</p><p>seq2seq中，每一步</p><h2 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h2><p>Attention(<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>)</p><h2 id="Attention-in-NMT"><a href="#Attention-in-NMT" class="headerlink" title="Attention in NMT"></a>Attention in NMT</h2><h3 id="encoder"><a href="#encoder" class="headerlink" title="encoder"></a>encoder</h3><p>在encoder部分，使用的是一个双向的RNN（BiRNN），会生成一个前向的隐藏状态序列和后向的隐藏状态序列，将前向和后向对应的状态进行连接（concate）。</p><div align="center">    <img src="/2021/06/29/2021-07-01-attention/3.png" width="50%" height="50%"></div><center>图3 双向RNN原理（图片来源：Yang et al.2020）<h3 id="decoder"><a href="#decoder" class="headerlink" title="decoder"></a>decoder</h3><div align="center">    <img src="/2021/06/29/2021-07-01-attention/4.png" width="25%" height="25%"></div><p>attention机制</p><p>在解码翻译时模拟搜索输入序列</p><p>$$<br>p(y_t│y_1,…y_{t-1},x)=g(y_{i-1},s_i,c_i)<br>$$<br>$s_i$是RNN在i时刻的隐藏状态，$s_i=f(s_{i-1},y_{i-1},c_i)$，这里和seq2seq模型的区别是，seq2seq仅会产生一个上下文向量$c$，但通过attention机制会生成多个上下文向量，时间$i$的上下文向量为$c_i$，由隐藏状态的加权和计算得出：<br>$$<br>c_i=\Sigma_{j=1}^{T_x}\alpha_{ij}h_j<br>$$<br>相当于计算所有的annotation(状态）的期望。$\alpha_{ij}$表示i时刻第j个状态的权重，这个权重可以被理解成目标语言生成的$y_i$能够翻译源语言的单词$x_j$的概率，计算公式为：<br>$$<br>α<em>{ij}=\frac{exp⁡(e</em>{ij})}{\Sigma_{k=1}^{T_x}exp⁡(e_{ik})}<br>$$</p><p>$e_{ij}=a(s_{i-1},h_j)$</p><p>alignment model: )  score表示输入j位置和输出的i位置有多match</p><p>注意力机制保证了encoder不需要将所有的原始语句都编码为一个固定长度的向量。</p><h3 id="alignment-visualizations"><a href="#alignment-visualizations" class="headerlink" title="alignment visualizations"></a>alignment visualizations</h3><h2 id="Attention-in-Graph"><a href="#Attention-in-Graph" class="headerlink" title="Attention in Graph"></a>Attention in Graph</h2><h2 id="Attention-Family"><a href="#Attention-Family" class="headerlink" title="Attention Family"></a>Attention Family</h2><p>根据attention score计算方式的不同，有如下的attention机制：</p><ul><li>additive attention</li><li>dot-product (multiplicative) attention</li><li>scaled Dot-Product Attention</li></ul><h3 id="query、values和keys"><a href="#query、values和keys" class="headerlink" title="query、values和keys"></a>query、values和keys</h3><p>values/keys: 把编码好的输入的表示看成key-value pairs$(K,V)$  ,长度为N, key和value皆是encoder的隐藏状态。</p><p>query：在decoder阶段，之前的输出会被压缩成一个query$(Q)$,长度为M。decoder的输出用于映射这个query和key-value pairs的集合。模型decoder会输出一个word的distribution, query表示最有可能的单词的表示向量。</p><h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>可以把它理解成一个全连接层，权重是由输入的成对关系动态生成的。</p><p>输入向量，输出相同数量的向量，相当于一个encoder。</p><p><img src="/2021/06/29/2021-07-01-attention/image-20210702092147189.png" alt="demo"></p><h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><ul><li><p>原论文： Attention is all you need  (2017 NIPS)</p><p><img src="/2021/06/29/2021-07-01-attention/image-20210702092323838.png" alt="image-20210702092323838"></p></li></ul><h3 id="Encoder-amp-Decoder"><a href="#Encoder-amp-Decoder" class="headerlink" title="Encoder&amp;Decoder"></a>Encoder&amp;Decoder</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065725298.png" alt="image-20210702065725298"></p><h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><ul><li><p>层数$N=6$，每层有两个sub-layers，分别是多头自注意力机制和根据位置的全连接前馈网络</p></li><li><p>两个子层之前使用残差连接[11]和正则化</p></li><li><p>生成K、V矩阵</p></li></ul><h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><ul><li><p>层数$N=6$，在encoder的两个子层之间加入第三层</p></li><li><p>对encoder的输出使用多头注意力机制</p></li><li><p>对decoder的第一层多头注意力层进行了修改-&gt;masking multi-head attention 保证第一层注意力机制在预测当前位置的单词时只依赖当前位置之前的单词</p></li><li><p>生成Q矩阵</p></li></ul><h3 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h3><ul><li>$d_{model}$是词embedding的维度，论文中取512。</li><li>偶数位置：$PE_{(pos,2i)}=sin(pos/10000^{2i/d_{model}})$ </li><li>奇数位置：$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_{model}})$ </li></ul><p>绝对位置向量中蕴含着相对位置的信息，相对位置会在注意力机制中消失。</p><h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065823387.png" alt="image-20210702065823387"><br>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$<br>${d_k}$是key和value的维度，$QK^T$保持方差为1。</p><h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065858923.png" alt="image-20210702065858923"></p><p>多个平行的attention层分别获得各自的Q、K、V：<br>$$<br>MultiHead(Q,K,V)=Concat(head_1,…,head_h)W^O\space where\space head_i=Attention(QW_i^Q,KW_i^K,VW_I^V)<br>$$</p><h3 id="Transformer中的注意力机制"><a href="#Transformer中的注意力机制" class="headerlink" title="Transformer中的注意力机制"></a>Transformer中的注意力机制</h3><ul><li>self-attention in encoder and decoder:  $Q=K=V=X$</li><li>masked self-attention:  在transformer的decoder中，masked是保证attention加权计算时忽略当前位置后面的单词，保证信息来源于当前位置以及之前的位置。</li><li>cross-attention:  keys和values来源于最后一层的encoder的输入。</li></ul><h3 id="Positional-wise-Feed-Forward-Network"><a href="#Positional-wise-Feed-Forward-Network" class="headerlink" title="Positional-wise Feed-Forward Network"></a>Positional-wise Feed-Forward Network</h3><p>$$<br>FFN(x)=max(0,xW_1+b_1)W_2+b_2<br>$$</p><h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702081304496.png" alt="image-20210702081304496"></p><p>残差结构：输出的Z和经过位置编码的X对位相加，作为输出。</p><p>Layer Normalization：不需要像Batch Normalization一样考虑所有batch，只需要考虑同一个example中的不同feature计算均值和方差，然后对example的向量进行normalization。</p><h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul><li>teacher forcing: 使用正确的truth作为input。</li></ul><h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p><img src="/2021/06/29/2021-07-01-attention/image-20210702092543139.png" alt="image-20210702092543139"></p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. <a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">“Sequence to sequence learning with neural networks.”</a> <em>Advances in neural information processing systems</em>. 2014.</p><p>[2] Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. <a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">“Neural machine translation by jointly learning to align and translate.”</a> ICLR. 2015.</p><p>[3] Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. <a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">“Effective Approaches to Attention-based Neural Machine Translation.”</a> EMNLP. 2015.</p><p>[4] Yang, Shuoheng, Yuxin Wang, and Xiaowen Chu. <a href="https://arxiv.org/pdf/2002.07526.pdf" target="_blank" rel="noopener">“A survey of deep learning techniques for neural machine translation.”</a> <em>arXiv preprint arXiv:2002.07526</em> (2020).</p><ol><li><a href="https://arxiv.org/pdf/2106.04554.pdf" target="_blank" rel="noopener">A Survey of Transformers</a></li><li><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html" target="_blank" rel="noopener">Attention? Attention! by Lilian Weng</a></li><li><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf" target="_blank" rel="noopener">Self-Attention by Li Hungyi</a></li><li><a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></li></ol></center>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[toc]&lt;/p&gt;
+&lt;h2 id=&quot;Neural-Machine-Translation-NMT&quot;&gt;&lt;a href=&quot;#Neural-Machine-Translation-NMT&quot; class=&quot;headerlink&quot; title=&quot;Neural Machine Tran</summary>
+      
+    
+    
+    
+    
+    <category term="NLP" scheme="https://ruotingwu.github.io/tags/NLP/"/>
+    
+    <category term="Transformer" scheme="https://ruotingwu.github.io/tags/Transformer/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【异常检测5】基于集成学习的异常检测</title>
-    <link href="https://wuruoting.club/2021/05/23/2021-05-23-anomaly-detection-5/"/>
-    <id>https://wuruoting.club/2021/05/23/2021-05-23-anomaly-detection-5/</id>
+    <link href="https://ruotingwu.github.io/2021/05/23/2021-05-23-anomaly-detection-5/"/>
+    <id>https://ruotingwu.github.io/2021/05/23/2021-05-23-anomaly-detection-5/</id>
     <published>2021-05-23T04:33:16.000Z</published>
-    <updated>2021-05-23T16:45:19.937Z</updated>
+    <updated>2021-07-01T13:58:54.363Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p><a href="https://gitee.com/datawhalechina/team-learning-data-mining/blob/master/AnomalyDetection/%E4%BA%94%E3%80%81%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95.md" target="_blank" rel="noopener">DataWhale组队学习活动</a></p></blockquote><blockquote><p>集成学习主要分为三种方法：</p><p>1.Boosting（提升）：主要包括两种方法AdaBoost和Gradient Boost，其中Gradient Boost方法的代表是梯度提升决策树（GDBT)</p><p>2.Bagging: 主要方法有随机森林</p><p>3.Stacking</p></blockquote><p>通过集成学习来进行异常检测的方法主要有两种，分别是特征Feature Bagging和孤立森林（Isolation Forest)。</p><h2 id="Feature-Bagging"><a href="#Feature-Bagging" class="headerlink" title="Feature Bagging"></a>Feature Bagging</h2><p>Feature Bagging将Bagging的思想应用在特征上。它结合了多个异常检测算法的结果，每个异常检测算法使用的特征都是从原始特征集合中随机选取的特征子集合。每种异常检测的方法会检测出不同的异常点，然后通过异常点分值来对结果进行合并。</p><h3 id="基础框架"><a href="#基础框架" class="headerlink" title="基础框架"></a>基础框架</h3><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210523133318831.png" alt="image-20210523133318831"></p><p>上述为这种方法的基本框架，每个异常检测的算法会选取每所有样本的d/2-d个特征，d表示原始的特征数，输出不同的分数向量$AS_t(j)$，表示第$t$个方法中，数据集中数据$j$是异常点的概率。由于总共有$T$个方法，那么会有$T$个异常分数向量，最后使用COMBINE函数对向量进行合并，最后生成一个$AS_{FINAL}$向量，表示数据点是异常点的最终的概率。</p><h3 id="COMBINE方法"><a href="#COMBINE方法" class="headerlink" title="COMBINE方法"></a>COMBINE方法</h3><h4 id="1-Breadth-First-广度优先"><a href="#1-Breadth-First-广度优先" class="headerlink" title="1.Breadth-First 广度优先"></a>1.Breadth-First 广度优先</h4><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210523133448116.png" alt="image-20210523133448116"></p><h4 id="2-Cumulative-Sum-累积求和"><a href="#2-Cumulative-Sum-累积求和" class="headerlink" title="2.Cumulative Sum 累积求和"></a>2.Cumulative Sum 累积求和</h4><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210523133521315.png" alt="image-20210523133521315"></p><h3 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h3><p>优势：</p><p>feature bagging能够降低方差（bagging方法使用有放回抽样，数据集间会有重复的样本，每个模型之间具有相关关系，设相关系数为$\rho$，模型均值的方差可以被表示为：</p><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210524003416272.png" alt="image-20210524003416272"></p><p>当n增大时，模型整体的方差会趋向于$\rho\sigma^2$，模型方差会降低。</p><h2 id="孤立森林（Isolation-Forests）"><a href="#孤立森林（Isolation-Forests）" class="headerlink" title="孤立森林（Isolation Forests）"></a>孤立森林（Isolation Forests）</h2><h3 id="整体思想"><a href="#整体思想" class="headerlink" title="整体思想"></a>整体思想</h3><p>假设我们用一个随机超平面来切割数据空间，切一次可以生成两个子空间。然后我们继续用随机超平面来切割每个子空间并循环，直到每个子空间只有一个数据点为止。直观上来讲，那些具有高密度的簇需要被切很多次才会将其分离，而那些低密度的点很快就被单独分配到一个子空间了。孤立森林认为这些很快被孤立的点就是异常点。</p><p>孤立森林使用集成方法得到收敛值，将多种切割的方法进行平均，使得结果更为可靠。</p><h3 id="孤立树的生成"><a href="#孤立树的生成" class="headerlink" title="孤立树的生成"></a>孤立树的生成</h3><p>孤立森林是由t棵孤立的树构成，每个树是随机二叉树，对异常点来说，它会很快地被划分到叶子节点，因此叶子节点到根节点的路径越短，数据可能越异常。在这个过程中，不需要知道样本的标签，可以直接通过孤立森林构造树的过程来判断样本是否异常，所以孤立森林的方法是无监督的。树的构造方法如下：</p><blockquote><p>1)从训练数据中随机选择一个样本子集，放入树的根节点；</p><p>2)随机指定一个属性，随机产生一个切割点V，即属性A的最大值和最小值之间的某个数；</p><p>3)根据属性A对每个样本分类，把A小于V的样本放在当前节点的左孩子中，大于等于V的样本放在右孩子中，这样就形成了2个子空间；</p><p>4) 在孩子节点中递归步骤2和3，不断地构造左孩子和右孩子，直到孩子节点中只有一个数据，或树的高度达到了限定高度。</p></blockquote><p>孤立森林的不同的分支对应于数据的不同局部子空间区域，较小的路径对应于孤立子空间的低维，因此这也是一种基于子空间的方法。</p><h3 id="路径长度计算"><a href="#路径长度计算" class="headerlink" title="路径长度计算"></a>路径长度计算</h3><p><img src="https://gitee.com/datawhalechina/team-learning-data-mining/raw/master/AnomalyDetection/img/image-20210103183909407.png" alt="img"></p><h3 id="优劣-1"><a href="#优劣-1" class="headerlink" title="优劣"></a>优劣</h3><p>优势：</p><ul><li>计算成本相比基于距离或基于密度的算法更小。</li><li>具有线性的时间复杂度。</li><li>在处理大数据集上有优势。</li></ul><p>劣势：</p><ul><li>不适用于超高维数据，每次随机选取维度，如果维度过高，则会存在过多噪音。</li></ul>]]></content>
     
@@ -35,16 +60,16 @@
     
     
     
-    <category term="异常检测" scheme="https://wuruoting.club/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
-    <category term="集成学习" scheme="https://wuruoting.club/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    <category term="集成学习" scheme="https://ruotingwu.github.io/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测4】基于相似度的方法</title>
-    <link href="https://wuruoting.club/2021/05/20/2021-05-20-anomaly-detection-4/"/>
-    <id>https://wuruoting.club/2021/05/20/2021-05-20-anomaly-detection-4/</id>
+    <link href="https://ruotingwu.github.io/2021/05/20/2021-05-20-anomaly-detection-4/"/>
+    <id>https://ruotingwu.github.io/2021/05/20/2021-05-20-anomaly-detection-4/</id>
     <published>2021-05-20T15:31:53.000Z</published>
     <updated>2021-05-23T05:30:35.918Z</updated>
     
@@ -60,14 +85,14 @@
     
     
     
-    <category term="异常检测" scheme="https://wuruoting.club/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测3】线性模型（线性回归、主成分分析）</title>
-    <link href="https://wuruoting.club/2021/05/17/2021-05-17-anomaly-detection-3/"/>
-    <id>https://wuruoting.club/2021/05/17/2021-05-17-anomaly-detection-3/</id>
+    <link href="https://ruotingwu.github.io/2021/05/17/2021-05-17-anomaly-detection-3/"/>
+    <id>https://ruotingwu.github.io/2021/05/17/2021-05-17-anomaly-detection-3/</id>
     <published>2021-05-17T01:53:05.000Z</published>
     <updated>2021-05-18T06:11:59.771Z</updated>
     
@@ -83,16 +108,16 @@
     
     
     
-    <category term="异常检测" scheme="https://wuruoting.club/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
-    <category term="回归" scheme="https://wuruoting.club/tags/%E5%9B%9E%E5%BD%92/"/>
+    <category term="回归" scheme="https://ruotingwu.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测2】基于统计学的异常检测方法</title>
-    <link href="https://wuruoting.club/2021/05/14/2021-05-14-anomaly-detection-2/"/>
-    <id>https://wuruoting.club/2021/05/14/2021-05-14-anomaly-detection-2/</id>
+    <link href="https://ruotingwu.github.io/2021/05/14/2021-05-14-anomaly-detection-2/"/>
+    <id>https://ruotingwu.github.io/2021/05/14/2021-05-14-anomaly-detection-2/</id>
     <published>2021-05-14T15:13:17.000Z</published>
     <updated>2021-05-18T01:49:33.336Z</updated>
     
@@ -108,14 +133,14 @@
     
     
     
-    <category term="异常检测" scheme="https://wuruoting.club/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测1】基本概念</title>
-    <link href="https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/"/>
-    <id>https://wuruoting.club/2021/05/11/2021-05-11-anomaly-detection-1/</id>
+    <link href="https://ruotingwu.github.io/2021/05/11/2021-05-11-anomaly-detection-1/"/>
+    <id>https://ruotingwu.github.io/2021/05/11/2021-05-11-anomaly-detection-1/</id>
     <published>2021-05-11T11:46:14.000Z</published>
     <updated>2021-05-12T02:14:11.065Z</updated>
     
@@ -131,14 +156,14 @@
     
     
     
-    <category term="异常检测" scheme="https://wuruoting.club/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>如何读取HDF5保存的权重</title>
-    <link href="https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/"/>
-    <id>https://wuruoting.club/2021/04/20/2021-04-20-hdf5-weights/</id>
+    <link href="https://ruotingwu.github.io/2021/04/20/2021-04-20-hdf5-weights/"/>
+    <id>https://ruotingwu.github.io/2021/04/20/2021-04-20-hdf5-weights/</id>
     <published>2021-04-20T11:23:37.000Z</published>
     <updated>2021-05-18T01:38:28.771Z</updated>
     
@@ -157,8 +182,8 @@
   
   <entry>
     <title>Boosting提升</title>
-    <link href="https://wuruoting.club/2021/04/14/2021-04-14-boosting/"/>
-    <id>https://wuruoting.club/2021/04/14/2021-04-14-boosting/</id>
+    <link href="https://ruotingwu.github.io/2021/04/14/2021-04-14-boosting/"/>
+    <id>https://ruotingwu.github.io/2021/04/14/2021-04-14-boosting/</id>
     <published>2021-04-14T01:56:20.000Z</published>
     <updated>2021-05-23T06:27:55.993Z</updated>
     
@@ -178,8 +203,8 @@
   
   <entry>
     <title>TensorBoard相关知识</title>
-    <link href="https://wuruoting.club/2021/04/13/2021-04-13-Tensorboard/"/>
-    <id>https://wuruoting.club/2021/04/13/2021-04-13-Tensorboard/</id>
+    <link href="https://ruotingwu.github.io/2021/04/13/2021-04-13-Tensorboard/"/>
+    <id>https://ruotingwu.github.io/2021/04/13/2021-04-13-Tensorboard/</id>
     <published>2021-04-13T03:48:30.000Z</published>
     <updated>2021-04-13T03:49:37.963Z</updated>
     
@@ -198,8 +223,8 @@
   
   <entry>
     <title>图神经网络里的监督/半监督和转导/归纳概念解析</title>
-    <link href="https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/"/>
-    <id>https://wuruoting.club/2021/04/09/2021-04-09-GNN-classification/</id>
+    <link href="https://ruotingwu.github.io/2021/04/09/2021-04-09-GNN-classification/"/>
+    <id>https://ruotingwu.github.io/2021/04/09/2021-04-09-GNN-classification/</id>
     <published>2021-04-09T13:23:45.000Z</published>
     <updated>2021-04-09T13:40:52.261Z</updated>
     
@@ -215,16 +240,16 @@
     
     
     
-    <category term="图" scheme="https://wuruoting.club/tags/%E5%9B%BE/"/>
+    <category term="图" scheme="https://ruotingwu.github.io/tags/%E5%9B%BE/"/>
     
-    <category term="机器学习" scheme="https://wuruoting.club/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://ruotingwu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>Keras的一些基本操作</title>
-    <link href="https://wuruoting.club/2021/04/08/2021-04-08-keras/"/>
-    <id>https://wuruoting.club/2021/04/08/2021-04-08-keras/</id>
+    <link href="https://ruotingwu.github.io/2021/04/08/2021-04-08-keras/"/>
+    <id>https://ruotingwu.github.io/2021/04/08/2021-04-08-keras/</id>
     <published>2021-04-08T02:47:25.000Z</published>
     <updated>2021-05-11T12:17:11.949Z</updated>
     
@@ -243,8 +268,8 @@
   
   <entry>
     <title>Keras中RNNLayer的输入输出总结</title>
-    <link href="https://wuruoting.club/2021/04/07/2021-04-07-keras-LSTM/"/>
-    <id>https://wuruoting.club/2021/04/07/2021-04-07-keras-LSTM/</id>
+    <link href="https://ruotingwu.github.io/2021/04/07/2021-04-07-keras-LSTM/"/>
+    <id>https://ruotingwu.github.io/2021/04/07/2021-04-07-keras-LSTM/</id>
     <published>2021-04-07T14:00:24.000Z</published>
     <updated>2021-04-12T03:48:33.407Z</updated>
     
@@ -260,16 +285,16 @@
     
     
     
-    <category term="Keras" scheme="https://wuruoting.club/tags/Keras/"/>
+    <category term="Keras" scheme="https://ruotingwu.github.io/tags/Keras/"/>
     
-    <category term="RNN" scheme="https://wuruoting.club/tags/RNN/"/>
+    <category term="RNN" scheme="https://ruotingwu.github.io/tags/RNN/"/>
     
   </entry>
   
   <entry>
     <title>gitbook+Typora打造舒适的笔记环境</title>
-    <link href="https://wuruoting.club/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/"/>
-    <id>https://wuruoting.club/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/</id>
+    <link href="https://ruotingwu.github.io/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/"/>
+    <id>https://ruotingwu.github.io/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/</id>
     <published>2020-06-22T08:53:38.000Z</published>
     <updated>2021-04-07T11:51:16.764Z</updated>
     
@@ -282,16 +307,16 @@
     
     
     
-    <category term="gitbook" scheme="https://wuruoting.club/tags/gitbook/"/>
+    <category term="gitbook" scheme="https://ruotingwu.github.io/tags/gitbook/"/>
     
-    <category term="小技巧" scheme="https://wuruoting.club/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <category term="小技巧" scheme="https://ruotingwu.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
     <title>文本数据的聚类分析综述</title>
-    <link href="https://wuruoting.club/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/"/>
-    <id>https://wuruoting.club/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/</id>
+    <link href="https://ruotingwu.github.io/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/"/>
+    <id>https://ruotingwu.github.io/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/</id>
     <published>2020-06-10T08:25:51.000Z</published>
     <updated>2020-06-14T16:33:32.909Z</updated>
     
@@ -306,16 +331,16 @@
     
     
     
-    <category term="文本挖掘" scheme="https://wuruoting.club/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/"/>
+    <category term="文本挖掘" scheme="https://ruotingwu.github.io/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/"/>
     
-    <category term="聚类分析" scheme="https://wuruoting.club/tags/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/"/>
+    <category term="聚类分析" scheme="https://ruotingwu.github.io/tags/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题5】中间代码生成</title>
-    <link href="https://wuruoting.club/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/"/>
-    <id>https://wuruoting.club/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/</id>
+    <link href="https://ruotingwu.github.io/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/"/>
+    <id>https://ruotingwu.github.io/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/</id>
     <published>2020-05-23T09:27:48.000Z</published>
     <updated>2020-06-14T15:45:18.837Z</updated>
     
@@ -332,14 +357,14 @@
     
     
     
-    <category term="编译原理" scheme="https://wuruoting.club/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题4】语法制导翻译</title>
-    <link href="https://wuruoting.club/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
-    <id>https://wuruoting.club/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/</id>
+    <link href="https://ruotingwu.github.io/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
+    <id>https://ruotingwu.github.io/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/</id>
     <published>2020-05-22T02:27:00.000Z</published>
     <updated>2020-06-14T15:45:00.324Z</updated>
     
@@ -355,14 +380,14 @@
     
     
     
-    <category term="编译原理" scheme="https://wuruoting.club/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题3】语法分析的例子整理</title>
-    <link href="https://wuruoting.club/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/"/>
-    <id>https://wuruoting.club/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/</id>
+    <link href="https://ruotingwu.github.io/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/"/>
+    <id>https://ruotingwu.github.io/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/</id>
     <published>2020-05-21T12:58:37.000Z</published>
     <updated>2020-06-14T15:44:54.984Z</updated>
     
@@ -379,14 +404,14 @@
     
     
     
-    <category term="编译原理" scheme="https://wuruoting.club/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题2】关于语法分析</title>
-    <link href="https://wuruoting.club/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
-    <id>https://wuruoting.club/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</id>
+    <link href="https://ruotingwu.github.io/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
+    <id>https://ruotingwu.github.io/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</id>
     <published>2020-05-21T02:07:43.000Z</published>
     <updated>2020-06-14T15:44:35.422Z</updated>
     
@@ -404,14 +429,14 @@
     
     
     
-    <category term="编译原理" scheme="https://wuruoting.club/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题1】上下文无关文法和正则表达式</title>
-    <link href="https://wuruoting.club/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>https://wuruoting.club/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
+    <link href="https://ruotingwu.github.io/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>https://ruotingwu.github.io/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
     <published>2020-05-21T01:35:48.000Z</published>
     <updated>2020-06-14T16:30:45.896Z</updated>
     
@@ -427,14 +452,14 @@
     
     
     
-    <category term="编译原理" scheme="https://wuruoting.club/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>一个解决word页码错乱的小方法</title>
-    <link href="https://wuruoting.club/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/"/>
-    <id>https://wuruoting.club/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/</id>
+    <link href="https://ruotingwu.github.io/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/"/>
+    <id>https://ruotingwu.github.io/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/</id>
     <published>2020-05-20T08:11:28.000Z</published>
     <updated>2020-06-14T16:31:18.836Z</updated>
     
@@ -451,33 +476,9 @@
     
     
     
-    <category term="小技巧" scheme="https://wuruoting.club/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <category term="小技巧" scheme="https://ruotingwu.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
-    <category term="word" scheme="https://wuruoting.club/tags/word/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【综述总结2】More Data,More Relations,More Context and More Openness:A Review and Outlook for Relation Extraction</title>
-    <link href="https://wuruoting.club/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/"/>
-    <id>https://wuruoting.club/2020/05/02/%E7%BB%BC%E8%BF%B0%E6%80%BB%E7%BB%93-2/</id>
-    <published>2020-05-02T00:15:09.000Z</published>
-    <updated>2020-05-02T00:21:06.422Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="行文结构"><a href="#行文结构" class="headerlink" title="行文结构"></a>行文结构</h2><p>先关注于现有的工作，按照模型分类，其次探讨了关系提取的更多方向，主要是从数据量、学习表现、场景、领域四个方面，恰好和题目呼应；最后提出了其他的挑战。</p><h3 id="Section-1-Introduction"><a href="#Section-1-Introduction" class="headerlink" title="Section 1 Introduction"></a>Section 1 Introduction</h3><p>RE: relation extraction</p><h3 id="Section-2-背景和现有的工作"><a href="#Section-2-背景和现有的工作" class="headerlink" title="Section 2 背景和现有的工作"></a>Section 2 背景和现有的工作</h3><h4 id="2-1-模式提取模型"><a href="#2-1-模式提取模型" class="headerlink" title="2.1 模式提取模型"></a>2.1 模式提取模型</h4><h4 id="2-2-统计关系提取模型"><a href="#2-2-统计关系提取模型" class="headerlink" title="2.2 统计关系提取模型"></a>2.2 统计关系提取模型</h4><h4 id="2-3-神经网络关系提取模型"><a href="#2-3-神经网络关系提取模型" class="headerlink" title="2.3 神经网络关系提取模型"></a>2.3 神经网络关系提取模型</h4><h3 id="Section-3-RE的更多方向"><a href="#Section-3-RE的更多方向" class="headerlink" title="Section 3 RE的更多方向"></a>Section 3 RE的更多方向</h3><h4 id="3-1-使用更多数据"><a href="#3-1-使用更多数据" class="headerlink" title="3.1 使用更多数据"></a>3.1 使用更多数据</h4><h4 id="3-2-学习表现更有效"><a href="#3-2-学习表现更有效" class="headerlink" title="3.2  学习表现更有效"></a>3.2  学习表现更有效</h4><h4 id="3-3-在更复杂的场景中实现"><a href="#3-3-在更复杂的场景中实现" class="headerlink" title="3.3 在更复杂的场景中实现"></a>3.3 在更复杂的场景中实现</h4><h4 id="3-4-面向更开放的领域"><a href="#3-4-面向更开放的领域" class="headerlink" title="3.4 面向更开放的领域"></a>3.4 面向更开放的领域</h4><h3 id="Section-4-其他挑战"><a href="#Section-4-其他挑战" class="headerlink" title="Section  4 其他挑战"></a>Section  4 其他挑战</h3><h4 id="4-1-从文本或实体名中学习"><a href="#4-1-从文本或实体名中学习" class="headerlink" title="4.1 从文本或实体名中学习"></a>4.1 从文本或实体名中学习</h4><h4 id="4-2关系提取数据集"><a href="#4-2关系提取数据集" class="headerlink" title="4.2关系提取数据集"></a>4.2关系提取数据集</h4>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;行文结构&quot;&gt;&lt;a href=&quot;#行文结构&quot; class=&quot;headerlink&quot; title=&quot;行文结构&quot;&gt;&lt;/a&gt;行文结构&lt;/h2&gt;&lt;p&gt;先关注于现有的工作，按照模型分类，其次探讨了关系提取的更多方向，主要是从数据量、学习表现、场景、领域四个方面，恰好和题目呼应</summary>
-      
-    
-    
-    
-    
-    <category term="NLP" scheme="https://wuruoting.club/tags/NLP/"/>
-    
-    <category term="综述" scheme="https://wuruoting.club/tags/%E7%BB%BC%E8%BF%B0/"/>
+    <category term="word" scheme="https://ruotingwu.github.io/tags/word/"/>
     
   </entry>
   

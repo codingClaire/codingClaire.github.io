@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Attention Mechanism总结"/><meta name="keywords" content="NLP, Transformer, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
+<link rel="canonical" href="https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz",
+      appKey: "c0YVFIAlMCeKLx899vBJAnMV"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
+</script>
+
+    <title>Attention Mechanism总结 - Ruoting Wu's Blog</title>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
+</head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Ruoting Wu's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Ruoting Wu's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Attention Mechanism总结
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2021-06-29
+        </span><span class="post-visits"
+             data-url="/2021/06/29/2021-07-01-attention/"
+             data-title="Attention Mechanism总结">
+          阅读次数 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Neural-Machine-Translation-NMT"><span class="toc-text">Neural Machine Translation(NMT)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#coditional-probability"><span class="toc-text">coditional probability</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Seq2seq模型"><span class="toc-text">Seq2seq模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encoder-decoder框架"><span class="toc-text">encoder-decoder框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Seq2seq的问题"><span class="toc-text">Seq2seq的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention机制"><span class="toc-text">Attention机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-in-NMT"><span class="toc-text">Attention in NMT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encoder"><span class="toc-text">encoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decoder"><span class="toc-text">decoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alignment-visualizations"><span class="toc-text">alignment visualizations</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-in-Graph"><span class="toc-text">Attention in Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-Family"><span class="toc-text">Attention Family</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#query、values和keys"><span class="toc-text">query、values和keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-Attention"><span class="toc-text">Self-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer"><span class="toc-text">Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Encoder-amp-Decoder"><span class="toc-text">Encoder&amp;Decoder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Encoder"><span class="toc-text">Encoder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Decoder"><span class="toc-text">Decoder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-Encoding"><span class="toc-text">Positional Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaled-Dot-Product-Attention"><span class="toc-text">Scaled-Dot-Product Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Head-Self-Attention"><span class="toc-text">Multi-Head Self-Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer中的注意力机制"><span class="toc-text">Transformer中的注意力机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-wise-Feed-Forward-Network"><span class="toc-text">Positional-wise Feed-Forward Network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Residual-Connection-and-Normalization"><span class="toc-text">Residual Connection and Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练"><span class="toc-text">训练</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-Family"><span class="toc-text">Transformer Family</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>[toc]</p>
+<h2 id="Neural-Machine-Translation-NMT"><a href="#Neural-Machine-Translation-NMT" class="headerlink" title="Neural Machine Translation(NMT)"></a>Neural Machine Translation(NMT)</h2><p>Neural Machine Translation,简称NMT, 是指使用深度学习来完成机器翻译任务。NMT任务是一个端到端的学习任务，输入一个序列直接输出对应的目标序列。NMT可以被分为两个步骤：编码和解码。如图所示：</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/1.png" width="50%" height="50%">
+</div>
+
+<center>图1</center>
+
+<p><strong>-encoder</strong></p>
+<p>在encoder阶段，模型输入语句 $x=(x_1,…x_{T_x})$ ，使用RNN计算上下文向量（context vector），其中t时刻的隐含状态计算公式如下：<br>$$<br>h_t=f(x_t,h_{t-1})<br>$$<br>上下文向量：<br>$$<br>c=q({h_1,…h_{T_x}})<br>$$<br>$f$和$q$是两个非线性函数， (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)使用LSTM作为$f$, $q({h_1,…h_T })= h_T$作为$q$。</p>
+<p>-<strong>decoder</strong></p>
+<p>在decoder阶段，模型逐个预测单词。当预测单词$y_{t^{‘}}$时，给定的上下文向量$c$和所有之前预测的单词${y_1,…y_{t^{‘}-1}}$将会用于预测。decoder生成的目标序列$y=(y_1,…y_{T_y})$，条件概率为：<br>$$<br>p(y)=\prod_{t=1}^{T}p(y_t│{y_1,…y_{t-1}},c)<br>$$</p>
+<ul>
+<li>如果使用RNN，则条件概率可以被表示为$p(y_t│y_1,…y_{t-1},c)=g(y_{t-1},s_t,c)$</li>
+<li>如果使用Attention机制，</li>
+</ul>
+<h3 id="coditional-probability"><a href="#coditional-probability" class="headerlink" title="coditional probability"></a>coditional probability</h3><h2 id="Seq2seq模型"><a href="#Seq2seq模型" class="headerlink" title="Seq2seq模型"></a>Seq2seq模型</h2><p>Seq2seq模型 (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)是基于encoder-decoder框架下使用LSTM对文本进行翻译。</p>
+<h3 id="encoder-decoder框架"><a href="#encoder-decoder框架" class="headerlink" title="encoder-decoder框架"></a>encoder-decoder框架</h3><div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/2.png" width="90%" height="90%">
+</div>
+
+<center>图2 （图片来源：Sutskever et al.2014）</center>
+
+<p>图2中，模型输入句子“ABC&lt;EOS&gt;”, 输出对应的翻译句子“WXYZ&lt;EOS&gt;”，当decoder输入Z时，模型预测出&lt;EOS&gt;字符（end-of-sentence)，表示预测结束。</p>
+<p>encoder-decoder框架是sequence-to-sequence任务中的一个标准的模型，其中包括两个组件：</p>
+<p>encoder: 读入原始的序列，生成整个输入序列的representation(即输入语句的embedding，也被称作context vector) 。</p>
+<p>decoder: 使用encoder输出的representation，生成目标序列。</p>
+<h3 id="Seq2seq的问题"><a href="#Seq2seq的问题" class="headerlink" title="Seq2seq的问题"></a>Seq2seq的问题</h3><p>RNN结构存在着长程梯度消失的问题，随着输入句子长度的增加，结构的效果会有所下降。</p>
+<p>seq2seq中，每一步</p>
+<h2 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h2><p>Attention(<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>)</p>
+<h2 id="Attention-in-NMT"><a href="#Attention-in-NMT" class="headerlink" title="Attention in NMT"></a>Attention in NMT</h2><h3 id="encoder"><a href="#encoder" class="headerlink" title="encoder"></a>encoder</h3><p>在encoder部分，使用的是一个双向的RNN（BiRNN），会生成一个前向的隐藏状态序列和后向的隐藏状态序列，将前向和后向对应的状态进行连接（concate）。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/3.png" width="50%" height="50%">
+</div>
+
+<center>图3 双向RNN原理（图片来源：Yang et al.2020）
+
+<h3 id="decoder"><a href="#decoder" class="headerlink" title="decoder"></a>decoder</h3><div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/4.png" width="25%" height="25%">
+</div>
+
+
+<p>attention机制</p>
+<p>在解码翻译时模拟搜索输入序列</p>
+<p>$$<br>p(y_t│y_1,…y_{t-1},x)=g(y_{i-1},s_i,c_i)<br>$$<br>$s_i$是RNN在i时刻的隐藏状态，$s_i=f(s_{i-1},y_{i-1},c_i)$，这里和seq2seq模型的区别是，seq2seq仅会产生一个上下文向量$c$，但通过attention机制会生成多个上下文向量，时间$i$的上下文向量为$c_i$，由隐藏状态的加权和计算得出：<br>$$<br>c_i=\Sigma_{j=1}^{T_x}\alpha_{ij}h_j<br>$$<br>相当于计算所有的annotation(状态）的期望。$\alpha_{ij}$表示i时刻第j个状态的权重，这个权重可以被理解成目标语言生成的$y_i$能够翻译源语言的单词$x_j$的概率，计算公式为：<br>$$<br>α<em>{ij}=\frac{exp⁡(e</em>{ij})}{\Sigma_{k=1}^{T_x}exp⁡(e_{ik})}<br>$$</p>
+<p>$e_{ij}=a(s_{i-1},h_j)$</p>
+<p>alignment model: )  score表示输入j位置和输出的i位置有多match</p>
+<p>注意力机制保证了encoder不需要将所有的原始语句都编码为一个固定长度的向量。</p>
+<h3 id="alignment-visualizations"><a href="#alignment-visualizations" class="headerlink" title="alignment visualizations"></a>alignment visualizations</h3><h2 id="Attention-in-Graph"><a href="#Attention-in-Graph" class="headerlink" title="Attention in Graph"></a>Attention in Graph</h2><h2 id="Attention-Family"><a href="#Attention-Family" class="headerlink" title="Attention Family"></a>Attention Family</h2><p>根据attention score计算方式的不同，有如下的attention机制：</p>
+<ul>
+<li>additive attention</li>
+<li>dot-product (multiplicative) attention</li>
+<li>scaled Dot-Product Attention</li>
+</ul>
+<h3 id="query、values和keys"><a href="#query、values和keys" class="headerlink" title="query、values和keys"></a>query、values和keys</h3><p>values/keys: 把编码好的输入的表示看成key-value pairs$(K,V)$  ,长度为N, key和value皆是encoder的隐藏状态。</p>
+<p>query：在decoder阶段，之前的输出会被压缩成一个query$(Q)$,长度为M。decoder的输出用于映射这个query和key-value pairs的集合。模型decoder会输出一个word的distribution, query表示最有可能的单词的表示向量。</p>
+<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>可以把它理解成一个全连接层，权重是由输入的成对关系动态生成的。</p>
+<p>输入向量，输出相同数量的向量，相当于一个encoder。</p>
+<p><img src="/2021/06/29/2021-07-01-attention/image-20210702092147189.png" alt="demo"></p>
+<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><ul>
+<li><p>原论文： Attention is all you need  (2017 NIPS)</p>
+<p><img src="/2021/06/29/2021-07-01-attention/image-20210702092323838.png" alt="image-20210702092323838"></p>
+</li>
+</ul>
+<h3 id="Encoder-amp-Decoder"><a href="#Encoder-amp-Decoder" class="headerlink" title="Encoder&amp;Decoder"></a>Encoder&amp;Decoder</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065725298.png" alt="image-20210702065725298"></p>
+<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><ul>
+<li><p>层数$N=6$，每层有两个sub-layers，分别是多头自注意力机制和根据位置的全连接前馈网络</p>
+</li>
+<li><p>两个子层之前使用残差连接[11]和正则化</p>
+</li>
+<li><p>生成K、V矩阵</p>
+</li>
+</ul>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><ul>
+<li><p>层数$N=6$，在encoder的两个子层之间加入第三层</p>
+</li>
+<li><p>对encoder的输出使用多头注意力机制</p>
+</li>
+<li><p>对decoder的第一层多头注意力层进行了修改-&gt;masking multi-head attention 保证第一层注意力机制在预测当前位置的单词时只依赖当前位置之前的单词</p>
+</li>
+<li><p>生成Q矩阵</p>
+</li>
+</ul>
+<h3 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h3><ul>
+<li>$d_{model}$是词embedding的维度，论文中取512。</li>
+<li>偶数位置：$PE_{(pos,2i)}=sin(pos/10000^{2i/d_{model}})$ </li>
+<li>奇数位置：$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_{model}})$ </li>
+</ul>
+<p>绝对位置向量中蕴含着相对位置的信息，相对位置会在注意力机制中消失。</p>
+<h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065823387.png" alt="image-20210702065823387"><br>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$<br>${d_k}$是key和value的维度，$QK^T$保持方差为1。</p>
+<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065858923.png" alt="image-20210702065858923"></p>
+<p>多个平行的attention层分别获得各自的Q、K、V：<br>$$<br>MultiHead(Q,K,V)=Concat(head_1,…,head_h)W^O\space where\space head_i=Attention(QW_i^Q,KW_i^K,VW_I^V)<br>$$</p>
+<h3 id="Transformer中的注意力机制"><a href="#Transformer中的注意力机制" class="headerlink" title="Transformer中的注意力机制"></a>Transformer中的注意力机制</h3><ul>
+<li>self-attention in encoder and decoder:  $Q=K=V=X$</li>
+<li>masked self-attention:  在transformer的decoder中，masked是保证attention加权计算时忽略当前位置后面的单词，保证信息来源于当前位置以及之前的位置。</li>
+<li>cross-attention:  keys和values来源于最后一层的encoder的输入。</li>
+</ul>
+<h3 id="Positional-wise-Feed-Forward-Network"><a href="#Positional-wise-Feed-Forward-Network" class="headerlink" title="Positional-wise Feed-Forward Network"></a>Positional-wise Feed-Forward Network</h3><p>$$<br>FFN(x)=max(0,xW_1+b_1)W_2+b_2<br>$$</p>
+<h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702081304496.png" alt="image-20210702081304496"></p>
+<p>残差结构：输出的Z和经过位置编码的X对位相加，作为输出。</p>
+<p>Layer Normalization：不需要像Batch Normalization一样考虑所有batch，只需要考虑同一个example中的不同feature计算均值和方差，然后对example的向量进行normalization。</p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul>
+<li>teacher forcing: 使用正确的truth作为input。</li>
+</ul>
+<h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p><img src="/2021/06/29/2021-07-01-attention/image-20210702092543139.png" alt="image-20210702092543139"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. <a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">“Sequence to sequence learning with neural networks.”</a> <em>Advances in neural information processing systems</em>. 2014.</p>
+<p>[2] Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. <a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">“Neural machine translation by jointly learning to align and translate.”</a> ICLR. 2015.</p>
+<p>[3] Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. <a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">“Effective Approaches to Attention-based Neural Machine Translation.”</a> EMNLP. 2015.</p>
+<p>[4] Yang, Shuoheng, Yuxin Wang, and Xiaowen Chu. <a href="https://arxiv.org/pdf/2002.07526.pdf" target="_blank" rel="noopener">“A survey of deep learning techniques for neural machine translation.”</a> <em>arXiv preprint arXiv:2002.07526</em> (2020).</p>
+<ol>
+<li><a href="https://arxiv.org/pdf/2106.04554.pdf" target="_blank" rel="noopener">A Survey of Transformers</a></li>
+<li><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html" target="_blank" rel="noopener">Attention? Attention! by Lilian Weng</a></li>
+<li><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf" target="_blank" rel="noopener">Self-Attention by Li Hungyi</a></li>
+<li><a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></li>
+</ol>
+</center>
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://ruotingwu.github.io">Ruoting Wu</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/">https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="wechat">
+        </label>
+      <label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="alipay">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/NLP/">NLP</a>
+            <a href="/tags/Transformer/">Transformer</a>
+            </div>
+        
+        <nav class="post-nav"><a class="next" href="/2021/05/23/2021-05-23-anomaly-detection-5/">
+        <span class="next-text nav-default">【异常检测5】基于集成学习的异常检测</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://github.com/ahonn" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2021<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ruoting Wu</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>
