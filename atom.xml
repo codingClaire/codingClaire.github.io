@@ -3,11 +3,11 @@
   <title>Ruoting Wu&#39;s Blog</title>
   
   
-  <link href="https://ruotingwu.github.io/atom.xml" rel="self"/>
+  <link href="https://codingclaire.github.io/atom.xml" rel="self"/>
   
-  <link href="https://ruotingwu.github.io/"/>
+  <link href="https://codingclaire.github.io/"/>
   <updated>2021-07-04T11:32:41.097Z</updated>
-  <id>https://ruotingwu.github.io/</id>
+  <id>https://codingclaire.github.io/</id>
   
   <author>
     <name>Ruoting Wu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Attention Mechanism总结</title>
-    <link href="https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/"/>
-    <id>https://ruotingwu.github.io/2021/06/29/2021-07-01-attention/</id>
+    <link href="https://codingclaire.github.io/2021/06/29/2021-07-01-attention/"/>
+    <id>https://codingclaire.github.io/2021/06/29/2021-07-01-attention/</id>
     <published>2021-06-29T08:29:52.000Z</published>
     <updated>2021-07-04T11:32:41.097Z</updated>
     
@@ -35,16 +35,16 @@
     
     
     
-    <category term="NLP" scheme="https://ruotingwu.github.io/tags/NLP/"/>
+    <category term="NLP" scheme="https://codingclaire.github.io/tags/NLP/"/>
     
-    <category term="Transformer" scheme="https://ruotingwu.github.io/tags/Transformer/"/>
+    <category term="Transformer" scheme="https://codingclaire.github.io/tags/Transformer/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测5】基于集成学习的异常检测</title>
-    <link href="https://ruotingwu.github.io/2021/05/23/2021-05-23-anomaly-detection-5/"/>
-    <id>https://ruotingwu.github.io/2021/05/23/2021-05-23-anomaly-detection-5/</id>
+    <link href="https://codingclaire.github.io/2021/05/23/2021-05-23-anomaly-detection-5/"/>
+    <id>https://codingclaire.github.io/2021/05/23/2021-05-23-anomaly-detection-5/</id>
     <published>2021-05-23T04:33:16.000Z</published>
     <updated>2021-07-01T13:58:54.363Z</updated>
     
@@ -60,16 +60,16 @@
     
     
     
-    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://codingclaire.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
-    <category term="集成学习" scheme="https://ruotingwu.github.io/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    <category term="集成学习" scheme="https://codingclaire.github.io/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测4】基于相似度的方法</title>
-    <link href="https://ruotingwu.github.io/2021/05/20/2021-05-20-anomaly-detection-4/"/>
-    <id>https://ruotingwu.github.io/2021/05/20/2021-05-20-anomaly-detection-4/</id>
+    <link href="https://codingclaire.github.io/2021/05/20/2021-05-20-anomaly-detection-4/"/>
+    <id>https://codingclaire.github.io/2021/05/20/2021-05-20-anomaly-detection-4/</id>
     <published>2021-05-20T15:31:53.000Z</published>
     <updated>2021-05-23T05:30:35.918Z</updated>
     
@@ -85,14 +85,14 @@
     
     
     
-    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://codingclaire.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测3】线性模型（线性回归、主成分分析）</title>
-    <link href="https://ruotingwu.github.io/2021/05/17/2021-05-17-anomaly-detection-3/"/>
-    <id>https://ruotingwu.github.io/2021/05/17/2021-05-17-anomaly-detection-3/</id>
+    <link href="https://codingclaire.github.io/2021/05/17/2021-05-17-anomaly-detection-3/"/>
+    <id>https://codingclaire.github.io/2021/05/17/2021-05-17-anomaly-detection-3/</id>
     <published>2021-05-17T01:53:05.000Z</published>
     <updated>2021-05-18T06:11:59.771Z</updated>
     
@@ -108,16 +108,16 @@
     
     
     
-    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://codingclaire.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
-    <category term="回归" scheme="https://ruotingwu.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
+    <category term="回归" scheme="https://codingclaire.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测2】基于统计学的异常检测方法</title>
-    <link href="https://ruotingwu.github.io/2021/05/14/2021-05-14-anomaly-detection-2/"/>
-    <id>https://ruotingwu.github.io/2021/05/14/2021-05-14-anomaly-detection-2/</id>
+    <link href="https://codingclaire.github.io/2021/05/14/2021-05-14-anomaly-detection-2/"/>
+    <id>https://codingclaire.github.io/2021/05/14/2021-05-14-anomaly-detection-2/</id>
     <published>2021-05-14T15:13:17.000Z</published>
     <updated>2021-05-18T01:49:33.336Z</updated>
     
@@ -133,14 +133,14 @@
     
     
     
-    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://codingclaire.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>【异常检测1】基本概念</title>
-    <link href="https://ruotingwu.github.io/2021/05/11/2021-05-11-anomaly-detection-1/"/>
-    <id>https://ruotingwu.github.io/2021/05/11/2021-05-11-anomaly-detection-1/</id>
+    <link href="https://codingclaire.github.io/2021/05/11/2021-05-11-anomaly-detection-1/"/>
+    <id>https://codingclaire.github.io/2021/05/11/2021-05-11-anomaly-detection-1/</id>
     <published>2021-05-11T11:46:14.000Z</published>
     <updated>2021-05-12T02:14:11.065Z</updated>
     
@@ -156,14 +156,14 @@
     
     
     
-    <category term="异常检测" scheme="https://ruotingwu.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+    <category term="异常检测" scheme="https://codingclaire.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>如何读取HDF5保存的权重</title>
-    <link href="https://ruotingwu.github.io/2021/04/20/2021-04-20-hdf5-weights/"/>
-    <id>https://ruotingwu.github.io/2021/04/20/2021-04-20-hdf5-weights/</id>
+    <link href="https://codingclaire.github.io/2021/04/20/2021-04-20-hdf5-weights/"/>
+    <id>https://codingclaire.github.io/2021/04/20/2021-04-20-hdf5-weights/</id>
     <published>2021-04-20T11:23:37.000Z</published>
     <updated>2021-05-18T01:38:28.771Z</updated>
     
@@ -182,8 +182,8 @@
   
   <entry>
     <title>Boosting提升</title>
-    <link href="https://ruotingwu.github.io/2021/04/14/2021-04-14-boosting/"/>
-    <id>https://ruotingwu.github.io/2021/04/14/2021-04-14-boosting/</id>
+    <link href="https://codingclaire.github.io/2021/04/14/2021-04-14-boosting/"/>
+    <id>https://codingclaire.github.io/2021/04/14/2021-04-14-boosting/</id>
     <published>2021-04-14T01:56:20.000Z</published>
     <updated>2021-05-23T06:27:55.993Z</updated>
     
@@ -203,8 +203,8 @@
   
   <entry>
     <title>TensorBoard相关知识</title>
-    <link href="https://ruotingwu.github.io/2021/04/13/2021-04-13-Tensorboard/"/>
-    <id>https://ruotingwu.github.io/2021/04/13/2021-04-13-Tensorboard/</id>
+    <link href="https://codingclaire.github.io/2021/04/13/2021-04-13-Tensorboard/"/>
+    <id>https://codingclaire.github.io/2021/04/13/2021-04-13-Tensorboard/</id>
     <published>2021-04-13T03:48:30.000Z</published>
     <updated>2021-04-13T03:49:37.963Z</updated>
     
@@ -223,8 +223,8 @@
   
   <entry>
     <title>图神经网络里的监督/半监督和转导/归纳概念解析</title>
-    <link href="https://ruotingwu.github.io/2021/04/09/2021-04-09-GNN-classification/"/>
-    <id>https://ruotingwu.github.io/2021/04/09/2021-04-09-GNN-classification/</id>
+    <link href="https://codingclaire.github.io/2021/04/09/2021-04-09-GNN-classification/"/>
+    <id>https://codingclaire.github.io/2021/04/09/2021-04-09-GNN-classification/</id>
     <published>2021-04-09T13:23:45.000Z</published>
     <updated>2021-04-09T13:40:52.261Z</updated>
     
@@ -240,16 +240,16 @@
     
     
     
-    <category term="图" scheme="https://ruotingwu.github.io/tags/%E5%9B%BE/"/>
+    <category term="图" scheme="https://codingclaire.github.io/tags/%E5%9B%BE/"/>
     
-    <category term="机器学习" scheme="https://ruotingwu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://codingclaire.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>Keras的一些基本操作</title>
-    <link href="https://ruotingwu.github.io/2021/04/08/2021-04-08-keras/"/>
-    <id>https://ruotingwu.github.io/2021/04/08/2021-04-08-keras/</id>
+    <link href="https://codingclaire.github.io/2021/04/08/2021-04-08-keras/"/>
+    <id>https://codingclaire.github.io/2021/04/08/2021-04-08-keras/</id>
     <published>2021-04-08T02:47:25.000Z</published>
     <updated>2021-05-11T12:17:11.949Z</updated>
     
@@ -268,8 +268,8 @@
   
   <entry>
     <title>Keras中RNNLayer的输入输出总结</title>
-    <link href="https://ruotingwu.github.io/2021/04/07/2021-04-07-keras-LSTM/"/>
-    <id>https://ruotingwu.github.io/2021/04/07/2021-04-07-keras-LSTM/</id>
+    <link href="https://codingclaire.github.io/2021/04/07/2021-04-07-keras-LSTM/"/>
+    <id>https://codingclaire.github.io/2021/04/07/2021-04-07-keras-LSTM/</id>
     <published>2021-04-07T14:00:24.000Z</published>
     <updated>2021-04-12T03:48:33.407Z</updated>
     
@@ -285,16 +285,16 @@
     
     
     
-    <category term="Keras" scheme="https://ruotingwu.github.io/tags/Keras/"/>
+    <category term="Keras" scheme="https://codingclaire.github.io/tags/Keras/"/>
     
-    <category term="RNN" scheme="https://ruotingwu.github.io/tags/RNN/"/>
+    <category term="RNN" scheme="https://codingclaire.github.io/tags/RNN/"/>
     
   </entry>
   
   <entry>
     <title>gitbook+Typora打造舒适的笔记环境</title>
-    <link href="https://ruotingwu.github.io/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/"/>
-    <id>https://ruotingwu.github.io/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/</id>
+    <link href="https://codingclaire.github.io/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/"/>
+    <id>https://codingclaire.github.io/2020/06/22/gitbook-Typora%E6%89%93%E9%80%A0%E8%88%92%E9%80%82%E7%9A%84%E7%AC%94%E8%AE%B0%E7%8E%AF%E5%A2%83/</id>
     <published>2020-06-22T08:53:38.000Z</published>
     <updated>2021-04-07T11:51:16.764Z</updated>
     
@@ -307,16 +307,16 @@
     
     
     
-    <category term="gitbook" scheme="https://ruotingwu.github.io/tags/gitbook/"/>
+    <category term="gitbook" scheme="https://codingclaire.github.io/tags/gitbook/"/>
     
-    <category term="小技巧" scheme="https://ruotingwu.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <category term="小技巧" scheme="https://codingclaire.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
     <title>文本数据的聚类分析综述</title>
-    <link href="https://ruotingwu.github.io/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/"/>
-    <id>https://ruotingwu.github.io/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/</id>
+    <link href="https://codingclaire.github.io/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/"/>
+    <id>https://codingclaire.github.io/2020/06/10/%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%BB%BC%E8%BF%B0/</id>
     <published>2020-06-10T08:25:51.000Z</published>
     <updated>2020-06-14T16:33:32.909Z</updated>
     
@@ -331,16 +331,16 @@
     
     
     
-    <category term="文本挖掘" scheme="https://ruotingwu.github.io/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/"/>
+    <category term="文本挖掘" scheme="https://codingclaire.github.io/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/"/>
     
-    <category term="聚类分析" scheme="https://ruotingwu.github.io/tags/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/"/>
+    <category term="聚类分析" scheme="https://codingclaire.github.io/tags/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题5】中间代码生成</title>
-    <link href="https://ruotingwu.github.io/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/"/>
-    <id>https://ruotingwu.github.io/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/</id>
+    <link href="https://codingclaire.github.io/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/"/>
+    <id>https://codingclaire.github.io/2020/05/23/%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/</id>
     <published>2020-05-23T09:27:48.000Z</published>
     <updated>2020-06-14T15:45:18.837Z</updated>
     
@@ -357,14 +357,14 @@
     
     
     
-    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://codingclaire.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题4】语法制导翻译</title>
-    <link href="https://ruotingwu.github.io/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
-    <id>https://ruotingwu.github.io/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/</id>
+    <link href="https://codingclaire.github.io/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
+    <id>https://codingclaire.github.io/2020/05/22/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/</id>
     <published>2020-05-22T02:27:00.000Z</published>
     <updated>2020-06-14T15:45:00.324Z</updated>
     
@@ -380,14 +380,14 @@
     
     
     
-    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://codingclaire.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题3】语法分析的例子整理</title>
-    <link href="https://ruotingwu.github.io/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/"/>
-    <id>https://ruotingwu.github.io/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/</id>
+    <link href="https://codingclaire.github.io/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/"/>
+    <id>https://codingclaire.github.io/2020/05/21/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%9A%84%E4%BE%8B%E5%AD%90%E6%95%B4%E7%90%86/</id>
     <published>2020-05-21T12:58:37.000Z</published>
     <updated>2020-06-14T15:44:54.984Z</updated>
     
@@ -404,14 +404,14 @@
     
     
     
-    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://codingclaire.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题2】关于语法分析</title>
-    <link href="https://ruotingwu.github.io/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
-    <id>https://ruotingwu.github.io/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</id>
+    <link href="https://codingclaire.github.io/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
+    <id>https://codingclaire.github.io/2020/05/21/%E5%85%B3%E4%BA%8E%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</id>
     <published>2020-05-21T02:07:43.000Z</published>
     <updated>2020-06-14T15:44:35.422Z</updated>
     
@@ -429,14 +429,14 @@
     
     
     
-    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://codingclaire.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>【编译原理复习专题1】上下文无关文法和正则表达式</title>
-    <link href="https://ruotingwu.github.io/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>https://ruotingwu.github.io/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
+    <link href="https://codingclaire.github.io/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>https://codingclaire.github.io/2020/05/21/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
     <published>2020-05-21T01:35:48.000Z</published>
     <updated>2020-06-14T16:30:45.896Z</updated>
     
@@ -452,14 +452,14 @@
     
     
     
-    <category term="编译原理" scheme="https://ruotingwu.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    <category term="编译原理" scheme="https://codingclaire.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>一个解决word页码错乱的小方法</title>
-    <link href="https://ruotingwu.github.io/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/"/>
-    <id>https://ruotingwu.github.io/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/</id>
+    <link href="https://codingclaire.github.io/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/"/>
+    <id>https://codingclaire.github.io/2020/05/20/%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3word%E9%A1%B5%E7%A0%81%E9%94%99%E4%B9%B1%E7%9A%84%E5%B0%8F%E6%96%B9%E6%B3%95/</id>
     <published>2020-05-20T08:11:28.000Z</published>
     <updated>2020-06-14T16:31:18.836Z</updated>
     
@@ -476,9 +476,9 @@
     
     
     
-    <category term="小技巧" scheme="https://ruotingwu.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <category term="小技巧" scheme="https://codingclaire.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
-    <category term="word" scheme="https://ruotingwu.github.io/tags/word/"/>
+    <category term="word" scheme="https://codingclaire.github.io/tags/word/"/>
     
   </entry>
   
