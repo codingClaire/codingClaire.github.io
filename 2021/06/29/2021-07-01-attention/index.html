@@ -122,7 +122,7 @@
   </div><div class="post-content"><p>[toc]</p>
 <h2 id="Neural-Machine-Translation-NMT"><a href="#Neural-Machine-Translation-NMT" class="headerlink" title="Neural Machine Translation(NMT)"></a>Neural Machine Translation(NMT)</h2><p>Neural Machine Translation,简称NMT, 是指使用深度学习来完成机器翻译任务。NMT任务是一个端到端的学习任务，输入一个序列直接输出对应的目标序列。NMT可以被分为两个步骤：编码和解码。如图所示：</p>
 <div align="center">    
-<img src="/2021/06/29/2021-07-01-attention/1.png" width="50%" height="50%">
+<img src="/.io//06/29/2021-07-01-attention/1.png" width="50%" height="50%">
 </div>
 
 <center>图1</center>
@@ -137,7 +137,7 @@
 </ul>
 <h3 id="coditional-probability"><a href="#coditional-probability" class="headerlink" title="coditional probability"></a>coditional probability</h3><h2 id="Seq2seq模型"><a href="#Seq2seq模型" class="headerlink" title="Seq2seq模型"></a>Seq2seq模型</h2><p>Seq2seq模型 (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)是基于encoder-decoder框架下使用LSTM对文本进行翻译。</p>
 <h3 id="encoder-decoder框架"><a href="#encoder-decoder框架" class="headerlink" title="encoder-decoder框架"></a>encoder-decoder框架</h3><div align="center">    
-<img src="/2021/06/29/2021-07-01-attention/2.png" width="90%" height="90%">
+<img src="/.io//06/29/2021-07-01-attention/2.png" width="90%" height="90%">
 </div>
 
 <center>图2 （图片来源：Sutskever et al.2014）</center>
@@ -151,13 +151,13 @@
 <h2 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h2><p>Attention(<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>)</p>
 <h2 id="Attention-in-NMT"><a href="#Attention-in-NMT" class="headerlink" title="Attention in NMT"></a>Attention in NMT</h2><h3 id="encoder"><a href="#encoder" class="headerlink" title="encoder"></a>encoder</h3><p>在encoder部分，使用的是一个双向的RNN（BiRNN），会生成一个前向的隐藏状态序列和后向的隐藏状态序列，将前向和后向对应的状态进行连接（concate）。</p>
 <div align="center">    
-<img src="/2021/06/29/2021-07-01-attention/3.png" width="50%" height="50%">
+<img src="/.io//06/29/2021-07-01-attention/3.png"" width="50%" height="50%">
 </div>
 
-<center>图3 双向RNN原理（图片来源：Yang et al.2020）
+<center>图3 双向RNN原理（图片来源：Yang et al.2020）</center>
 
 <h3 id="decoder"><a href="#decoder" class="headerlink" title="decoder"></a>decoder</h3><div align="center">    
-<img src="/2021/06/29/2021-07-01-attention/4.png" width="25%" height="25%">
+<img src="/.io//06/29/2021-07-01-attention/4.png" width="25%" height="25%">
 </div>
 
 
@@ -177,13 +177,13 @@
 <p>query：在decoder阶段，之前的输出会被压缩成一个query$(Q)$,长度为M。decoder的输出用于映射这个query和key-value pairs的集合。模型decoder会输出一个word的distribution, query表示最有可能的单词的表示向量。</p>
 <h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>可以把它理解成一个全连接层，权重是由输入的成对关系动态生成的。</p>
 <p>输入向量，输出相同数量的向量，相当于一个encoder。</p>
-<p><img src="/2021/06/29/2021-07-01-attention/image-20210702092147189.png" alt="demo"></p>
+<p><img src="/.io//06/29/2021-07-01-attention/image-20210702092147189.png" alt="demo"></p>
 <h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><ul>
 <li><p>原论文： Attention is all you need  (2017 NIPS)</p>
-<p><img src="/2021/06/29/2021-07-01-attention/image-20210702092323838.png" alt="image-20210702092323838"></p>
+<p><img src="/.io//06/29/2021-07-01-attention/image-20210702092323838.png" alt="image-20210702092323838"></p>
 </li>
 </ul>
-<h3 id="Encoder-amp-Decoder"><a href="#Encoder-amp-Decoder" class="headerlink" title="Encoder&amp;Decoder"></a>Encoder&amp;Decoder</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065725298.png" alt="image-20210702065725298"></p>
+<h3 id="Encoder-amp-Decoder"><a href="#Encoder-amp-Decoder" class="headerlink" title="Encoder&amp;Decoder"></a>Encoder&amp;Decoder</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702065725298.png" alt="image-20210702065725298"></p>
 <h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><ul>
 <li><p>层数$N=6$，每层有两个sub-layers，分别是多头自注意力机制和根据位置的全连接前馈网络</p>
 </li>
@@ -208,8 +208,8 @@
 <li>奇数位置：$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_{model}})$ </li>
 </ul>
 <p>绝对位置向量中蕴含着相对位置的信息，相对位置会在注意力机制中消失。</p>
-<h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065823387.png" alt="image-20210702065823387"><br>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$<br>${d_k}$是key和value的维度，$QK^T$保持方差为1。</p>
-<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702065858923.png" alt="image-20210702065858923"></p>
+<h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702065823387.png" alt="image-20210702065823387"><br>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$<br>${d_k}$是key和value的维度，$QK^T$保持方差为1。</p>
+<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702065858923.png" alt="image-20210702065858923"></p>
 <p>多个平行的attention层分别获得各自的Q、K、V：<br>$$<br>MultiHead(Q,K,V)=Concat(head_1,…,head_h)W^O\space where\space head_i=Attention(QW_i^Q,KW_i^K,VW_I^V)<br>$$</p>
 <h3 id="Transformer中的注意力机制"><a href="#Transformer中的注意力机制" class="headerlink" title="Transformer中的注意力机制"></a>Transformer中的注意力机制</h3><ul>
 <li>self-attention in encoder and decoder:  $Q=K=V=X$</li>
@@ -217,13 +217,13 @@
 <li>cross-attention:  keys和values来源于最后一层的encoder的输入。</li>
 </ul>
 <h3 id="Positional-wise-Feed-Forward-Network"><a href="#Positional-wise-Feed-Forward-Network" class="headerlink" title="Positional-wise Feed-Forward Network"></a>Positional-wise Feed-Forward Network</h3><p>$$<br>FFN(x)=max(0,xW_1+b_1)W_2+b_2<br>$$</p>
-<h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><p><img src="/2021/06/29/2021-07-01-attention/image-20210702081304496.png" alt="image-20210702081304496"></p>
+<h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702081304496.png" alt="image-20210702081304496"></p>
 <p>残差结构：输出的Z和经过位置编码的X对位相加，作为输出。</p>
 <p>Layer Normalization：不需要像Batch Normalization一样考虑所有batch，只需要考虑同一个example中的不同feature计算均值和方差，然后对example的向量进行normalization。</p>
 <h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul>
 <li>teacher forcing: 使用正确的truth作为input。</li>
 </ul>
-<h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p><img src="/2021/06/29/2021-07-01-attention/image-20210702092543139.png" alt="image-20210702092543139"></p>
+<h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p><img src="/.io//06/29/2021-07-01-attention/image-20210702092543139.png" alt="image-20210702092543139"></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. <a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">“Sequence to sequence learning with neural networks.”</a> <em>Advances in neural information processing systems</em>. 2014.</p>
 <p>[2] Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. <a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">“Neural machine translation by jointly learning to align and translate.”</a> ICLR. 2015.</p>
 <p>[3] Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. <a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">“Effective Approaches to Attention-based Neural Machine Translation.”</a> EMNLP. 2015.</p>
@@ -234,7 +234,7 @@
 <li><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf" target="_blank" rel="noopener">Self-Attention by Li Hungyi</a></li>
 <li><a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></li>
 </ol>
-</center>
+
       </div>
       <div class="post-copyright">
     <p class="copyright-item">
@@ -275,7 +275,7 @@
       </main>
 
       <footer id="footer" class="footer"><div class="social-links"><a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-        <a href="https://github.com/ahonn" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
+        <a href="https://github.com/codingClaire" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
         <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
     </div><div class="copyright">
   <span class="power-by">
