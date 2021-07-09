@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="【异常检测5】基于集成学习的异常检测"/><meta name="keywords" content="异常检测, 集成学习, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
+<meta name="description" content="【异常检测5】基于集成学习的异常检测"/><meta name="keywords" content="异常检测, 集成学习, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/shiba.png?v=2.11.0" />
 <link rel="canonical" href="https://codingClaire.github.io/2021/05/23/2021-05-23-anomaly-detection-5/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
@@ -130,13 +130,13 @@
 </blockquote>
 <p>通过集成学习来进行异常检测的方法主要有两种，分别是特征Feature Bagging和孤立森林（Isolation Forest)。</p>
 <h2 id="Feature-Bagging"><a href="#Feature-Bagging" class="headerlink" title="Feature Bagging"></a>Feature Bagging</h2><p>Feature Bagging将Bagging的思想应用在特征上。它结合了多个异常检测算法的结果，每个异常检测算法使用的特征都是从原始特征集合中随机选取的特征子集合。每种异常检测的方法会检测出不同的异常点，然后通过异常点分值来对结果进行合并。</p>
-<h3 id="基础框架"><a href="#基础框架" class="headerlink" title="基础框架"></a>基础框架</h3><p><img src="/.io//05/23/2021-05-23-anomaly-detection-5/image-20210523133318831.png" alt="image-20210523133318831"></p>
+<h3 id="基础框架"><a href="#基础框架" class="headerlink" title="基础框架"></a>基础框架</h3><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210523133318831.png" alt="image-20210523133318831"></p>
 <p>上述为这种方法的基本框架，每个异常检测的算法会选取每所有样本的d/2-d个特征，d表示原始的特征数，输出不同的分数向量$AS_t(j)$，表示第$t$个方法中，数据集中数据$j$是异常点的概率。由于总共有$T$个方法，那么会有$T$个异常分数向量，最后使用COMBINE函数对向量进行合并，最后生成一个$AS_{FINAL}$向量，表示数据点是异常点的最终的概率。</p>
-<h3 id="COMBINE方法"><a href="#COMBINE方法" class="headerlink" title="COMBINE方法"></a>COMBINE方法</h3><h4 id="1-Breadth-First-广度优先"><a href="#1-Breadth-First-广度优先" class="headerlink" title="1.Breadth-First 广度优先"></a>1.Breadth-First 广度优先</h4><p><img src="/.io//05/23/2021-05-23-anomaly-detection-5/image-20210523133448116.png" alt="image-20210523133448116"></p>
-<h4 id="2-Cumulative-Sum-累积求和"><a href="#2-Cumulative-Sum-累积求和" class="headerlink" title="2.Cumulative Sum 累积求和"></a>2.Cumulative Sum 累积求和</h4><p><img src="/.io//05/23/2021-05-23-anomaly-detection-5/image-20210523133521315.png" alt="image-20210523133521315"></p>
+<h3 id="COMBINE方法"><a href="#COMBINE方法" class="headerlink" title="COMBINE方法"></a>COMBINE方法</h3><h4 id="1-Breadth-First-广度优先"><a href="#1-Breadth-First-广度优先" class="headerlink" title="1.Breadth-First 广度优先"></a>1.Breadth-First 广度优先</h4><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210523133448116.png" alt="image-20210523133448116"></p>
+<h4 id="2-Cumulative-Sum-累积求和"><a href="#2-Cumulative-Sum-累积求和" class="headerlink" title="2.Cumulative Sum 累积求和"></a>2.Cumulative Sum 累积求和</h4><p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210523133521315.png" alt="image-20210523133521315"></p>
 <h3 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h3><p>优势：</p>
 <p>feature bagging能够降低方差（bagging方法使用有放回抽样，数据集间会有重复的样本，每个模型之间具有相关关系，设相关系数为$\rho$，模型均值的方差可以被表示为：</p>
-<p><img src="/.io//05/23/2021-05-23-anomaly-detection-5/image-20210524003416272.png" alt="image-20210524003416272"></p>
+<p><img src="/2021/05/23/2021-05-23-anomaly-detection-5/image-20210524003416272.png" alt="image-20210524003416272"></p>
 <p>当n增大时，模型整体的方差会趋向于$\rho\sigma^2$，模型方差会降低。</p>
 <h2 id="孤立森林（Isolation-Forests）"><a href="#孤立森林（Isolation-Forests）" class="headerlink" title="孤立森林（Isolation Forests）"></a>孤立森林（Isolation Forests）</h2><h3 id="整体思想"><a href="#整体思想" class="headerlink" title="整体思想"></a>整体思想</h3><p>假设我们用一个随机超平面来切割数据空间，切一次可以生成两个子空间。然后我们继续用随机超平面来切割每个子空间并循环，直到每个子空间只有一个数据点为止。直观上来讲，那些具有高密度的簇需要被切很多次才会将其分离，而那些低密度的点很快就被单独分配到一个子空间了。孤立森林认为这些很快被孤立的点就是异常点。</p>
 <p>孤立森林使用集成方法得到收敛值，将多种切割的方法进行平均，使得结果更为可靠。</p>
@@ -217,7 +217,7 @@
     <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2021<span class="heart">
+  <span class="copyright-year">&copy;2019 - 2021<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ruoting Wu</span>

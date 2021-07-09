@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Attention Mechanism总结"/><meta name="keywords" content="NLP, Transformer, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/cat.jpg?v=2.11.0" />
+<meta name="description" content="Attention Mechanism总结"/><meta name="keywords" content="NLP, Transformer, attention, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/shiba.png?v=2.11.0" />
 <link rel="canonical" href="https://codingClaire.github.io/2021/06/29/2021-07-01-attention/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
@@ -117,123 +117,123 @@
     <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Neural-Machine-Translation-NMT"><span class="toc-text">Neural Machine Translation(NMT)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#coditional-probability"><span class="toc-text">coditional probability</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Seq2seq模型"><span class="toc-text">Seq2seq模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encoder-decoder框架"><span class="toc-text">encoder-decoder框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Seq2seq的问题"><span class="toc-text">Seq2seq的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention机制"><span class="toc-text">Attention机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-in-NMT"><span class="toc-text">Attention in NMT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encoder"><span class="toc-text">encoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decoder"><span class="toc-text">decoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alignment-visualizations"><span class="toc-text">alignment visualizations</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-in-Graph"><span class="toc-text">Attention in Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-Family"><span class="toc-text">Attention Family</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#query、values和keys"><span class="toc-text">query、values和keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-Attention"><span class="toc-text">Self-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer"><span class="toc-text">Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Encoder-amp-Decoder"><span class="toc-text">Encoder&amp;Decoder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Encoder"><span class="toc-text">Encoder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Decoder"><span class="toc-text">Decoder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-Encoding"><span class="toc-text">Positional Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaled-Dot-Product-Attention"><span class="toc-text">Scaled-Dot-Product Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Head-Self-Attention"><span class="toc-text">Multi-Head Self-Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer中的注意力机制"><span class="toc-text">Transformer中的注意力机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-wise-Feed-Forward-Network"><span class="toc-text">Positional-wise Feed-Forward Network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Residual-Connection-and-Normalization"><span class="toc-text">Residual Connection and Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练"><span class="toc-text">训练</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-Family"><span class="toc-text">Transformer Family</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Neural-Machine-Translation-NMT"><span class="toc-text">Neural Machine Translation(NMT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Seq2seq模型"><span class="toc-text">Seq2seq模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encoder"><span class="toc-text">encoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decoder"><span class="toc-text">decoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Seq2seq的问题"><span class="toc-text">Seq2seq的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-in-NMT"><span class="toc-text">Attention in NMT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encoder：BiRNN"><span class="toc-text">encoder：BiRNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decoder：Additive-Attention"><span class="toc-text">decoder：Additive Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Q-query-、V-values-和K-keys"><span class="toc-text">Q(query)、V(values)和K(keys)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-Family"><span class="toc-text">Attention Family</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#soft-amp-hard-attention"><span class="toc-text">soft&amp;hard attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#global-amp-local-attention"><span class="toc-text">global&amp;local attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#global-attention"><span class="toc-text">global attention</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#local-attention"><span class="toc-text">local attention</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attention-score不同的计算方式"><span class="toc-text">attention score不同的计算方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-Attention"><span class="toc-text">Self-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
     </div>
   </div><div class="post-content"><p>[toc]</p>
-<h2 id="Neural-Machine-Translation-NMT"><a href="#Neural-Machine-Translation-NMT" class="headerlink" title="Neural Machine Translation(NMT)"></a>Neural Machine Translation(NMT)</h2><p>Neural Machine Translation,简称NMT, 是指使用深度学习来完成机器翻译任务。NMT任务是一个端到端的学习任务，输入一个序列直接输出对应的目标序列。NMT可以被分为两个步骤：编码和解码。如图所示：</p>
+<h2 id="Neural-Machine-Translation-NMT"><a href="#Neural-Machine-Translation-NMT" class="headerlink" title="Neural Machine Translation(NMT)"></a>Neural Machine Translation(NMT)</h2><p>Neural Machine Translation,简称NMT, 是指使用深度学习来完成机器翻译任务。NMT任务是一个端到端的学习任务，输入一个序列直接输出对应的目标序列。如图1所示，模型输入句子“ABC&lt;EOS&gt;”, 输出对应的翻译句子“WXYZ&lt;EOS&gt;”，该图可以分为两个部分：编码（encode）和解码（decode）。</p>
 <div align="center">    
-<img src="/.io//06/29/2021-07-01-attention/1.png" width="50%" height="50%">
+<img src="/2021/06/29/2021-07-01-attention/2.png" width="90%" height="90%">
 </div>
+<center>图1 （图片来源：Sutskever et al.2014）</center>
 
-<center>图1</center>
-
-<p><strong>-encoder</strong></p>
-<p>在encoder阶段，模型输入语句 $x=(x_1,…x_{T_x})$ ，使用RNN计算上下文向量（context vector），其中t时刻的隐含状态计算公式如下：<br>$$<br>h_t=f(x_t,h_{t-1})<br>$$<br>上下文向量：<br>$$<br>c=q({h_1,…h_{T_x}})<br>$$<br>$f$和$q$是两个非线性函数， (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)使用LSTM作为$f$, $q({h_1,…h_T })= h_T$作为$q$。</p>
-<p>-<strong>decoder</strong></p>
-<p>在decoder阶段，模型逐个预测单词。当预测单词$y_{t^{‘}}$时，给定的上下文向量$c$和所有之前预测的单词${y_1,…y_{t^{‘}-1}}$将会用于预测。decoder生成的目标序列$y=(y_1,…y_{T_y})$，条件概率为：<br>$$<br>p(y)=\prod_{t=1}^{T}p(y_t│{y_1,…y_{t-1}},c)<br>$$</p>
-<ul>
-<li>如果使用RNN，则条件概率可以被表示为$p(y_t│y_1,…y_{t-1},c)=g(y_{t-1},s_t,c)$</li>
-<li>如果使用Attention机制，</li>
-</ul>
-<h3 id="coditional-probability"><a href="#coditional-probability" class="headerlink" title="coditional probability"></a>coditional probability</h3><h2 id="Seq2seq模型"><a href="#Seq2seq模型" class="headerlink" title="Seq2seq模型"></a>Seq2seq模型</h2><p>Seq2seq模型 (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)是基于encoder-decoder框架下使用LSTM对文本进行翻译。</p>
-<h3 id="encoder-decoder框架"><a href="#encoder-decoder框架" class="headerlink" title="encoder-decoder框架"></a>encoder-decoder框架</h3><div align="center">    
-<img src="/.io//06/29/2021-07-01-attention/2.png" width="90%" height="90%">
-</div>
-
-<center>图2 （图片来源：Sutskever et al.2014）</center>
-
-<p>图2中，模型输入句子“ABC&lt;EOS&gt;”, 输出对应的翻译句子“WXYZ&lt;EOS&gt;”，当decoder输入Z时，模型预测出&lt;EOS&gt;字符（end-of-sentence)，表示预测结束。</p>
-<p>encoder-decoder框架是sequence-to-sequence任务中的一个标准的模型，其中包括两个组件：</p>
-<p>encoder: 读入原始的序列，生成整个输入序列的representation(即输入语句的embedding，也被称作context vector) 。</p>
-<p>decoder: 使用encoder输出的representation，生成目标序列。</p>
-<h3 id="Seq2seq的问题"><a href="#Seq2seq的问题" class="headerlink" title="Seq2seq的问题"></a>Seq2seq的问题</h3><p>RNN结构存在着长程梯度消失的问题，随着输入句子长度的增加，结构的效果会有所下降。</p>
-<p>seq2seq中，每一步</p>
-<h2 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h2><p>Attention(<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>)</p>
-<h2 id="Attention-in-NMT"><a href="#Attention-in-NMT" class="headerlink" title="Attention in NMT"></a>Attention in NMT</h2><h3 id="encoder"><a href="#encoder" class="headerlink" title="encoder"></a>encoder</h3><p>在encoder部分，使用的是一个双向的RNN（BiRNN），会生成一个前向的隐藏状态序列和后向的隐藏状态序列，将前向和后向对应的状态进行连接（concate）。</p>
+<p>左侧encoder输入”ABC&lt;EOS&gt;“，右侧decoder逐个预测出翻译的单词。decoder并不能直接确定预测单词的个数（句子的长度），预测的结束以通过预测到&lt;EOS&gt;结束，当decoder输入Z时，模型预测出&lt;EOS&gt;字符（end-of-sentence)，表示预测结束。</p>
+<h2 id="Seq2seq模型"><a href="#Seq2seq模型" class="headerlink" title="Seq2seq模型"></a>Seq2seq模型</h2><p>整个框架也被称为<strong>Sequence-to-sequence模型（简称为Seq2seq）</strong>，是一种使用RNN结构来解决NLP相关的问题的模型。最早由 (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)提出，该方法是基于encoder-decoder框架下使用LSTM对文本进行翻译。encoder-decoder框架是sequence-to-sequence任务中的一个标准的模型，如图2。</p>
 <div align="center">    
-<img src="/.io//06/29/2021-07-01-attention/3.png"" width="50%" height="50%">
+<img src="/2021/06/29/2021-07-01-attention/1.png" width="50%" height="50%">
 </div>
+<center>图2 encoder-decoder框架</center>
 
-<center>图3 双向RNN原理（图片来源：Yang et al.2020）</center>
-
-<h3 id="decoder"><a href="#decoder" class="headerlink" title="decoder"></a>decoder</h3><div align="center">    
-<img src="/.io//06/29/2021-07-01-attention/4.png" width="25%" height="25%">
+<p>encoder和decoder通常都是RNN单元，如LSTM模型或GRU模型。encoder读入原始的序列，生成整个输入序列的representation（即上下文向量context vector），其中encoder的输出会被丢弃，只有隐藏状态（hidden state）会被保留。</p>
+<p>decoder使用encoder输出的representation，生成目标序列。decoder的初始状态由encoder的最后一个LSTM单元的最终状态进行初始化。每一个LSTM单元都会接受上一个单元的隐藏状态，并生成自己的隐藏状态作为输出。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/5.png" width="90%" height="90%">
 </div>
+<center>图3 Seq2seq模型原理图</center>
+
+<h3 id="encoder"><a href="#encoder" class="headerlink" title="encoder"></a>encoder</h3><p>如图3，在编码阶段，模型输入语句 $x=(x_1,…x_{T_x})$ ，使用RNN计算上下文向量（context vector），其中t时刻的隐含状态计算公式如下：<br>$$<br>h_t=f(x_t,h_{t-1})<br>$$<br>通过encoder，能够用隐含状态计算出输入语句的embedding，也被称为上下文向量（context vector)，记作$C$：<br>$$<br>C=q({h_1,…h_{T_x}})<br>$$<br>其中$f$和$q$是两个非线性函数， (<a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">Sutskever et al.,2014</a>)使用LSTM作为$f$, $q({h_1,…h_T })= h_T$作为$q$，即将最后一个隐藏状态$h_T$作为上下文向量。</p>
+<h3 id="decoder"><a href="#decoder" class="headerlink" title="decoder"></a>decoder</h3><p>如图3，在解码阶段，模型逐个预测单词。当预测单词$y_{t^{‘}}$时，给定的上下文向量$C$和所有之前预测的单词${y_1,…y_{t^{‘}-1}}$将会用于预测。decoder生成的目标序列$y=(y_1,…y_{T_y})$，条件概率为：<br>$$<br>p(y)=\prod_{t=1}^{T}p(y_t│{y_1,…y_{t-1}},C)<br>$$</p>
+<p>最终decoder确定最终预测的单词是概率向量中概率最大的词。<br>$$<br>y_{t^{‘}}=arg\mathop{max}\limits_{y}p(y|x)=arg\mathop{max}\limits_{y}\prod_{t=1}^{T}p(y_t│y_{&lt;t},x)<br>$$<br>当decoder使用RNN，则条件概率可以被表示为$p(y_t│y_1,…y_{t-1},C)=g(y_{t-1},s_t,C)$，其中$g$也是一个非线性的多层函数。decoder的第$t$个单元生成的隐含状态$s_t$和前一个单元的输出$y_{t-1}$作为输入，生成当前单元的输出$y_t$的概率向量。</p>
+<blockquote>
+<p>decoder还会使用”Teacher Forcing”提高训练的效率，此处不展开介绍，可以参考这篇<a href="https://machinelearningmastery.com/teacher-forcing-for-recurrent-neural-networks/" target="_blank" rel="noopener">文章</a>。</p>
+</blockquote>
+<h3 id="Seq2seq的问题"><a href="#Seq2seq的问题" class="headerlink" title="Seq2seq的问题"></a>Seq2seq的问题</h3><ol>
+<li>Seq2seq模型中context vector是一个固定的向量，将输入的整句话编码成固定尺寸的向量，可能会损失句子的信息，限制模型的性能。</li>
+<li>对RNN结构来说，序列长度越长，神经网络越深，这将导致梯度消失，结构的效果会有所下降。尽管LSTM可以一定程度上防止该问题，但仍然有可能出现长程梯度消失问题。</li>
+</ol>
+<h2 id="Attention-in-NMT"><a href="#Attention-in-NMT" class="headerlink" title="Attention in NMT"></a>Attention in NMT</h2><p>为了解决Seq2seq模型存在的问题，（<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>）将attention思想最早由运用在NMT任务中。简单地说，注意力可以被解释为一个权重向量，这个向量能够被用来估计被预测的元素（如句子中的一个单词）和其他元素的相关性。元素通过注意力向量加权和会被作为目标的近似值。网络中的注意力部分会从输入序列中映射出重要的和相关性高的词，赋予这些词更高的权重，从而提高预测的准确性。（<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>）论文整体的框架如图4所示，这种attention机制通常也被称为Additive Attention，它保证了encoder不需要将所有的原始语句都编码为一个固定长度的向量。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/4.png" width="45%" height="45%">
+</div>
+<center>图4 模型框架（图片来源：Bahdanau et al.,2015）</center>
 
 
-<p>attention机制</p>
-<p>在解码翻译时模拟搜索输入序列</p>
-<p>$$<br>p(y_t│y_1,…y_{t-1},x)=g(y_{i-1},s_i,c_i)<br>$$<br>$s_i$是RNN在i时刻的隐藏状态，$s_i=f(s_{i-1},y_{i-1},c_i)$，这里和seq2seq模型的区别是，seq2seq仅会产生一个上下文向量$c$，但通过attention机制会生成多个上下文向量，时间$i$的上下文向量为$c_i$，由隐藏状态的加权和计算得出：<br>$$<br>c_i=\Sigma_{j=1}^{T_x}\alpha_{ij}h_j<br>$$<br>相当于计算所有的annotation(状态）的期望。$\alpha_{ij}$表示i时刻第j个状态的权重，这个权重可以被理解成目标语言生成的$y_i$能够翻译源语言的单词$x_j$的概率，计算公式为：<br>$$<br>α<em>{ij}=\frac{exp⁡(e</em>{ij})}{\Sigma_{k=1}^{T_x}exp⁡(e_{ik})}<br>$$</p>
-<p>$e_{ij}=a(s_{i-1},h_j)$</p>
-<p>alignment model: )  score表示输入j位置和输出的i位置有多match</p>
-<p>注意力机制保证了encoder不需要将所有的原始语句都编码为一个固定长度的向量。</p>
-<h3 id="alignment-visualizations"><a href="#alignment-visualizations" class="headerlink" title="alignment visualizations"></a>alignment visualizations</h3><h2 id="Attention-in-Graph"><a href="#Attention-in-Graph" class="headerlink" title="Attention in Graph"></a>Attention in Graph</h2><h2 id="Attention-Family"><a href="#Attention-Family" class="headerlink" title="Attention Family"></a>Attention Family</h2><p>根据attention score计算方式的不同，有如下的attention机制：</p>
+
+<h3 id="encoder：BiRNN"><a href="#encoder：BiRNN" class="headerlink" title="encoder：BiRNN"></a>encoder：BiRNN</h3><p>在encoder部分，使用的是一个双向的RNN（BiRNN），会生成一个前向的隐藏状态序列和后向的隐藏状态序列，将前向和后向对应的状态进行连接（concate），BiRNN使得每一个$h_j$都包含之前和之后单词的信息。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/9.png" width="40%" height="40%">
+</div>
+<center>图5 双向RNN原理</center>
+
+<p>Seq2seq模型中，encoder产生的最后一个状态将作为context vector，与Seq2seq不同的是，这里encoder产生的每一个状态都将在decoder用于计算context vector，且context vector成为了一个动态的表示。</p>
+<h3 id="decoder：Additive-Attention"><a href="#decoder：Additive-Attention" class="headerlink" title="decoder：Additive Attention"></a>decoder：Additive Attention</h3><p>实际上，在Additive Attention中，context vector的计算需要利用encoder和decoder产生的状态，具体的流程如下图所示：</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/6.png" width="100%" height="100%">
+</div>
+<center>图6 如何计算context vector</center>
+
+<p>在decoder中，条件概率被定义为：<br>$$<br>p(y_t│y_1,…y_{t-1},x)=g(y_{i-1},s_i,c_i)<br>$$<br>$s_i$是decoder中RNN的第$i$隐藏状态，$s_i=f(s_{i-1},y_{i-1},c_i)$，如图4，$s_i$的计算需要：1）上一个隐藏状态$s_i$，2）上一个单元生成的$y_{i-1}$,3)由上一个隐藏状态计算出的当前的上下文向量$c_i$。这里和seq2seq模型的区别是，seq2seq仅会产生一个上下文向量$c$，但通过attention机制会生成多个上下文向量。每个上下文向量由encoder的隐藏状态的加权和计算得出：<br>$$<br>c_i=\Sigma_{j=1}^{T_x}\alpha_{ij}h_j<br>$$<br>这个值相当于计算所有的状态的期望。$\alpha_{ij}$表示$i$时刻第$j$个状态的权重，这个权重可以被理解成目标语言生成的$y_i$能够翻译源语言的单词$x_j$的概率，$\alpha_{ij}$也可以被称为attention score，计算公式为：<br>$$<br>\alpha_{ij}=\frac{exp⁡(e_{ij})}{\Sigma_{k=1}^{T_x}exp⁡(e_{ik})}<br>$$</p>
+<p>这个式子说明$\alpha_{ij}$其实就是$e_{ij}$的softmax值，$e_{ij}$相当于一个分数，表示输入$j$位置和输出的$i$位置的匹配程度，计算公式为：<br>$$<br>e_{ij}=a(s_{i-1},h_j)=v_a^Ttanh(W_as_{i-1}+U_ah_j)<br>$$<br>$a$表示一个alignment model，通过feedforward神经网络进行训练，$W_a\in R^{n\times n}$，$U_a\in R^{n\times 2n}$和$v_a\in R^n$都是权重矩阵。$U_ah_j$可以被预先计算出来。</p>
+<blockquote>
+<p>关于alignment：</p>
+<p>alignment在NMT中，指的就是不同种的语言单词语义上的相近，如机器学习翻译为machine learning，机器和machine在语义上是等价的，这就是一种alignment。alignment也可以理解为correspondence，以翻译文本为例，除了一对一的alignment，还可能会出现多对一、一对多的alignment。</p>
+<p>soft alignment和hard alignment：（<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>）使用的加权矩阵就可以被称为attention soft-alignment matrix,基本上可以把attention机制理解成soft alignment。</p>
+</blockquote>
+<p>下图表示翻译句子时的alignment scores matrix，灰度颜色越浅表示source word和target word的相关度越高（alignment score越大）。在这个图中能够看到在生成target word时，哪些source word更重要。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/result.png" width="50%" height="50%">
+</div>
+<center>图7 alignment scores matrix（图片来源：Bahdanau et al.,2015）</center>
+
+<h2 id="Q-query-、V-values-和K-keys"><a href="#Q-query-、V-values-和K-keys" class="headerlink" title="Q(query)、V(values)和K(keys)"></a>Q(query)、V(values)和K(keys)</h2><p>用QKV的视角来理解attention最早是在（<a href="https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf" target="_blank" rel="noopener">Vaswani et al.,2017</a>）中，在图6，标注了计算context vector过程中参与计算的Q、K、V矩阵。</p>
+<p>values/keys: 把编码好的输入的表示看成key-value pairs$(K,V)$  ,长度为N, key和value皆是encoder的隐藏状态。</p>
+<p>query：在decoder阶段，之前的输出会被压缩成一个query$(Q)$,长度为M。decoder的输出用于映射这个query和key-value pairs的集合。模型decoder会输出一个word的distribution, query就是最有可能的单词的表示向量。</p>
+<h2 id="Attention-Family"><a href="#Attention-Family" class="headerlink" title="Attention Family"></a>Attention Family</h2><div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/8.png" width="100%" height="100%">
+</div>
+<center>图8 Attention Family</center>
+
+<h3 id="soft-amp-hard-attention"><a href="#soft-amp-hard-attention" class="headerlink" title="soft&amp;hard attention"></a>soft&amp;hard attention</h3><p>attention机制在NLP领域被提出后，很快被应用到了CV领域(<a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">Xu et al. 2015</a>)。在这篇文章中，首次提出了soft attention和hard attention的概念。</p>
+<p>soft attention指相对“柔和地”利用attention score来加权计算context vector，相当于求的是context vector的期望。（<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>）中提出的模型就是soft attention。hard attention是将context vector看做随机变量，context vector的取值是利用参数为attention score的多项式分布在value中进行采样获得的。下图是(<a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">Xu et al. 2015</a>)中两种attention机制的实验中的attention矩阵的可视化，通过下图能够直观地理解soft attention和hard attention的区别。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/10.png" width="80%" height="80%">
+</div>
+<center>图9 Attention的可视化（图片来源：Xu et al.,2015）</center>
+
+<p>soft attention是differential的，但当输入较长的时候模型代价较大，hard attention是</p>
+<h3 id="global-amp-local-attention"><a href="#global-amp-local-attention" class="headerlink" title="global&amp;local attention"></a>global&amp;local attention</h3><p>根据计算context vector时利用encoder的隐藏状态的多少，可以分为global attention和local attention（<a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">Luong et al.,2015</a>）。</p>
+<h4 id="global-attention"><a href="#global-attention" class="headerlink" title="global attention"></a>global attention</h4><p>global attention的原理和（<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>）较为相似，其中不同的部分是：</p>
+<p>1.在计算$score(s_i,h_j)$时，将$s_i$和$h_j$直接进行concat。</p>
+<p>2.简化了计算过程：$h_t \rightarrow a_t \rightarrow c_t \rightarrow \widetilde h_t$ （Bahdanau et al.,2015的计算过程为$h_{t-1} \rightarrow a_t \rightarrow c_t \rightarrow h_t$ ）。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/global.png" width="40%" height="40%">
+</div>
+<center>图9 global attention原理（图片来源：Luong et al.,2015）</center>
+
+<h4 id="local-attention"><a href="#local-attention" class="headerlink" title="local attention"></a>local attention</h4><p>local attention的引入是为了解决global attention中，复杂度较高的问题。local attention会根据目标词的隐藏状态$h_t$计算出相应的对齐位置$p_t$，context vector的计算是通过$[p_t-D,p_t+D]$区间内的encoder中的隐含状态的加权和来进行计算的。D是根据经验选择的。<br>$$<br>p_t=S \times sigmoid(v_p^T tanh(W_ph_t))<br>$$<br>$S$是原序列的长度，以$p_t$为中心的高斯核函数进行衰减，aligned weights被定义为：<br>$$<br>a_t(s)=align(h_t,\overline h_s)exp(-\frac{(s-p_t)^2}{2\sigma^2})<br>$$<br>其中，$\sigma=\frac{D}{2}$。</p>
+<div align="center">    
+<img src="/2021/06/29/2021-07-01-attention/local.png" width="40%" height="40%">
+</div>
+<center>图10 local attention原理（图片来源：Luong et al.,2015）</center>
+
+<p>当前对目标单词的预测值，没有利用已经预测的输出单词（encoder的隐藏状态）作为输入，也没有利用目标词位置前一时刻的decoder隐状态$h_{t−1}$，仅利用了当前decoder的隐藏状态$h_t$来计算。说明每个目标单词的决策是独立的。</p>
+<h3 id="attention-score不同的计算方式"><a href="#attention-score不同的计算方式" class="headerlink" title="attention score不同的计算方式"></a>attention score不同的计算方式</h3><p>根据attention score计算方式的不同，有如下的attention机制：</p>
 <ul>
-<li>additive attention</li>
-<li>dot-product (multiplicative) attention</li>
-<li>scaled Dot-Product Attention</li>
+<li>additive attention：（<a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et al.,2015</a>）</li>
+<li>dot-product (multiplicative) attention：(<a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">Luong et al.,2015</a>）</li>
+<li>general attention (<a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">Luong et al.,2015</a>）</li>
+<li>concat attention (<a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">Luong et al.,2015</a>）</li>
+<li>location attention (<a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">Luong et al.,2015</a>）</li>
+<li>scaled Dot-Product Attention：（<a href="https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf" target="_blank" rel="noopener">Vaswani et al.,2017</a>）</li>
 </ul>
-<h3 id="query、values和keys"><a href="#query、values和keys" class="headerlink" title="query、values和keys"></a>query、values和keys</h3><p>values/keys: 把编码好的输入的表示看成key-value pairs$(K,V)$  ,长度为N, key和value皆是encoder的隐藏状态。</p>
-<p>query：在decoder阶段，之前的输出会被压缩成一个query$(Q)$,长度为M。decoder的输出用于映射这个query和key-value pairs的集合。模型decoder会输出一个word的distribution, query表示最有可能的单词的表示向量。</p>
-<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>可以把它理解成一个全连接层，权重是由输入的成对关系动态生成的。</p>
-<p>输入向量，输出相同数量的向量，相当于一个encoder。</p>
-<p><img src="/.io//06/29/2021-07-01-attention/image-20210702092147189.png" alt="demo"></p>
-<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><ul>
-<li><p>原论文： Attention is all you need  (2017 NIPS)</p>
-<p><img src="/.io//06/29/2021-07-01-attention/image-20210702092323838.png" alt="image-20210702092323838"></p>
-</li>
-</ul>
-<h3 id="Encoder-amp-Decoder"><a href="#Encoder-amp-Decoder" class="headerlink" title="Encoder&amp;Decoder"></a>Encoder&amp;Decoder</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702065725298.png" alt="image-20210702065725298"></p>
-<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><ul>
-<li><p>层数$N=6$，每层有两个sub-layers，分别是多头自注意力机制和根据位置的全连接前馈网络</p>
-</li>
-<li><p>两个子层之前使用残差连接[11]和正则化</p>
-</li>
-<li><p>生成K、V矩阵</p>
-</li>
-</ul>
-<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><ul>
-<li><p>层数$N=6$，在encoder的两个子层之间加入第三层</p>
-</li>
-<li><p>对encoder的输出使用多头注意力机制</p>
-</li>
-<li><p>对decoder的第一层多头注意力层进行了修改-&gt;masking multi-head attention 保证第一层注意力机制在预测当前位置的单词时只依赖当前位置之前的单词</p>
-</li>
-<li><p>生成Q矩阵</p>
-</li>
-</ul>
-<h3 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h3><ul>
-<li>$d_{model}$是词embedding的维度，论文中取512。</li>
-<li>偶数位置：$PE_{(pos,2i)}=sin(pos/10000^{2i/d_{model}})$ </li>
-<li>奇数位置：$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_{model}})$ </li>
-</ul>
-<p>绝对位置向量中蕴含着相对位置的信息，相对位置会在注意力机制中消失。</p>
-<h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702065823387.png" alt="image-20210702065823387"><br>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$<br>${d_k}$是key和value的维度，$QK^T$保持方差为1。</p>
-<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702065858923.png" alt="image-20210702065858923"></p>
-<p>多个平行的attention层分别获得各自的Q、K、V：<br>$$<br>MultiHead(Q,K,V)=Concat(head_1,…,head_h)W^O\space where\space head_i=Attention(QW_i^Q,KW_i^K,VW_I^V)<br>$$</p>
-<h3 id="Transformer中的注意力机制"><a href="#Transformer中的注意力机制" class="headerlink" title="Transformer中的注意力机制"></a>Transformer中的注意力机制</h3><ul>
-<li>self-attention in encoder and decoder:  $Q=K=V=X$</li>
-<li>masked self-attention:  在transformer的decoder中，masked是保证attention加权计算时忽略当前位置后面的单词，保证信息来源于当前位置以及之前的位置。</li>
-<li>cross-attention:  keys和values来源于最后一层的encoder的输入。</li>
-</ul>
-<h3 id="Positional-wise-Feed-Forward-Network"><a href="#Positional-wise-Feed-Forward-Network" class="headerlink" title="Positional-wise Feed-Forward Network"></a>Positional-wise Feed-Forward Network</h3><p>$$<br>FFN(x)=max(0,xW_1+b_1)W_2+b_2<br>$$</p>
-<h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><p><img src="/.io//06/29/2021-07-01-attention/image-20210702081304496.png" alt="image-20210702081304496"></p>
-<p>残差结构：输出的Z和经过位置编码的X对位相加，作为输出。</p>
-<p>Layer Normalization：不需要像Batch Normalization一样考虑所有batch，只需要考虑同一个example中的不同feature计算均值和方差，然后对example的向量进行normalization。</p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul>
-<li>teacher forcing: 使用正确的truth作为input。</li>
-</ul>
-<h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p><img src="/.io//06/29/2021-07-01-attention/image-20210702092543139.png" alt="image-20210702092543139"></p>
+<p>不同的attention score具体计算方式图8所示。</p>
+<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>自注意力机制和普通的注意力机制的区别在于，自注意力机制考虑的是输入元素（source word）之间的相关性，而非输入元素和输出元素之间的相关性（source word和target word），因此，自注意力机制能够使用上述任意一种attention score的计算方式，只是其目标序列和输入的原始序列相同。我们可以把它理解成一个全连接层，权重是由输入的成对关系动态生成的。</p>
+<p>关于self-attention具体的原理和Query、Value和Keys的进一步解释，将在后续介绍Transformer的文章中展开介绍。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. <a href="https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf" target="_blank" rel="noopener">“Sequence to sequence learning with neural networks.”</a> <em>Advances in neural information processing systems</em>. 2014.</p>
 <p>[2] Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. <a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">“Neural machine translation by jointly learning to align and translate.”</a> ICLR. 2015.</p>
 <p>[3] Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. <a href="https://nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">“Effective Approaches to Attention-based Neural Machine Translation.”</a> EMNLP. 2015.</p>
 <p>[4] Yang, Shuoheng, Yuxin Wang, and Xiaowen Chu. <a href="https://arxiv.org/pdf/2002.07526.pdf" target="_blank" rel="noopener">“A survey of deep learning techniques for neural machine translation.”</a> <em>arXiv preprint arXiv:2002.07526</em> (2020).</p>
-<ol>
-<li><a href="https://arxiv.org/pdf/2106.04554.pdf" target="_blank" rel="noopener">A Survey of Transformers</a></li>
-<li><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html" target="_blank" rel="noopener">Attention? Attention! by Lilian Weng</a></li>
-<li><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf" target="_blank" rel="noopener">Self-Attention by Li Hungyi</a></li>
-<li><a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></li>
-</ol>
+<p>[5]Xu, Kelvin, et al. <a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">“Show, attend and tell: Neural image caption generation with visual attention.”</a> <em>International conference on machine learning</em>. PMLR, 2015.</p>
+<p>[6] Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. <a href="https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf" target="_blank" rel="noopener">“Attention is all you need.”</a> In <em>Advances in neural information processing systems</em>, pp. 5998-6008. 2017.</p>
 
       </div>
       <div class="post-copyright">
@@ -263,9 +263,15 @@
         <div class="post-tags">
             <a href="/tags/NLP/">NLP</a>
             <a href="/tags/Transformer/">Transformer</a>
+            <a href="/tags/attention/">attention</a>
             </div>
         
-        <nav class="post-nav"><a class="next" href="/2021/05/23/2021-05-23-anomaly-detection-5/">
+        <nav class="post-nav"><a class="prev" href="/2021/07/08/2021-07-08-transformer/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Transformer总结</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    <a class="next" href="/2021/05/23/2021-05-23-anomaly-detection-5/">
         <span class="next-text nav-default">【异常检测5】基于集成学习的异常检测</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
@@ -287,7 +293,7 @@
     <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2021<span class="heart">
+  <span class="copyright-year">&copy;2019 - 2021<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ruoting Wu</span>
