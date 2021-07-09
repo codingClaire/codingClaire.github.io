@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Transformer总结"/><meta name="keywords" content="NLP, Transformer, attention, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/shiba.png?v=2.11.0" />
+<meta name="description" content="Transformer总结及源码分析"/><meta name="keywords" content="NLP, Transformer, attention, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/shiba.png?v=2.11.0" />
 <link rel="canonical" href="https://codingClaire.github.io/2021/07/08/2021-07-08-transformer/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
@@ -46,7 +46,7 @@
   window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
 </script>
 
-    <title>Transformer总结 - Ruoting Wu's Blog</title>
+    <title>Transformer总结及源码分析 - Ruoting Wu's Blog</title>
   <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
 </head>
 
@@ -100,7 +100,7 @@
         <div class="content-wrapper">
           <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">Transformer总结
+      <h1 class="post-title">Transformer总结及源码分析
         </h1>
 
       <div class="post-meta">
@@ -108,7 +108,7 @@
           2021-07-08
         </span><span class="post-visits"
              data-url="/2021/07/08/2021-07-08-transformer/"
-             data-title="Transformer总结">
+             data-title="Transformer总结及源码分析">
           阅读次数 0
         </span>
         </div>
@@ -117,28 +117,42 @@
     <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer"><span class="toc-text">Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Encoder-amp-Decoder"><span class="toc-text">Encoder&amp;Decoder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Encoder"><span class="toc-text">Encoder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Decoder"><span class="toc-text">Decoder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-Encoding"><span class="toc-text">Positional Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaled-Dot-Product-Attention"><span class="toc-text">Scaled-Dot-Product Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Head-Self-Attention"><span class="toc-text">Multi-Head Self-Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer中的注意力机制"><span class="toc-text">Transformer中的注意力机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-wise-Feed-Forward-Network"><span class="toc-text">Positional-wise Feed-Forward Network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Residual-Connection-and-Normalization"><span class="toc-text">Residual Connection and Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练"><span class="toc-text">训练</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-Family"><span class="toc-text">Transformer Family</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾Attention"><span class="toc-text">回顾Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q、K与V"><span class="toc-text">Q、K与V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaled-Dot-Product-Attention"><span class="toc-text">Scaled-Dot-Product Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-Attention"><span class="toc-text">Self-Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Head-Self-Attention"><span class="toc-text">Multi-Head Self-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-vanilla-Transformer"><span class="toc-text">Transformer(vanilla Transformer)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Encoder"><span class="toc-text">Encoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decoder"><span class="toc-text">Decoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-Encoding"><span class="toc-text">Positional Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Positional-wise-Feed-Forward-Network"><span class="toc-text">Positional-wise Feed-Forward Network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Residual-Connection-and-Normalization"><span class="toc-text">Residual Connection and Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training"><span class="toc-text">Training</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer中的注意力机制"><span class="toc-text">Transformer中的注意力机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-Family"><span class="toc-text">Transformer Family</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-NMT相关项目、源码"><span class="toc-text">Transformer&#x2F;NMT相关项目、源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
     </div>
   </div><div class="post-content"><p>[toc]</p>
-<div align="center">    
-<img src="/2021/7.png" width="50%" height="50%">
+<h2 id="回顾Attention"><a href="#回顾Attention" class="headerlink" title="回顾Attention"></a>回顾Attention</h2><h3 id="Q、K与V"><a href="#Q、K与V" class="headerlink" title="Q、K与V"></a>Q、K与V</h3><h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><div align="center">    
+<img src="/2021/07/08/2021-07-08-transformer/3.png" width="30%" height="30%">
 </div>
 
-<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><ul>
-<li><p>原论文： Attention is all you need  (2017 NIPS)</p>
-<p><img src="/2021/D:%5CGithubblog%5Chexo%5Csource_posts%5Cimage-20210702092323838.png" alt="image-20210702092323838"></p>
-</li>
+<p>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$</p>
+<p>${d_k}$是key和value的维度，当${d_k}$越大，则$QK^T$越大，经过$softmax$函数可能会在梯度极小的区域，为了避免梯度消失的问题，scaled-dot-product的操作是将$QK^T$除以$\sqrt{d_k}$，但仍然$QK^T$保持方差为1。</p>
+<p>在Transformer的<a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">源码</a>中，scale-dot-product attention的实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">attention</span><span class="params">(query, key, value, mask=None, dropout=None)</span>:</span></span><br><span class="line">    <span class="string">"Compute 'Scaled Dot Product Attention'"</span></span><br><span class="line">    d_k = query.size(<span class="number">-1</span>)</span><br><span class="line">    scores = torch.matmul(query, key.transpose(<span class="number">-2</span>, <span class="number">-1</span>)) \</span><br><span class="line">             / math.sqrt(d_k)</span><br><span class="line">    <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        scores = scores.masked_fill(mask == <span class="number">0</span>, <span class="number">-1e9</span>)</span><br><span class="line">    p_attn = F.softmax(scores, dim = <span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">if</span> dropout <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        p_attn = dropout(p_attn)</span><br><span class="line">    <span class="keyword">return</span> torch.matmul(p_attn, value), p_attn</span><br></pre></td></tr></table></figure>
+<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><p>自注意力机制（Self-attention）考虑的是输入元素之间的相关性，而非输入元素和输出元素之间的相关性，其目标序列和输入的原始序列相同。</p>
+<div align="center">    
+<img src="/2021/07/08/2021-07-08-transformer/7.png" width="40%" height="40%">
+</div>
+<center>图1 self-attention原理图</center>
+
+<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><div align="center">    
+<img src="/2021/07/08/2021-07-08-transformer/4.png" width="30%" height="30%">
+</div>
+
+<p>多头注意力机制让模型能够在不同的位置上共同关注来自不同representation的子空间的信息。多个平行的attention层分别获得各自的Q、K、V：<br>$$<br>MultiHead(Q,K,V)=Concat(head_1,…,head_h)W^O\space where\space head_i=Attention(QW_i^Q,KW_i^K,VW_I^V)<br>$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MultiHeadedAttention</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, h, d_model, dropout=<span class="number">0.1</span>)</span>:</span></span><br><span class="line">        <span class="string">"Take in model size and number of heads."</span></span><br><span class="line">        super(MultiHeadedAttention, self).__init__()</span><br><span class="line">        <span class="keyword">assert</span> d_model % h == <span class="number">0</span></span><br><span class="line">        <span class="comment"># We assume d_v always equals d_k</span></span><br><span class="line">        self.d_k = d_model // h</span><br><span class="line">        self.h = h <span class="comment"># heads论文中取8</span></span><br><span class="line">        self.linears = clones(nn.Linear(d_model, d_model), <span class="number">4</span>)</span><br><span class="line">        self.attn = <span class="literal">None</span></span><br><span class="line">        self.dropout = nn.Dropout(p=dropout)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, query, key, value, mask=None)</span>:</span></span><br><span class="line">        <span class="string">"Implements Figure 2"</span></span><br><span class="line">        <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># Same mask applied to all h heads.</span></span><br><span class="line">            mask = mask.unsqueeze(<span class="number">1</span>)</span><br><span class="line">        nbatches = query.size(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 1) Do all the linear projections in batch from d_model =&gt; h x d_k </span></span><br><span class="line">        query, key, value = [l(x).view(nbatches, <span class="number">-1</span>, self.h, self.d_k).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">             <span class="keyword">for</span> l, x <span class="keyword">in</span> zip(self.linears, (query, key, value))]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 2) Apply attention on all the projected vectors in batch. </span></span><br><span class="line">        <span class="comment"># self-attention中query、key、value全部相同，size为[batch_size,len,d_model]</span></span><br><span class="line">        x, self.attn = attention(query, key, value, mask=mask, </span><br><span class="line">                                 dropout=self.dropout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 3) "Concat" using a view and apply a final linear. </span></span><br><span class="line">        x = x.transpose(<span class="number">1</span>, <span class="number">2</span>).contiguous().view(nbatches, <span class="number">-1</span>, self.h * self.d_k)</span><br><span class="line">        <span class="comment"># 还原序列</span></span><br><span class="line">        <span class="keyword">return</span> self.linears[<span class="number">-1</span>](x)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Transformer-vanilla-Transformer"><a href="#Transformer-vanilla-Transformer" class="headerlink" title="Transformer(vanilla Transformer)"></a>Transformer(vanilla Transformer)</h2><div align="center">    
+<img src="/2021/07/08/2021-07-08-transformer/1.png" width="80%" height="80%">
+</div>
+
+<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><ul>
+<li>层数$N=6$，每层有两个sub-layers，分别是多头自注意力机制和根据位置的全连接前馈网络</li>
+<li>两个子层之前使用残差连接[11]和正则化</li>
+<li>生成K、V矩阵</li>
 </ul>
-<h3 id="Encoder-amp-Decoder"><a href="#Encoder-amp-Decoder" class="headerlink" title="Encoder&amp;Decoder"></a>Encoder&amp;Decoder</h3><p><img src="/2021/D:%5CGithubblog%5Chexo%5Csource_posts%5Cimage-20210702065725298.png" alt="image-20210702065725298"></p>
-<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><ul>
-<li><p>层数$N=6$，每层有两个sub-layers，分别是多头自注意力机制和根据位置的全连接前馈网络</p>
-</li>
-<li><p>两个子层之前使用残差连接[11]和正则化</p>
-</li>
-<li><p>生成K、V矩阵</p>
-</li>
-</ul>
-<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><ul>
+<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><ul>
 <li><p>层数$N=6$，在encoder的两个子层之间加入第三层</p>
 </li>
 <li><p>对encoder的输出使用多头注意力机制</p>
@@ -154,26 +168,75 @@
 <li>奇数位置：$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_{model}})$ </li>
 </ul>
 <p>绝对位置向量中蕴含着相对位置的信息，相对位置会在注意力机制中消失。</p>
-<h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled-Dot-Product Attention"></a>Scaled-Dot-Product Attention</h3><p><img src="/2021/D:%5CGithubblog%5Chexo%5Csource_posts%5Cimage-20210702065823387.png" alt="image-20210702065823387"><br>$$<br>Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV<br>$$<br>${d_k}$是key和value的维度，$QK^T$保持方差为1。</p>
-<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p><img src="/2021/D:%5CGithubblog%5Chexo%5Csource_posts%5Cimage-20210702065858923.png" alt="image-20210702065858923"></p>
-<p>多个平行的attention层分别获得各自的Q、K、V：<br>$$<br>MultiHead(Q,K,V)=Concat(head_1,…,head_h)W^O\space where\space head_i=Attention(QW_i^Q,KW_i^K,VW_I^V)<br>$$</p>
-<h3 id="Transformer中的注意力机制"><a href="#Transformer中的注意力机制" class="headerlink" title="Transformer中的注意力机制"></a>Transformer中的注意力机制</h3><ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PositionalEncoding</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="string">"Implement the PE function."</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, d_model, dropout, max_len=<span class="number">5000</span>)</span>:</span></span><br><span class="line">        super(PositionalEncoding, self).__init__()</span><br><span class="line">        self.dropout = nn.Dropout(p=dropout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Compute the positional encodings once in log space.</span></span><br><span class="line">        pe = torch.zeros(max_len, d_model) <span class="comment">#d_model论文中取512</span></span><br><span class="line">        position = torch.arange(<span class="number">0</span>, max_len).unsqueeze(<span class="number">1</span>) <span class="comment">#维度增加</span></span><br><span class="line">        div_term = torch.exp(torch.arange(<span class="number">0</span>, d_model, <span class="number">2</span>) *</span><br><span class="line">                             -(math.log(<span class="number">10000.0</span>) / d_model)) <span class="comment">#相对位置公式</span></span><br><span class="line">        pe[:, <span class="number">0</span>::<span class="number">2</span>] = torch.sin(position * div_term) <span class="comment">#奇数列</span></span><br><span class="line">        pe[:, <span class="number">1</span>::<span class="number">2</span>] = torch.cos(position * div_term) <span class="comment">#偶数列</span></span><br><span class="line">        pe = pe.unsqueeze(<span class="number">0</span>) <span class="comment">#增加维度</span></span><br><span class="line">        self.register_buffer(<span class="string">'pe'</span>, pe)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = x + Variable(self.pe[:, :x.size(<span class="number">1</span>)], </span><br><span class="line">                         requires_grad=<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">return</span> self.dropout(x)</span><br></pre></td></tr></table></figure>
+<h3 id="Positional-wise-Feed-Forward-Network"><a href="#Positional-wise-Feed-Forward-Network" class="headerlink" title="Positional-wise Feed-Forward Network"></a>Positional-wise Feed-Forward Network</h3><p>$$<br>FFN(x)=max(0,xW_1+b_1)W_2+b_2<br>$$<br>FFN将每个位置的attention结果映射到一个更大维度的特征空间，然后用ReLU引入非线性层进行筛选，最后恢复原始维度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PositionwiseFeedForward</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="string">"Implements FFN equation."</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, d_model, d_ff, dropout=<span class="number">0.1</span>)</span>:</span></span><br><span class="line">        super(PositionwiseFeedForward, self).__init__()</span><br><span class="line">        self.w_1 = nn.Linear(d_model, d_ff)</span><br><span class="line">        self.w_2 = nn.Linear(d_ff, d_model)</span><br><span class="line">        self.dropout = nn.Dropout(dropout)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.w_2(self.dropout(F.relu(self.w_1(x))))</span><br></pre></td></tr></table></figure>
+
+<h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><div align="center">    
+<img src="/2021/07/08/2021-07-08-transformer/5.png" width="40%" height="40%">
+</div>
+
+<p>残差结构：输出的Z和经过位置编码的X对位相加，作为输出。</p>
+<p>Layer Normalization：不需要像Batch Normalization一样考虑所有batch，只需要考虑同一个example中的不同feature计算均值和方差，然后对example的向量进行normalization。</p>
+<p>以下是实现的代码：</p>
+<p>在子层与子层之间进行了残差连接与归一化，子层的输出为$LayerNorm(x+Sublayer(x))$。tensor2tensor的实现是$x+SubLayer(LayerNorm(x))$。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LayerNorm</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="string">"Construct a layernorm module (See citation for details)."</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, features, eps=<span class="number">1e-6</span>)</span>:</span></span><br><span class="line">        super(LayerNorm, self).__init__()</span><br><span class="line">        self.a_2 = nn.Parameter(torch.ones(features))</span><br><span class="line">        self.b_2 = nn.Parameter(torch.zeros(features))</span><br><span class="line">        self.eps = eps</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        mean = x.mean(<span class="number">-1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        std = x.std(<span class="number">-1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> self.a_2 * (x - mean) / (std + self.eps) + self.b_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SublayerConnection</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A residual connection followed by a layer norm.</span></span><br><span class="line"><span class="string">    Note for code simplicity the norm is first as opposed to last.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size, dropout)</span>:</span></span><br><span class="line">        super(SublayerConnection, self).__init__()</span><br><span class="line">        self.norm = LayerNorm(size)</span><br><span class="line">        self.dropout = nn.Dropout(dropout)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x, sublayer)</span>:</span></span><br><span class="line">        <span class="string">"Apply residual connection to any sublayer with the same size."</span></span><br><span class="line">        <span class="keyword">return</span> x + self.dropout(sublayer(self.norm(x)))</span><br></pre></td></tr></table></figure>
+
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
+<li>teacher forcing: 使用正确的truth作为input。</li>
+</ul>
+<h2 id="Transformer中的注意力机制"><a href="#Transformer中的注意力机制" class="headerlink" title="Transformer中的注意力机制"></a>Transformer中的注意力机制</h2><ul>
 <li>self-attention in encoder and decoder:  $Q=K=V=X$</li>
 <li>masked self-attention:  在transformer的decoder中，masked是保证attention加权计算时忽略当前位置后面的单词，保证信息来源于当前位置以及之前的位置。</li>
 <li>cross-attention:  keys和values来源于最后一层的encoder的输入。</li>
 </ul>
-<h3 id="Positional-wise-Feed-Forward-Network"><a href="#Positional-wise-Feed-Forward-Network" class="headerlink" title="Positional-wise Feed-Forward Network"></a>Positional-wise Feed-Forward Network</h3><p>$$<br>FFN(x)=max(0,xW_1+b_1)W_2+b_2<br>$$</p>
-<h3 id="Residual-Connection-and-Normalization"><a href="#Residual-Connection-and-Normalization" class="headerlink" title="Residual Connection and Normalization"></a>Residual Connection and Normalization</h3><p><img src="/2021/D:%5CGithubblog%5Chexo%5Csource_posts%5Cimage-20210702081304496.png" alt="image-20210702081304496"></p>
-<p>残差结构：输出的Z和经过位置编码的X对位相加，作为输出。</p>
-<p>Layer Normalization：不需要像Batch Normalization一样考虑所有batch，只需要考虑同一个example中的不同feature计算均值和方差，然后对example的向量进行normalization。</p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul>
-<li>teacher forcing: 使用正确的truth作为input。</li>
-</ul>
-<h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p><img src="/2021/D:%5CGithubblog%5Chexo%5Csource_posts%5Cimage-20210702092543139.png" alt="image-20210702092543139"></p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://arxiv.org/pdf/2106.04554.pdf" target="_blank" rel="noopener">A Survey of Transformers</a></p>
-<p><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html" target="_blank" rel="noopener">Attention? Attention! by Lilian Weng</a></p>
-<p><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf" target="_blank" rel="noopener">Self-Attention by Li Hungyi</a></p>
-<p><a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></p>
+<h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><div align="center">    
+<img src="/2021/07/08/2021-07-08-transformer/6.png" width="60%" height="60%">
+</div>
+### Transformer-XL
+
+<p>如何赋予编码器捕获长距离依赖的能力(代码表示的场景下，代码长度较长，如何捕捉长距离依赖)</p>
+<p>【TODO】</p>
+<h2 id="Transformer-NMT相关项目、源码"><a href="#Transformer-NMT相关项目、源码" class="headerlink" title="Transformer/NMT相关项目、源码"></a>Transformer/NMT相关项目、源码</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>来源</th>
+<th>文档</th>
+<th>Github</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Transformers</td>
+<td>hugging face</td>
+<td>[<a href="https://huggingface.co/transformers/index.html" target="_blank" rel="noopener">doc</a>]</td>
+<td>[<a href="https://github.com/huggingface/transformers" target="_blank" rel="noopener">source code</a>]</td>
+<td></td>
+</tr>
+<tr>
+<td>OpenNMT</td>
+<td>Harvard NLP group and SYSTRAN</td>
+<td><a href="https://opennmt.net/OpenNMT-py/" target="_blank" rel="noopener">[doc]</a></td>
+<td>[<a href="https://github.com/OpenNMT/OpenNMT" target="_blank" rel="noopener">source code</a>]</td>
+<td></td>
+</tr>
+<tr>
+<td>Tensor2Tensor</td>
+<td>Google Brain team</td>
+<td>[<a href="https://github.com/tensorflow/tensor2tensor/blob/master/README.md" target="_blank" rel="noopener">Readme</a>]</td>
+<td><a href="https://github.com/tensorflow/tensor2tensor" target="_blank" rel="noopener">[source code]</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Li Hungyi. <a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf" target="_blank" rel="noopener">“Self-Attention” </a> lecture PPT,2021.</p>
+<p>[2] Ashish Vaswani, et al. <a href="https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf" target="_blank" rel="noopener">“Attention is all you need.”</a> NIPS,2017.</p>
+<p>[3] Alexander Rush. <a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">“The Annotated Transformer”</a> 2018.</p>
+<p>[4] <a href="http://xtf615.com/2020/07/05/transformers/" target="_blank" rel="noopener">http://xtf615.com/2020/07/05/transformers/</a></p>
+<p>[5] <a href="https://arxiv.org/pdf/2106.04554.pdf" target="_blank" rel="noopener">A Survey of Transformers</a></p>
+<p>[6] <a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></p>
 
       </div>
       <div class="post-copyright">
