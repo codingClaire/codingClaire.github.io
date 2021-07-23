@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Transformer Family汇总"/><meta name="keywords" content="NLP, Transformer, attention, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/shiba.png?v=2.11.0" />
+<link rel="canonical" href="https://codingClaire.github.io/2021/07/15/2021-07-15-transformer2/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz",
+      appKey: "c0YVFIAlMCeKLx899vBJAnMV"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
+</script>
+
+    <title>Transformer Family汇总 - Ruoting Wu's Blog</title>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
+</head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Ruoting Wu's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Ruoting Wu's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Transformer Family汇总
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2021-07-15
+        </span><span class="post-visits"
+             data-url="/2021/07/15/2021-07-15-transformer2/"
+             data-title="Transformer Family汇总">
+          阅读次数 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-Family"><span class="toc-text">Transformer Family</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer基础结构"><span class="toc-text">Transformer基础结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#综述总结"><span class="toc-text">综述总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A-Survey-of-Transformers-2021"><span class="toc-text">A Survey of Transformers  (2021)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Efficient-Transformers-A-Survey-2020"><span class="toc-text">Efficient Transformers: A Survey  (2020)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Transformer-XL（ACL-2019）"><span class="toc-text">1. Transformer-XL（ACL 2019）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#隐藏状态重用"><span class="toc-text">隐藏状态重用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相对位置编码"><span class="toc-text">相对位置编码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Reformer（ICLR-2020）"><span class="toc-text">2. Reformer（ICLR 2020）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH-attention"><span class="toc-text">LSH attention</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reversible-Residual-Network"><span class="toc-text">Reversible Residual Network</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Sparse-Transformer"><span class="toc-text">3. Sparse Transformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Compressive-Transformer（ICLR-2020）"><span class="toc-text">4. Compressive Transformer（ICLR 2020）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Universal-Transformer-ICLR-2019"><span class="toc-text">5. Universal Transformer (ICLR 2019)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Transition-Function"><span class="toc-text">Transition Function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Coordinate-embeddings"><span class="toc-text">Coordinate embeddings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adaptive-Computation-Time-ACT"><span class="toc-text">Adaptive Computation Time (ACT)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Linear-Transformer-（ICLR-2020）-Performer（ICLR-2021）"><span class="toc-text">6. Linear Transformer （ICLR 2020）&#x2F; Performer（ICLR 2021）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Linformer"><span class="toc-text">7. Linformer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="Transformer-Family"><a href="#Transformer-Family" class="headerlink" title="Transformer Family"></a>Transformer Family</h2><p>[toc]</p>
+<h3 id="Transformer基础结构"><a href="#Transformer基础结构" class="headerlink" title="Transformer基础结构"></a>Transformer基础结构</h3><div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/vanilla-transformer.png" width="60%" height="30%">
+</div><center>图1 Transformer基础结构</center>
+
+
+<h3 id="综述总结"><a href="#综述总结" class="headerlink" title="综述总结"></a>综述总结</h3><h4 id="A-Survey-of-Transformers-2021"><a href="#A-Survey-of-Transformers-2021" class="headerlink" title="A Survey of Transformers  (2021)"></a><a href="https://arxiv.org/abs/2106.04554" target="_blank" rel="noopener">A Survey of Transformers</a>  (2021)</h4><blockquote>
+<p>分类方法：分四个部分进行分类：model-level、arch-level、pre-train model、application。</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/survey1.png" width="80%" height="80%">
+</div>
+<center>图2.Transformer分类1</center>
+
+
+</blockquote>
+<p>model level：</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/survey1-1.png" width="80%" height="80%">
+</div>
+<center>图3 Transformer方法模型层面的分类</center>
+
+<p>architecture level:</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/survey1-2.png" width="70%" height="70%">
+</div>
+<center>图4 Transformer方法架构层面的分类</center>
+
+<p>pre-Train:</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/survey1-3.png" width="50%" height="50%">
+</div>
+<center>图5 Transformer方法不同预训练的分类</center>
+
+<p>App:</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/survey1-4.png" width="70%" height="70%">
+</div>
+<center>图6 Transformer方法的应用分类</center>
+
+<h4 id="Efficient-Transformers-A-Survey-2020"><a href="#Efficient-Transformers-A-Survey-2020" class="headerlink" title="Efficient Transformers: A Survey  (2020)"></a><a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformers: A Survey</a>  (2020)</h4><blockquote>
+<p>分类方式：考虑Transformer如何提高其计算和内存的效率，分为五种不同的方法。</p>
+</blockquote>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/6.png" width="60%" height="60%">
+</div>
+<center>图7 Transformer分类2</center>
+
+
+<p><strong>1. Fixed patterns(FP)：<code>Sparse Transformer</code></strong></p>
+<p>通过限制attention的范围(从全局变成局部)来降低计算复杂度。限制范围的方法包括blockwise pattern，strided pattern，compressed pattern。</p>
+<p>Blockwise pattern：将输入序列切成多个block，attention只发生在block范围内，所以复杂度从$O(N^2)$降到$O(B^2)$，B为block size，但是这样切割会导致序列不连贯，attention能力受限。</p>
+<p>Strided pattern：采用滑动窗口的形式，每个token与周围相邻的几个token作attention，相邻的token范围就是window size，这样是有一定道理的，因为自然语言在多数情况下都是局部相关的，所以在一个窗口范围内作attention往往不会丢失太多信息，相比之前的blockwise pattern。（Sparse Transformer)</p>
+<p>Compressed pattern：先通过卷积池化对序列进行降采样，比如用核为2，步长为2的CNN，将2个token表征成一个向量，然后再做attention，同样也能降低attention的计算复杂度。相当于通过CNN对序列进行n-gram的切分。</p>
+<p><strong>2、Learnable patterns(LP) ： <code>Reformer</code></strong></p>
+<p>fixed pattern是认为规定好一些区域，让该区域的token进行注意力计算，而Learnable patterns则是通过引入可学习参数，让模型自己找到划分区域。Reformer引入基于哈希的相似度度量方法将输入序列切割。所以本质上说LP与FP是一致的，都是通过将整体序列切分成子序列，attention只在子序列中进行，从而降低计算开销，只不过LP的区域划分是通过模型学得，而FP则是人为定义。</p>
+<p><strong>3、Memory： <code>Compressive Transformer</code>、<code>Set transformer</code></strong></p>
+<p>在压缩编码解码的过程中肯定会有信息损失，一种改进方法是引入global memory，包括了之前输入序列token的信息。memory可以与所有的token进行注意力交互,由于这些token的数目远小于序列长度，因此也不会给计算带来负担，而且往往携带了整个输入序列的信息。</p>
+<p><strong>4、Low rank methods ：<code>Linear Transformer</code>、 <code>Linformer</code>、<code>Performer</code></strong></p>
+<p>关于注意力矩阵的低秩表示，在Linformer论文中有详细的论述。简单来说， 经过softmax之后的$N\times N$的注意力矩阵是不满秩的，这意味着我们不需要计算一个完整的注意力矩阵，因此我们可以将 $n \times d$ 维（n表示序列长度，d表示模型向量维度）的$K，V$向量映射到$k \times d$  维空间。</p>
+<p><strong>5、Kernels ：<code>Linear Transformer</code></strong></p>
+<p>以核函数变换的新形式取代原有的softmax注意力矩阵计算，将计算复杂度降至$O(n)$ 范围内。</p>
+<p><strong>6、Recurrence ：<code>Linear Transformer</code>、 <code>Transformer-XL</code></strong> </p>
+<p>recurrence实际上也是fixed patterns中blockwise的一种延伸。本质上仍是对输入序列进行区域划分，不过它进一步的对划分后的block做了一层循环连接，通过这样的层级关系就可以把一个长序列的输入进行更好的表征。</p>
+<h3 id="1-Transformer-XL（ACL-2019）"><a href="#1-Transformer-XL（ACL-2019）" class="headerlink" title="1. Transformer-XL（ACL 2019）"></a>1. Transformer-XL（ACL 2019）</h3><blockquote>
+<p>标准Transformer有一个固定有限的attention范围。在每一个更新的步中，模型只能够处理同一segment中的其他元素，信息无法在分离的segment中传递，也就意味着Transformer很难捕捉长期的依赖关系，在上下文较短的情况下，难以进行预测。</p>
+<p>Transformer-XL (<a href="https://arxiv.org/abs/1901.02860" target="_blank" rel="noopener">Dai et al., 2019</a>)进行了如下的改进：<strong>重用</strong>segment之间的隐藏状态，采用新的适合重用状态的<strong>位置编码</strong>。</p>
+</blockquote>
+<h4 id="隐藏状态重用"><a href="#隐藏状态重用" class="headerlink" title="隐藏状态重用"></a>隐藏状态重用</h4><p>Transformer-XL通过连续使用前一个segment的隐藏状态，将segment之间的递归引入到模型中。如下图，一个segment的长度为4，可以看出Transformer和Transformer-XL的区别。</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/transformer-XL-training.png" width="80%" height="80%">
+</div>
+<center>图8 Transformer和Transformer-XL的对比（图片来源：Dai et al.,2019）</center>
+
+<p>第$(\tau + 1)$段的第n层的隐藏状态记为 $\mathbf{h}<em>{\tau+1}^{(n)} \in \mathbb{R}^{L \times d}$，第n-1层的隐藏状态为 $\mathbf{h}</em>{\tau+1}^{(n-1)}$。前一个段的第n层隐藏状态为$\mathbf{h}_{\tau}^{(n)}$，模型有如下的公式，通过合并之前的隐藏状态的信息，实现注意力范围的延长。</p>
+<p>$$<br>\begin{aligned} {\widetilde{\mathbf{h}}<em>{\tau+1}^{(n-1)}} &amp;= [\text{stop-gradient}(\mathbf{h}</em>{\tau}^{(n-1)}) \circ \mathbf{h}<em>{\tau+1}^{(n-1)}] \ \mathbf{Q}</em>{\tau+1}^{(n)} &amp;= \mathbf{h}<em>{\tau+1}^{(n-1)}\mathbf{W}^q \ \mathbf{K}</em>{\tau+1}^{(n)} &amp;= {\widetilde{\mathbf{h}}<em>{\tau+1}^{(n-1)}} \mathbf{W}^k \ \mathbf{V}</em>{\tau+1}^{(n)} &amp;= {\widetilde{\mathbf{h}}<em>{\tau+1}^{(n-1)}} \mathbf{W}^v \ \mathbf{h}</em>{\tau+1}^{(n)} &amp;= \text{transformer-layer}(\mathbf{Q}<em>{\tau+1}^{(n)}, \mathbf{K}</em>{\tau+1}^{(n)}, \mathbf{V}_{\tau+1}^{(n)}) \end{aligned}<br>$$<br>key和value都依赖于扩展后的隐藏状态，而query只依赖于当前的隐藏状态。</p>
+<h4 id="相对位置编码"><a href="#相对位置编码" class="headerlink" title="相对位置编码"></a>相对位置编码</h4><p>Transformer-XL提出了一种新的位置编码来适应隐藏状态重用。在基础的Transformer中，编码绝对位置的话，前一段和当前段将会被相同的编码。在Transformer-XL中并不需要。为了保持段之间的位置信息的流动，Transformer-XL提出了相对位置编码，它只要知道位置的偏移量就可以做出预测。</p>
+<p>$i$位置的query和$j$位置的key的attention score为：</p>
+<p>$$<br>\begin{aligned} a_{ij} &amp;= \mathbf{q}_i {\mathbf{k}_j}^\top = (\mathbf{x}_i + \mathbf{p}_i)\mathbf{W}^q ((\mathbf{x}_j + \mathbf{p}_j)\mathbf{W}^k)^\top \ &amp;= \mathbf{x}_i\mathbf{W}^q {\mathbf{W}^k}^\top\mathbf{x}_j^\top + \mathbf{x}_i\mathbf{W}^q {\mathbf{W}^k}^\top\mathbf{p}_j^\top + \mathbf{p}_i\mathbf{W}^q {\mathbf{W}^k}^\top\mathbf{x}_j^\top + \mathbf{p}_i\mathbf{W}^q {\mathbf{W}^k}^\top\mathbf{p}_j^\top \end{aligned}<br>$$</p>
+<p>整理可得：</p>
+<p>$$<br>a_{ij}^\text{rel} = \underbrace{ \mathbf{x}<em>i\mathbf{W}^q { {\mathbf{W}_E^k}^\top } \mathbf{x}_j^\top }_\text{content-based addressing} + \underbrace{ \mathbf{x}_i\mathbf{W}^q { {\mathbf{W}_R^k}^\top } {\mathbf{r}</em>{i-j}^\top} }<em>\text{content-dependent positional bias} + \underbrace{ {\mathbf{u}} { {\mathbf{W}_E^k}^\top } \mathbf{x}_j^\top }_\text{global content bias} + \underbrace{ {\mathbf{v}} { {\mathbf{W}_R^k}^\top } {\mathbf{r}</em>{i-j}^\top} }_\text{global positional bias}<br>$$<br>其中：</p>
+<ul>
+<li>$\mathbf{p}<em>j$ 被替换为相对位置编码 $\mathbf{r}</em>{i-j} \in \mathbf{R}^{d}$;</li>
+<li>$\mathbf{p}_i\mathbf{W}^q$ 被替换为两个可训练的参数 ${u}$  和 ${v}$ ，分别用于计算content和location信息</li>
+<li>$\mathbf{W}^k$ 被分成两个矩阵， $\mathbf{W}^k_E$ 处理content信息， $\mathbf{W}^k_R$ 处理location信息。</li>
+</ul>
+<h3 id="2-Reformer（ICLR-2020）"><a href="#2-Reformer（ICLR-2020）" class="headerlink" title="2. Reformer（ICLR 2020）"></a>2. Reformer（ICLR 2020）</h3><blockquote>
+<p>模型的关键思想：LSH(local sensitive hashing) attention ：附近的向量应获得相似的哈希值，而远距离的向量则不应获得相似的哈希值，因此被称为“局部敏感”。</p>
+</blockquote>
+<p>Reformer(<a href="https://arxiv.org/abs/2001.04451" target="_blank" rel="noopener">Kitaev, et al. 2020</a>)主要解决了Transformer以下的几个问题：</p>
+<ul>
+<li>具有$N$层的模型中的内存是单层模型中的$N$倍。</li>
+<li>中间Feed Forward层通常相当大。</li>
+<li>长度为$L$的序列上的attention matrix 通常需要$O（L^2）$的内存和时间。</li>
+</ul>
+<p>Reformer主要的改进为：</p>
+<ul>
+<li>将dot-product attention替换为 <strong>locality-sensitive hashing (LSH) attention</strong>，将复杂度从 $O(L^2)$ 降低到$O(L\log L)$。</li>
+<li>将残差模块替换为<strong>reversible的残差层</strong>，在训练期间仅存储一次激活（activation），而不是$N$次。</li>
+</ul>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/LSH-attention-matrix.png" width="80%" height="80%">
+</div>
+<center>图9. LSH attention原理 (图片来源：Kitaev, et al. 2020）</center>
+
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/LSH-attention.png" width="60%" height="60%">
+</div>
+<center>图10. LSH attention的计算步骤 (图片来源：Kitaev, et al. 2020）</center>
+
+<h4 id="LSH-attention"><a href="#LSH-attention" class="headerlink" title="LSH attention"></a>LSH attention</h4><blockquote>
+<p>局部敏感哈希是一组将高维向量映射到一组离散值(桶/集群)的方法。它最常用来作为近似最近邻搜索的一种方法，用于近似的重复检测或视觉搜索等应用。</p>
+</blockquote>
+<p>当哈希策略$x\rightarrow h(x)$ 是locality-sensitive的，那么就意味着它保留了数据点之间的距离信息，使得距离接近向量得到相似的哈希值，而距离较远向量有非常不同的哈希值。Reformer的哈希策略是：给定一个fixed random matrix $R \in R^{d \times b/2}$ ，哈希函数是：<br>$$<br>h(x)=argmax([xR;−xR])<br>$$<br>$[;]$表示concatenation。</p>
+<p>为每个token计算一个桶之后，将根据它们的桶对这些token进行排序，并将标准的点积注意力应用到桶中的token的块上。有了足够多的桶，就减少了所有的给定的token需要处理的token的数量（论文的块取128）。</p>
+<h4 id="Reversible-Residual-Network"><a href="#Reversible-Residual-Network" class="headerlink" title="Reversible Residual Network"></a>Reversible Residual Network</h4><p>Reformer中使用了<em>reversible residual layers</em> (<a href="https://arxiv.org/abs/1707.04585" target="_blank" rel="noopener">Gomez et al. 2017</a>)。任何给定层的激活都可以从下一层的激活中恢复，只需使用模型参数。因此，我们可以通过在back propagation期间重新计算激活来节省内存，不需要存储所有激活。</p>
+<p>reversible layer把输入和输出分成pairs： $(x1,x2)\rightarrow (y1,y2)$<br>$$<br>y1=x1+F(x2),y2=x2+G(y1)<br>$$<br>reverse：<br>$$<br>x2=y2−G(y1),x1=y1−F(x2)<br>$$<br>Sparse Transformer将reversible残差网络应用到传统的Transformer：<br>$$<br>Y1=X1+Attention(X2),\ Y2=X2+FeedForward(Y1)\Y1=X1+Attention(X2),\Y2=X2+FeedForward(Y1)<br>$$<br>在feed-forward计算中还可以被分块（chunking）：</p>
+<p>$$<br>Y_2=[Y^{(1)}_2;…;Y^{(c)}_2]=[X^{(1)}_2+FeedForward(Y^{(1)}_1);…;X^{(c)}_2+FeedForward(Y^{(c)}_1)]<br>$$<br>reversible Transformer不需要存储每一层的activation。</p>
+<h3 id="3-Sparse-Transformer"><a href="#3-Sparse-Transformer" class="headerlink" title="3. Sparse Transformer"></a>3. Sparse Transformer</h3><p>(<a href="https://arxiv.org/abs/1904.10509" target="_blank" rel="noopener">Child et al., 2019</a>) 通过稀疏矩阵分解，提出了<strong>factorized self-attention</strong>，使得在16384的序列长度上训练数百层的密集注意力网络成为可能，否则在硬件上是不可行的。</p>
+<p>给定一组注意力连接模式（attention connectivity pattern） $\mathcal{S} = {S_1, \dots, S_n}$, 其中每个 $S_i$ 记录了第i个query vector的注意到的一组key position，有：</p>
+<p>$$\begin{aligned} \text{Attend}(\mathbf{X}, \mathcal{S}) &amp;= \Big( a(\mathbf{x}<em>i, S_i) \Big)</em>{i \in {1, \dots, L}}  \text{ where } a(\mathbf{x}<em>i, S_i)  = \text{softmax}\Big(\frac{(\mathbf{x}_i \mathbf{W}^q)(\mathbf{x}_j \mathbf{W}^k)</em>{j \in S_i}^\top}{\sqrt{d_k}}\Big) (\mathbf{x}<em>j \mathbf{W}^v)</em>{j \in S_i} \end{aligned}$$</p>
+<p>在自回归模型中，一个注意力范围（attention span）被定义为 $S_i = {j: j \leq i}$ ，它允许每个token关注过去的所有位置。</p>
+<p>在factorized self-attention中, $S_i$ 会被分解成一个依赖关系的树，对每一对 $(i, j)$ 其中$j \leq i$,  都有一条将$i$ 连接到 $j$ 的路径 ，$j$ 可以直接或间接地注意到 $i$。</p>
+<p>$S_i$被分成p个非重叠的子集，第m个子集表示为$A^{(m)}_i \subset S_i, m = 1,\dots, p$，输出位置$i$和任意一个$j$的最大距离为$p+1$。</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/sparse-transformer.png" width="80%" height="80%">
+</div>
+<center>图11. Sparse Transformer的两种attention对比 （图片来源：Child, et al. 2020）</center>
+
+<p><strong>(1) Strided attention</strong>： 步幅为 $l - \sqrt{n}$ 。<br>$$<br>A^{(1)}_i={t,t+1,…,i}, where \space t=max(0,i−ℓ)\A^{(2)}={j:(i−j)\space mod\space ℓ=0}<br>$$<br><strong>(2) Fixed attention</strong>：一个小的token的集合。<br>$$<br>A^{(1)}_i={j:⌊\frac{j}{ℓ}⌋=⌊\frac{i}{ℓ}⌋}\A^{(2)}_i={j:j\space mod\space ℓ∈{ℓ−c,…,ℓ−1}}<br>$$<br> c是超参数，文章选取 c∈{8,16,32} ，ℓ∈{128,256}。</p>
+<h3 id="4-Compressive-Transformer（ICLR-2020）"><a href="#4-Compressive-Transformer（ICLR-2020）" class="headerlink" title="4. Compressive Transformer（ICLR 2020）"></a>4. Compressive Transformer（ICLR 2020）</h3><blockquote>
+<p>“分而治之”的架构级别的改进，相当于在Transformer基础上添加了一个wrapper来增大有效上下文的长度</p>
+<p>Compressive Transformer(<a href="https://openreview.net/pdf?id=SylKikSYDH" target="_blank" rel="noopener">Rae, et al. 2019</a>)基于transformer-XL 方法进行改进，通过压缩memory 使得模型可以处理更长的序列，可长达一本书</p>
+</blockquote>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/compressive-transformer.png" width="80%" height="80%">
+</div>
+<center>图12. Compressive Transformer原理图 （图片来源：Rae, et al. 2019）</center>
+
+<p>将过去的隐藏activations映射到压缩后的表示（compressed memory）。</p>
+<p>从短期的细粒度记忆和长期的粗粒度记忆学习query。旧的记忆不会被丢弃，而是被存储到了compressed memory中。</p>
+<p>transformer-XL 会丢掉记忆窗口以外的信息，Compressive transformer 不会丢掉，而是把他们压缩并且存储到一个额外的记忆模块中，压缩函数如下：<br>$$<br>R^{n_s \times d} \rightarrow R^{\lfloor \frac{n_s}{c} \rfloor \times d}<br>$$<br>其中$d$是隐藏层的维度，$c$是压缩比例，$c$越大，压缩越多。</p>
+<p>定义有2个memory： 一个是存放正常的前几个segment的隐藏状态，记为 $m$, 一个是存放压缩的记忆模块，记为$cm$。</p>
+<p>假设原始序列为$S=(x_1 , x_2 , . . . x <em>{|s|})$，将$S$切割成长度为$n_s$的大小的片段（segment），那么在$t$时刻模型输入的片段为：$X = x_t , …,x</em>{t + n_s}$在$t$时刻得到的隐藏状态会放到放到先入先出队列$memory(m)$中，最早的将会被去除，然后通过一个压缩函数将被去除的隐藏状态压缩成更小的单元存放到$c_m$中。</p>
+<p>在第$i$层中，$t$时刻时，模型先将$c_m$和$m$进行拼接得到第$i$层的记忆模块$mem$, 然后通过当前segment的隐藏状态和$mem$来计算多头注意力$a$, 后面进行layer norm，然后再处理记忆模块。将$m$中前$n_s$个记忆单元 放到$old_mem$中，并通过压缩函数生成新的$new_{cm}$。最后更新当前的memory和压缩记忆单元。</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/compressive-transformer-code.png" width="80%" height="80%">
+</div>
+
+
+<p>压缩函数 $f_c$可以选取：</p>
+<ul>
+<li>max/mean pooling： kernel和步长设置为压缩比例 c。 这个是最快最简单的baseline。</li>
+<li>1D convolution ：kernel和步长也是设置为c。</li>
+<li>dilated convolutions ：膨胀卷积。卷积压缩方法包含需要训练的参数。</li>
+<li>most-used ：memories 存储 通过他们的平均attention 和最常使用来存储。这个来源于垃圾回收机制，不常用的记忆模块被删除掉。</li>
+</ul>
+<p>压缩网络训练时，每个old memory 需要BPTT(backpropagating-through-time)，所以在训练时也考虑局部辅助压缩损失。</p>
+<p><strong>auto-encoding 损失 ：</strong>从压缩记忆模块中重建原始记忆，然后计算自编码的损失：<br>$$<br>L^{ae}=||old_mem^{(i)}-g(new_cm^{(i)})||_2<br>$$<br>其中$g: R^{\frac{n_s}{c} * d} \rightarrow R^{n_s * d}$。</p>
+<p>上述是无损的压缩目标函数，试图从所有的记忆模块中恢复信息。<br><strong>attention-reconstruction 损失：</strong>注意力重建损失。重建memory的上下文注意力损失，这个是有损失的目标函数，未被关注的信息已经丢失了。（这种损失表现更好。），计算伪代码如下：</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/attention-reconstruct.png" width="80%" height="80%">
+</div>
+
+<h3 id="5-Universal-Transformer-ICLR-2019"><a href="#5-Universal-Transformer-ICLR-2019" class="headerlink" title="5. Universal Transformer (ICLR 2019)"></a>5. Universal Transformer (ICLR 2019)</h3><p>Transformer不是图灵完备的，有些很简单的任务表现很差，比如字符串拷贝。序列任务比较偏好于迭代和递归变换，RNN满足归纳偏置（Inductive Bias），但Transformer并不满足。</p>
+<p><a href="https://arxiv.org/abs/1807.03819" target="_blank" rel="noopener">(Dehghani et al., 2019)</a> 提出了universal Transformer，其中universal指的是computationally universal，即图灵完备。Universal Transformer主要的改进是加入对模型层数（depth）的循环。应用了一个机制对循环的次数进行控制。</p>
+<p>和Transformer主要的区别：</p>
+<ul>
+<li><p>在Transformer中，输入在经过多头注意力层后会进入全连接层，而Universal Transformer会进入Transition层，通过共享权重的transition function继续循环计算。</p>
+</li>
+<li><p>positional embedding考虑time维度，每次循环会重新做一次coordinate embedding。</p>
+</li>
+<li><p>Weight sharing：归纳偏置是关于目标函数的假设，CNN和RNN分别假设空间平移不变性（spatial translation invariance）和时间平移不变性（time translation invariance），体现为CNN卷积核在空间上的权重共享和RNN单元在时间上的权重共享，所以universal transformer也增加了这种假设，使recurrent机制中的权重共享，在增加了模型表达力的同时更加接近RNN的归纳偏置。</p>
+</li>
+<li><p>Conditional computation：通过加入ACT控制模型的计算次数，比固定depth的Transformer，universal transformer取得了更好的结果。</p>
+</li>
+</ul>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/universal-transformer.png" width="70%" height="30%">
+</div>
+<center>图13.Universal Attention原理图 （图片来源：Dehghani et al., 2019） </center>
+
+<h4 id="Transition-Function"><a href="#Transition-Function" class="headerlink" title="Transition Function"></a>Transition Function</h4><div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/transition.png" width="90%" height="90%">
+</div>
+<center>图14.Transition原理图 （图片来源：Dehghani et al., 2019）</center>
+
+<p>Transition Function的两种选择：</p>
+<p><strong>1. separable convolution</strong></p>
+<p><strong>2. fully-connected NN</strong> “consists of a single rectified-linear activation function between two affine transformations, applied position-wise” 。</p>
+<p>这样，每个self-attention+transition的输出$H^t$可以表示为：<br>$$<br>H^t=LayerNorm(A^t+Transition(A^t)) \space where \space A^t=LayerNorm(H^{t-1}+P^t)<br>$$</p>
+<h4 id="Coordinate-embeddings"><a href="#Coordinate-embeddings" class="headerlink" title="Coordinate embeddings"></a>Coordinate embeddings</h4><p>Transformer的positional embedding只用考虑symbol的position就可以了，这里又多了一个time维度，所以每一次循环都会重新做一次coordinate embedding。Embedding公式如下：<br>$$<br>P_{pos,2j}^t=sin(pos/10000^{2j/d} \oplus sin(t/10000^{2j/d}))\<br>P_{pos,2j+1}^t=cos(pos/10000^{2j/d} \oplus cos(t/10000^{2j/d}))<br>$$</p>
+<h4 id="Adaptive-Computation-Time-ACT"><a href="#Adaptive-Computation-Time-ACT" class="headerlink" title="Adaptive Computation Time (ACT)"></a>Adaptive Computation Time (ACT)</h4><ul>
+<li>ACT(Graves,2016)：a mechanism for dynamically modulating the number of computational steps needed to process each input symbol </li>
+<li>可以模型会动态调整每个位置所需的计算steps。每个position的ACT是独立的，如果一个position a在t时刻被停止了， $h_a^t$会被一直复制到最后一个position停止，当然也会设置一个最大时间，避免死循环。 当所有位置都停止计算后，整个过程才停止。</li>
+</ul>
+<h3 id="6-Linear-Transformer-（ICLR-2020）-Performer（ICLR-2021）"><a href="#6-Linear-Transformer-（ICLR-2020）-Performer（ICLR-2021）" class="headerlink" title="6. Linear Transformer （ICLR 2020）/ Performer（ICLR 2021）"></a>6. Linear Transformer （ICLR 2020）/ Performer（ICLR 2021）</h3><blockquote>
+<p>从结构上对 Attention 进行修改从而降低其计算复杂度，Linear Transformer(<a href="https://arxiv.org/pdf/2006.16236.pdf" target="_blank" rel="noopener">Katharopoulos et al.,2020</a>)主要思想是：去掉标准 Attention 中的 Softmax，使得 Attention 的复杂度退化为O（n）级别（Linear Attention）。</p>
+</blockquote>
+<p>在Transformer中广泛使用的scaled dot-product注意力机制中，$Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V=AV$，在计算时，softmax内部的$QK^T$会先进行计算，需要$O(MN) $的空间储存注意力矩阵，因此在$M $和 $N $很大时（例如对一个长序列算自注意力)，会存在计算瓶颈问题，造成内存爆炸。</p>
+<p>一种改进的思路是使用核函数替代softmax+内积的相似度计算。实际上，更广义的注意力计算是使用一个相似性度量选择记忆中要获取（retrieve）的值向量:</p>
+<p>$$<br>h_i=\Sigma_j\frac{sim(q_i,k_j)}{\Sigma_l sim(q_i,k_l)}v_j<br>$$<br>在scaled dot-product attention中，我们令 $sim(x,y)=exp(\gamma x^Ty)$，而线性注意力将$sim(x,y)$  用两个核函数的内积替代</p>
+<p>$$<br>sim(x,y)=\phi(x)^T\phi(y)<br>$$<br>相当于将核函数反过来用。通过解耦相似度度量，可获得：<br>$$<br>h_i=\Sigma_j\frac{\phi(q_i)^T\phi(k_j)}{\Sigma_l sim(\phi(q_i)^T\phi(k_l))}v_j \<br>=\frac{\phi(q_i)^T\textcolor{blue}{\Sigma_j\phi(k_j)\otimes v_j}}{\Sigma_l sim(\phi(q_i)^T\textcolor{blue}{\Sigma_j\phi(k_j))}}<br>$$<br>注意到(5)式中的求和（蓝色部分）均可以先一遍计算，复杂度$O(M)$  ，然后计算与$\phi(q_i)$ 逐一计算内积并归一化(复杂度为$O(N)$，不再需要存储复杂度为$O(MN)$的中间矩阵。Linear Trasformer和传统Transformer的区别如下图：</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/linear-transformer.jpg" width="90%" height="90%">
+</div>
+<center>图15. 传统注意力与线性注意力的区别 （图片来源：Random Feature Attention）</center>
+
+<blockquote>
+<p>2020年采用这一思路的代表工作两个，一个是Linear Transformer，另一个是Performer。</p>
+<p>它们的主要差别在于使用了不同的特征映射$\phi(\cdot)$。其中Linear Transformer使用了简单的特征映射$\phi(x)_i=elu(x_i)$，而Performer<a href="https://arxiv.org/pdf/2009.14794.pdf" target="_blank" rel="noopener">(Choromanski et al.,2021)</a>则从无偏逼近softmax函数的角度出发，使用了随机特征映射，其中第一版Performer是根据高斯核的傅立叶分解（借用了SVM时期的思想），第二版Performer则将这种随机特征映射替换为了正定的特征映射（使得softmax的逼近更稳定)。</p>
+</blockquote>
+<h3 id="7-Linformer"><a href="#7-Linformer" class="headerlink" title="7. Linformer"></a>7. Linformer</h3><p>Linformer(<a href="https://arxiv.org/pdf/2006.04768.pdf" target="_blank" rel="noopener">Wang et al.,2020</a>)中用了较大的篇幅证注意力矩阵是低秩矩阵（通过以下的两个Theorem），所以用低秩近似取代原有的全注意力机制。</p>
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/theorem1.png" width="70%" height="70%">
+</div>
+
+<div align="center">    
+<img src="/2021/07/15/2021-07-15-transformer2/theorem2.png" width="70%" height="70%">
+</div>
+
+<p>从某种程度上来说，将$n\times d$的输入映射到$k\times d$的维度其实是对输入序列做了卷积池化，把原来每个token的信息进行二次融合，去除冗余部分，得到更精炼的向量表示。简而言之，同样的信息，用更少更丰富的语义向量去表达。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Transformer被提出后，产生了很多变种的Transformer，大部分的模型是从Transformer本身的模型设计和架构出发，对模型进行改进，主要集中解决了Transformer计算复杂度高、难以处理长文本、图灵不完备等问题。在降低计算复杂度的问题上，主要就包括限制attention的范围、利用memory、使用低秩的矩阵等方法。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] <a href="https://arxiv.org/pdf/2106.04554.pdf" target="_blank" rel="noopener">A Survey of Transformers</a></p>
+<p>[2] <a href="https://arxiv.org/abs/2009.06732" target="_blank" rel="noopener">Efficient Transformer A survey</a></p>
+<p>[3] Kitaev, Nikita, Łukasz Kaiser, and Anselm Levskaya. <a href="https://arxiv.org/pdf/2001.04451.pdf" target="_blank" rel="noopener">“Reformer: The efficient transformer.”</a> ICLR, 2020.</p>
+<p>[4] Zihang Dai, et al. <a href="https://arxiv.org/abs/1901.02860" target="_blank" rel="noopener">“Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context.”</a> ACL 2019.</p>
+<p>[5] Aidan N. Gomez, et al. <a href="https://arxiv.org/abs/1707.04585" target="_blank" rel="noopener">“The Reversible Residual Network: Backpropagation Without Storing Activations”</a> NIPS 2017.</p>
+<p>[6] Child, Rewon, et al. <a href="https://arxiv.org/abs/1904.10509" target="_blank" rel="noopener">“Generating long sequences with sparse transformers.”</a> <em>arXiv preprint arXiv:1904.10509</em> (2019). </p>
+<p>[7] Dehghani, M. , et al. <a href="https://arxiv.org/abs/1807.03819" target="_blank" rel="noopener">“Universal Transformers.”</a> ICLR, 2019. </p>
+<p>[8] ack W. Rae, et al. <a href="https://openreview.net/pdf?id=SylKikSYDH" target="_blank" rel="noopener">“Compressive transformers for long-range sequence modelling.”</a> ICLR, 2020.</p>
+<p>[9] Angelos Katharopoulos, et al. <a href="https://arxiv.org/pdf/2006.16236.pdf" target="_blank" rel="noopener">“Transformers are rnns: Fast autoregressive transformers with linear attention.”</a>  ICLR, 2020.</p>
+<p>[10] Krzysztof Choromanski, et al. <a href="https://arxiv.org/pdf/2009.14794.pdf" target="_blank" rel="noopener">“Attention with Performers”</a> ICLR, 2021.</p>
+<p>[11] Sinong Wang,  et al.<a href="https://arxiv.org/pdf/2006.04768.pdf" target="_blank" rel="noopener">“Linformer: Selfattention with linear complexity”</a>. arXiv preprint arXiv:2006.04768, 2020b.  </p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://codingClaire.github.io">Ruoting Wu</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://codingclaire.github.io/2021/07/15/2021-07-15-transformer2/">https://codingclaire.github.io/2021/07/15/2021-07-15-transformer2/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="wechat">
+        </label>
+      <label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="alipay">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/NLP/">NLP</a>
+            <a href="/tags/Transformer/">Transformer</a>
+            <a href="/tags/attention/">attention</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2021/07/16/2021-07-16-latex-formula/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Latex公式汇总</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    <a class="next" href="/2021/07/08/2021-07-08-transformer/">
+        <span class="next-text nav-default">Transformer总结及源码分析</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://github.com/codingClaire" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2019 - 2021<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ruoting Wu</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

@@ -209,7 +209,7 @@
 </div>
 <center>图10 global attention原理（图片来源：Luong et al.,2015）</center>
 
-<h4 id="local-attention"><a href="#local-attention" class="headerlink" title="local attention"></a>local attention</h4><p>local attention的引入是为了解决global attention中，复杂度较高的问题。local attention会根据目标词的隐藏状态$h_t$计算出相应的对齐位置$p_t$，context vector的计算是通过$[p_t-D,p_t+D]$区间内的encoder中的隐含状态的加权和来进行计算的。D是根据经验选择的。<br>$$<br>p_t=S \times sigmoid(v_p^T tanh(W_ph_t))<br>$$<br>$S$是原序列的长度，以$p_t$为中心的高斯核函数进行衰减，aligned weights被定义为：<br>$$<br>a_t(s)=align(h_t,\overline h_s)exp(-\frac{(s-p_t)^2}{2\sigma^2})<br>$$<br>其中，$\sigma=\frac{D}{2}$。</p>
+<h4 id="local-attention"><a href="#local-attention" class="headerlink" title="local attention"></a>local attention</h4><p>local attention的引入是为了解决global attention中复杂度较高的问题。local attention会根据目标词的隐藏状态$h_t$计算出相应的对齐位置$p_t$，context vector的计算是通过$[p_t-D,p_t+D]$区间内的encoder中的隐含状态的加权和来进行计算的。D是根据经验选择的。<br>$$<br>p_t=S \times sigmoid(v_p^T tanh(W_ph_t))<br>$$<br>$S$是原序列的长度，以$p_t$为中心的高斯核函数进行衰减，aligned weights被定义为：<br>$$<br>a_t(s)=align(h_t,\overline h_s)exp(-\frac{(s-p_t)^2}{2\sigma^2})<br>$$<br>其中，$\sigma=\frac{D}{2}$。</p>
 <div align="center">    
 <img src="/2021/07/01/2021-07-01-attention/local.png" width="40%" height="40%">
 </div>

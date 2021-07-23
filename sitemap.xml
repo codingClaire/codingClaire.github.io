@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://codingclaire.github.io/2021/07/15/2021-07-15-transformer2/</loc>
+    
+    <lastmod>2021-07-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/2021/07/21/2021-07-21-opennmt-transformer/</loc>
+    
+    <lastmod>2021-07-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/2021/07/21/2021-07-21-pytorch-basic/</loc>
+    
+    <lastmod>2021-07-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/2021/07/16/2021-07-16-latex-formula/</loc>
+    
+    <lastmod>2021-07-23</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://codingclaire.github.io/2021/07/08/2021-07-08-transformer/</loc>
     
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-22</lastmod>
     
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/2021/07/01/2021-07-01-attention/</loc>
     
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-10</lastmod>
     
   </url>
   
@@ -270,7 +298,7 @@
 
   <url>
     <loc>https://codingclaire.github.io/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -278,238 +306,280 @@
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/Keras/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/RNN/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E5%9B%BE/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E5%9B%9E%E5%BD%92/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/gitbook/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/NLP/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/Transformer/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/JS/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/markdown/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/git/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/word/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/TKDD/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E8%AE%BA%E6%96%87/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E4%BA%A4%E6%B5%81/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E7%A7%91%E7%A0%94/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E4%B8%BB%E9%A2%98%E5%BB%BA%E6%A8%A1/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E7%BB%BC%E8%BF%B0/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/TVCG/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/%E6%95%B0%E5%AD%97%E4%BA%BA%E6%96%87/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://codingclaire.github.io/tags/attention/</loc>
-    <lastmod>2021-07-09</lastmod>
+    <lastmod>2021-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/tags/pytorch/</loc>
+    <lastmod>2021-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/tags/academic/</loc>
+    <lastmod>2021-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/tags/latex/</loc>
+    <lastmod>2021-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/tags/openNMT/</loc>
+    <lastmod>2021-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/tags/NMT/</loc>
+    <lastmod>2021-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingclaire.github.io/tags/transformer/</loc>
+    <lastmod>2021-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

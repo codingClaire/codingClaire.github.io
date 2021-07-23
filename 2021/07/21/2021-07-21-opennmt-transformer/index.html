@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="如何在oepnNMT中进行Transformer实验"/><meta name="keywords" content="NLP, openNMT, NMT, transformer, Ruoting Wu's Blog" /><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog"><link rel="shortcut icon" type="image/x-icon" href="/shiba.png?v=2.11.0" />
+<link rel="canonical" href="https://codingClaire.github.io/2021/07/21/2021-07-21-opennmt-transformer/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" /><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz",
+      appKey: "c0YVFIAlMCeKLx899vBJAnMV"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"UAlwruFunxBGx8T5d5R2vDKT-gzGzoHsz","app_key":"c0YVFIAlMCeKLx899vBJAnMV"},"toc":true,"fancybox":true,"pjax":"","latex":true};
+</script>
+
+    <title>如何在oepnNMT中进行Transformer实验 - Ruoting Wu's Blog</title>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Ruoting Wu's Blog" type="application/atom+xml">
+</head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Ruoting Wu's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Ruoting Wu's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">如何在oepnNMT中进行Transformer实验
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2021-07-21
+        </span><span class="post-visits"
+             data-url="/2021/07/21/2021-07-21-opennmt-transformer/"
+             data-title="如何在oepnNMT中进行Transformer实验">
+          阅读次数 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NMT的评价指标"><span class="toc-text">NMT的评价指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BLEU"><span class="toc-text">BLEU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Perplexity"><span class="toc-text">Perplexity</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验"><span class="toc-text">实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据集"><span class="toc-text">数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码来源"><span class="toc-text">源码来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型参数"><span class="toc-text">模型参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验结果"><span class="toc-text">实验结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="NMT的评价指标"><a href="#NMT的评价指标" class="headerlink" title="NMT的评价指标"></a>NMT的评价指标</h2><h3 id="BLEU"><a href="#BLEU" class="headerlink" title="BLEU"></a>BLEU</h3><p>BLEU（bilingual evaluation understudy）由<a href="https://aclanthology.org/P02-1040.pdf" target="_blank" rel="noopener">（Papineni et al.,2002）</a>提出，是一个用于评估机器翻译质量的指标。BLEU的主要思想就是，机器翻译（候选翻译，candidate，简称c）和人工翻译（参考翻译，reference，简称r）的结果越相近，则机器翻译的效果越好。</p>
+<p>BLEU的计算中，首先通过modified N-gram模型惩罚比参考翻译更长的候选翻译，然后使用brevity penalty（BP）用于惩罚与参考翻译长度不匹配的候选翻译（如长度过短的翻译）。定义best match length（最佳匹配长度）,best match length表示候选翻译和参考翻译的长度相同，只要候选翻译和任何一个参考翻译的长度相等，那么就满足best match length，这种情况下惩罚因子为$BP=1$，相当于没有惩罚。$BP$的取值如下：<br>$$<br>BP=\left{<br>\begin{array}{rcl}<br>1      &amp;      if &amp; {c&gt;r}\<br>e^{(1-r/c)}   &amp;    if &amp; {c\leq r}\<br>\end{array} \right.<br>$$<br>BLEU的计算公式如下：<br>$$<br>BLEU=BP \cdot exp(\Sigma_{n=1}^Nw_nlogp_n)<br>$$<br>通常取$N=4$，$w_n=1/N$。</p>
+<p>BLEU能够方便、快速地判断句子的翻译质量，但是BLEU也存在一些缺点，如没有考虑到语法的准确性，而且未考虑同义词或者相似表达的情况。</p>
+<p>BLEU其实是一组参数化方法，包括以下的参数：</p>
+<ul>
+<li>使用的参考翻译数量</li>
+<li>长度惩罚的计算</li>
+<li>n-gram长度的最大值（通常为4）</li>
+<li>应用于0-count n-grams的平滑</li>
+</ul>
+<p>对于使用同一个数据集实验的不同文章，对BLEU参数的选取可能会影响BLEU的分数，为了标准化BLEU，明确其所使用的参数，使得BLEU分数能够直接进行比较，<a href="(https://aclanthology.org/W18-6319.pdf)">（Post,2018）</a>提出了一种标准化计算BLEU的工具sacreBLEU。</p>
+<h3 id="Perplexity"><a href="#Perplexity" class="headerlink" title="Perplexity"></a>Perplexity</h3><p>对于一个好的语言模型来说，更真实且更容易观测到的句子应该要比语法错误或者较少出现的句子计算出的概率更高。通常使用未出现的测试数据集来衡量模型的表现，但是这样的外部评估需要对模型进行多次测试，代价较大。Perplexity（困惑度）是一种内在评估，它测试语言模型本身，而不是特定的任务或者程序。困惑度是一种极端外在评估下的较差的近似。困惑度仅适用于实验的初期，之后实验还需要运用外部评估来最终确定模型的性能。</p>
+<p>长度为$N$的句子$S$的困惑度的计算公式为：<br>$$<br>PP(S)=P(w_1w_2…w_N)^{-\frac{1}{N}}\=\sqrt[N]{p(w_1w_2…w_N)}\=\sqrt[N]{\prod_{i=1}^N\frac{1}{p(w_i|w_1w_2…w_i-1)}}<br>$$<br>其中$p(w_i)$是第$i$个词的概率，困惑度越小，说明句子的概率越大，则语言模型越好。</p>
+<p>另一种想法是可以将Perplexity看成是weighted average branching factor（加权的平均分支系数）。分支系数指的就是下一个单词可能的选择。可以直观地理解，模型生成下一个词时，可能的选择越少，那么模型就越准确。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>获取数据集</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">echo "Downloading and extracting Commoncrawl data (919 MB) for training..."</span><br><span class="line">wget --trust-server-names http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz</span><br><span class="line">tar zxvf training-parallel-commoncrawl.tgz</span><br><span class="line">ls | grep -v 'commoncrawl.de-en.[de,en]' | xargs rm</span><br><span class="line"></span><br><span class="line">echo "Downloading and extracting Europarl data (658 MB) for training..."</span><br><span class="line">wget --trust-server-names http://www.statmt.org/wmt13/training-parallel-europarl-v7.tgz</span><br><span class="line">tar zxvf training-parallel-europarl-v7.tgz</span><br><span class="line">cd training &amp;&amp; ls | grep -v 'europarl-v7.de-en.[de,en]' | xargs rm</span><br><span class="line">cd .. &amp;&amp; mv training/europarl* . &amp;&amp; rm -r training training-parallel-europarl-v7.tgz</span><br><span class="line"></span><br><span class="line">echo "Downloading and extracting News Commentary data (76 MB) for training..."</span><br><span class="line">wget --trust-server-names http://data.statmt.org/wmt16/translation-task/training-parallel-nc-v11.tgz</span><br><span class="line">tar zxvf training-parallel-nc-v11.tgz</span><br><span class="line">cd training-parallel-nc-v11 &amp;&amp; ls | grep -v news-commentary-v11.de-en.[de,en] | xargs rm</span><br><span class="line">cd .. &amp;&amp; mv training-parallel-nc-v11/* . &amp;&amp; rm -r training-parallel-nc-v11 training-parallel-nc-v11.tgz</span><br><span class="line"></span><br><span class="line">Validation and test data are put into the $DATA_PATH/test folder</span><br><span class="line">echo "Downloading and extracting newstest2014 data (4 MB) for validation..."</span><br><span class="line">wget --trust-server-names http://www.statmt.org/wmt14/test-filtered.tgz</span><br><span class="line">echo "Downloading and extracting newstest2017 data (5 MB) for testing..."</span><br><span class="line">wget --trust-server-names http://data.statmt.org/wmt17/translation-task/test.tgz</span><br><span class="line">tar zxvf test-filtered.tgz &amp;&amp; tar zxvf test.tgz</span><br><span class="line">cd test &amp;&amp; ls | grep -v '.*deen\|.*ende' | xargs rm</span><br><span class="line">cd .. &amp;&amp; rm test-filtered.tgz test.tgz &amp;&amp; cd ..</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用<a href="https://aclanthology.org/W14-3302.pdf" target="_blank" rel="noopener">WMT 14 dataset</a>中的en-de数据集进行实验，<a href="https://www.tensorflow.org/datasets/catalog/wmt14_translate" target="_blank" rel="noopener">原始数据</a>的信息为：</p>
+<div align="center">    
+<img src="/2021/image-20210716083549359.png" width="80%" height="80%">
+</div>
+
+
+<div align="center">    
+<img src="/2021/image-20210716083909414.png" width="80%" height="80%">
+</div>
+
+
+<p>为了方便测试模型性能，使用OpenNMT提供的<a href="https://s3.amazonaws.com/opennmt-trainingdata/toy-ende.tar.gz" target="_blank" rel="noopener">toy-en-de数据集</a>，该数据集中训练集有10000个句子，验证集有3000个句子，测试集有2737个句子。训练、验证、测试集中，每个英文句子都有对应的人工翻译的德语句子。</p>
+<h3 id="源码来源"><a href="#源码来源" class="headerlink" title="源码来源"></a>源码来源</h3><p><a href="https://opennmt.net/OpenNMT-py/quickstart.html#step-3-translate" target="_blank" rel="noopener">https://opennmt.net/OpenNMT-py/quickstart.html#step-3-translate</a></p>
+<p>Transformer的代码来源于OpenNMT，OpenNMT-py中Transformer的部分和上周看的代码一致（同一个团队完成的），除此之外，OpenNMT还有包括Seq2seq、Attention等机制完成NMT的源码。但是OpenNMT无法直接计算BLEU, 计算BLEU的方法有两种，分别是：</p>
+<p>1.<a href="https://github.com/mjpost/sacreBLEU" target="_blank" rel="noopener">sacreBLEU</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sacrebleu</span><br><span class="line"></span><br><span class="line">refs = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"target.test"</span>) <span class="keyword">as</span> test:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> test: </span><br><span class="line">        line = line.strip().split() </span><br><span class="line">        line = md.detokenize(line) </span><br><span class="line">        refs.append(line)</span><br><span class="line">refs = [refs]</span><br><span class="line"></span><br><span class="line">preds = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"target.pred"</span>) <span class="keyword">as</span> pred:  </span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> pred: </span><br><span class="line">        preds.append(line)</span><br><span class="line"></span><br><span class="line">bleu = sacrebleu.corpus_bleu(preds, refs)</span><br><span class="line">print(bleu.score)</span><br></pre></td></tr></table></figure>
+
+<p>模型最后输出的翻译结果如果是词的列表而非句子的话，需要进行detokenize，将词语列表转换为句子，可以使用<a href="https://github.com/alvations/sacremoses" target="_blank" rel="noopener">sacremoses</a>工具进行detokenize。</p>
+<p>2.<a href="https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/utils/get_ende_bleu.sh" target="_blank" rel="noopener">MultiBLEU.perl</a></p>
+<p><a href="https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl" target="_blank" rel="noopener">https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl</a></p>
+<p>使用方法：</p>
+<p>下载get_ende_bleu.sh文件，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl multi-bleu.perl ref.txt [ref2.txt ...]&lt; pre.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="模型参数"><a href="#模型参数" class="headerlink" title="模型参数"></a>模型参数</h3><p>模型参数和base Transformer相同，模型结构附在最后（太长了）。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>对于该数据集的结果，在<a href="https://paperswithcode.com/sota/machine-translation-on-wmt2014-english-german" target="_blank" rel="noopener">PaperwithCode</a>中对目前的方法进行了排序和追踪。Transformer在完整的数据集上的Baseline是27.3，但是跑出来的几个结果BLEU均远低于27.3。</p>
+<p>我为了减少训练时间将train step设置成了50000(baseline中的train step是200000），但当train step为50000时，模型训练的时间约为8小时左右（用服务器的两张卡），不过该train step下模型已经得到较高的BLEU值，应该已经收敛。我用训练好的模型来预测测试集和验证集的结果相差不大，BLEU大概不到10，预测训练集的BLEU为99.5左右，可能是模型出现过拟合现象。</p>
+<p>github相关的项目issue中也有类似的问题，一些解决办法是减小learning rate，还有一些方法是修改其他参数。</p>
+<p>TODO: 后续打算首先是先按照github issue中的修改方法调参，还有可能是语料库建立时的问题，下周将一并排查。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Papineni, Kishore, et al. <a href="https://aclanthology.org/P02-1040.pdf" target="_blank" rel="noopener">“Bleu: a method for automatic evaluation of machine translation.”</a> <em>Proceedings of the 40th annual meeting of the Association for Computational Linguistics</em>. 2002.</li>
+<li>Post, Matt. <a href="https://aclanthology.org/W18-6319.pdf" target="_blank" rel="noopener">“A call for clarity in reporting BLEU scores.”</a> <em>arXiv preprint arXiv:1804.08771</em> (2018).</li>
+<li>Speech and Language Processing <a href="https://web.stanford.edu/~jurafsky/slp3/3.pdf" target="_blank" rel="noopener">Chapter3</a>. Daniel Jurafsky &amp; James H. Martin.</li>
+<li>Yasmin Moslem.<a href="https://blog.machinetranslation.io/compute-bleu-score/" target="_blank" rel="noopener">Computing BLEU Score for Machine Translation</a></li>
+</ol>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://codingClaire.github.io">Ruoting Wu</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://codingclaire.github.io/2021/07/21/2021-07-21-opennmt-transformer/">https://codingclaire.github.io/2021/07/21/2021-07-21-opennmt-transformer/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="wechat">
+        </label>
+      <label class="qr-code-image" for="reward">
+          <img class="image" src="/cat.jpg" title="alipay">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/NLP/">NLP</a>
+            <a href="/tags/openNMT/">openNMT</a>
+            <a href="/tags/NMT/">NMT</a>
+            <a href="/tags/transformer/">transformer</a>
+            </div>
+        
+        <nav class="post-nav"><a class="next" href="/2021/07/21/2021-07-21-pytorch-basic/">
+        <span class="next-text nav-default">2021/07/21 - pytorch-basic</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://github.com/codingClaire" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2019 - 2021<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ruoting Wu</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>
